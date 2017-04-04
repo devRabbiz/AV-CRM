@@ -1,0 +1,552 @@
+<?php
+include 'include/header.php';
+?>
+
+<div>
+    <div class="container-fluid" id="home">
+      <div class="row admin-outer">
+        <br>
+        <?php if(isset($_SESSION['admin-logout'])){?>
+      <div class='alert alert-danger alert-dissmissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><?php echo $_SESSION['admin-logout']?></div>
+      <?php unset($_SESSION['admin-logout']);}?>
+      <?php if(isset($_SESSION['admin-invalid'])){?>
+      <div class='alert alert-danger alert-dissmissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><?php echo $_SESSION['admin-invalid']?></div>
+      <?php unset($_SESSION['admin-invalid']);}?>
+        <?php
+    if (isset($_SESSION['login_username'])) { ?>
+
+
+<?php if ($_SESSION['login_username']==='admin') { ?>
+
+
+<?php
+ $sql = "SELECT * FROM user ";
+    if($result = mysqli_query($con, $sql)){
+        if(mysqli_num_rows($result) > 0){
+            while($row1 = mysqli_fetch_array($result)){
+
+            if (is_null($row1[9]))
+              echo "";
+            else{
+
+             ?>
+
+
+
+           <script type="text/javascript">
+  var prove<?php echo $row1[0];?>="<?php echo $row1[9]; ?>";
+  console.log(prove<?php echo $row1[0];?>);
+  console.log("<?php echo $row1[1] ?>");
+  // Split timestamp into [ Y, M, D, h, m, s ]
+var t<?php echo $row1[0];?> = prove<?php echo $row1[0];?>.split(/[- :]/);
+
+// Apply each element to the Date function
+var d<?php echo $row1[0];?> = new Date(Date.UTC(t<?php echo $row1[0];?>[0], t<?php echo $row1[0];?>[1]-1, t<?php echo $row1[0];?>[2], t<?php echo $row1[0];?>[3]-1, t<?php echo $row1[0];?>[4], t<?php echo $row1[0];?>[5]));
+
+var x<?php echo $row1[0];?>=parseInt((d<?php echo $row1[0];?>.getTime()-d<?php echo $row1[0];?>.getMilliseconds())/1000);
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (!Notification) {
+    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    return;
+  }
+
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+});
+
+function notifyMe<?php echo $row1[0];?>() {
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var notification = new Notification('You have a meeting now', {
+      icon: 'images/meet.ico',
+      body: "<?php echo $row1[1] ?>",
+    });
+
+    notification.onclick = function () {
+      window.open("operator.php");
+    };
+
+  }
+
+}
+function clearmeet<?php echo $row1[0];?>() {
+
+
+          $.post("clearmeet_admin.php",{id:<?php echo $row1[0]; ?>},function(data){
+            window.location.reload();
+          });
+        };
+
+  var check<?php echo $row1[0];?>=setInterval(function() {
+      var a<?php echo $row1[0];?> =new Date();
+     var z<?php echo $row1[0];?>=parseInt((a<?php echo $row1[0];?>.getTime()-a<?php echo $row1[0];?>.getMilliseconds())/1000);
+     console.log(z<?php echo $row1[0];?>);
+     console.log("--------");
+     console.log(x<?php echo $row1[0];?>);
+    if (z<?php echo $row1[0];?>>x<?php echo $row1[0];?>){
+
+      notifyMe<?php echo $row1[0];?>();
+      alert("<?php echo $row1[1] ?>");
+      clearmeet<?php echo $row1[0];?>();
+    clearInterval(check<?php echo $row1[0];?>);
+    }
+
+
+
+
+  }, 1000);
+</script>
+<?php   }
+
+          }
+        }
+      }
+        } ?>
+
+
+
+<ul class="nav nav-tabs nav-justified" style="    width: 150px;">
+  <li role="presentation" ><a href="admin.php">Trader</a></li>
+  <li role="presentation" class="active"><a href="admin_sec.php">Trader2</a></li>
+
+</ul>
+
+<?php
+
+if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
+
+  $startrow = 0;
+
+} else {
+  $startrow = (int)$_GET['startrow'];
+}
+
+      $q = "SELECT * FROM user WHERE sec='0' ORDER BY(meet IS NULL) ,meet ASC,date DESC LIMIT $startrow, 30 ";
+      $r = mysqli_query($con,$q);
+      $num=mysqli_num_rows($r);
+
+      if (mysqli_num_rows($r)==0){
+
+        echo "<div class='well col-md-11'><p class='text-center'>No more records</p><ul class='pager'><li>";
+        echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow=0">Go to start</a></li></ul></div>';
+
+      }
+
+      else{
+
+
+
+
+
+        ?>
+
+
+        <div style="margin-right: 12px;">
+
+
+          <table style="background:url('/images/2.png');    background-repeat: round;"  id="etab1" class="table  table-condensed " cellspacing="0" width="100%">
+          <tr >
+          <th ><center>
+ <div class=" badge" data-count=
+<?php
+
+if (isset($_SESSION['login_username'])) {
+ $result=mysqli_query($con,"SELECT count(*) as total from user WHERE sec='0' ");
+$data=mysqli_fetch_assoc($result);
+?> > <?php echo $data['total'];}?>
+</div>
+
+
+ </div>
+ </center>
+
+<td >
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.search-box input[type="text"]').on("keyup input", function(){
+        /* Get input value on change */
+        var term = $(this).val();
+        resultDropdown = $(this).siblings(".result");
+        if(term.length){
+
+            $.get("fetch.php", {query: term}).done(function(data){
+                // Display the returned data in browser
+                resultDropdown.html(data);
+            });
+        } else{
+            resultDropdown.empty();
+        }
+    });
+        // Set search input value on click of result item
+    $(document).on("click", ".result p", function(){
+        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+        $(this).parent(".result").empty();
+    });
+});
+
+</script>
+
+
+    <div class="search-box">
+        <input type="text" autocomplete="off" id="sf"  onblur="setTimeout(function() { if (typeof resultDropdown !== 'undefined') {
+    // the variable is defined
+resultDropdown.empty();} }, 110);; " placeholder="Search client.." />
+        <div class="result"></div>
+    </div>
+
+
+            <a href="export.php?export=all" class='btn btn-default'>Download all</a>
+
+            <a href="export.php?export=new" class='btn btn-default'>Download Newest</a>
+
+             <a href="manual_registration.php" class="btn btn-default">Create New</a>
+            </td>
+
+            <td><center>
+              <div class="btn-group">
+
+    <ul class="pager">
+    <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
+    else echo '<a href="#"class="previous disabled">Previous</a>'?> </li>
+    <li><?php echo '<a class="next" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
+
+    </ul>
+
+    </div>
+
+
+    </center>
+
+            </td>
+
+
+          </th>
+
+          </tr>
+</table>
+<table id="etab1" class="table  table-condensed table-hover table-bordered" cellspacing="0" width="100%">
+          <tr>
+            <th><center><strong>ID</strong></center></th>
+            <th><strong>Name</strong></th>
+            <th><strong>Email</strong></th>
+            <th><strong>Phone</strong></th>
+            <th><strong>Meeting</strong></th>
+            <th><strong>Action</strong></th>
+            <th style="background: #5cb85c;color: white"><center><strong>Send to</strong></center></th>
+            <th style="background: #5bc0de;color: white"><center><strong>Verification</strong></center></th>
+            <th style="background: #f0ad4e;color: white"><center><strong>Move</strong></center></th>
+
+          </tr>
+
+          <?php
+
+          for($i=0;$i<$num;$i++)
+        {
+
+
+        while($row = $r->fetch_assoc()){
+
+
+
+                       ?> 
+          <tr>
+           <td ><center><?php echo $row['id'] ?></center></td>
+
+           <td><a href="view_user.php?user_id=<?php echo $row['id'] ?>"><?php echo $row['name'] ?></a></td>
+           <td style="color:#d9534f;">
+              <div  id="foo1<?php echo $row['id'] ?>" class="b1<?php echo $row['id'] ?>" data-clipboard-target="#foo1<?php echo $row['id'] ?>" value="https://github.com/zenorocha/clipboard.js.git">
+          <?php echo $row['email'] ?>
+          </div>
+
+            <script type="text/javascript">
+            new Clipboard('.b1<?php echo $row['id'] ?>');
+            </script>
+
+           </td>
+
+           <td class="text-center" style="font-family: cursive; font-style: italic;font-weight: bold;">
+           <a style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $row['phone_no'] ?>'" > <?php echo $row['phone_no'] ?></a>
+           </td>
+
+           <td style="text-align: justify;width: 150px;"><center>
+                      <?php
+                  if (!is_null($row['meet'])) {
+
+                    $date_arr= explode(" ", $row['meet']);
+                    $date= $date_arr[0];
+                    $time= $date_arr[1];
+                    $tomorrow = date('Y-m-d', strtotime('tomorrow')); 
+            ?>
+            <?php  if (date('Y-m-d') == date('Y-m-d', strtotime($row['meet']))) { ?>
+             <span  style="font-size: 16px" class="label label-danger"><?php echo  substr($time, 0, -3); ?></span>
+             <?php } else if ($tomorrow == date('Y-m-d', strtotime($row['meet']))) { ?>
+            <span style="font-size: 14px"  class="label label-warning"><?php echo  substr($time, 0, -3); ?></span>
+              <?php } else { ?>
+          <span style="font-size: 12px"  class="label label-success"><?php echo  substr($time, 0, -3); ?></span>
+          <?php } ?>
+            <span class="label label-primary"><?php echo $date ?></span>
+            <?php } ?>
+          </center>
+          </td>
+
+           <td><center><form method = "post" action="admin_user_edit.php?user_id=<?php echo $row['id'];?>"><input type="submit" value="Edit" class="btn btn-warning">
+
+           <button type="button" class="btn  btn-danger" data-toggle="modal" data-target="#myModal1">Delete</button>
+           </form></center>
+ <div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Kujdes</h4>
+      </div>
+      <div class="modal-body">
+        <p>Ju do te fshini te gjitha te dhenat e klientit me kete veprim.</p>
+        <p>Deshironi te vazhdoni?</p>
+      </div>
+      <div class="modal-footer">
+     <form method = "post" action="admin_delete_user.php?user_id=<?php echo $row['id']?>"><input type="submit" value="Delete" class="btn btn-danger"> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+           </td>
+           <td>
+            <?php if(is_null($row['sendto'])){?>
+            <center>
+           <input class="send-to" type='checkbox' name='send-to' id='<?php echo $row['id']?>'></center>
+           </center>
+            <?php } else{ echo $row['sendto']; } ?>
+          </td>
+          <td>
+
+           <?php if($row['checked_by_admin']==1){ ?>
+            <center>
+           <input class="admin-check" type='checkbox' name='admin-check' id='<?php echo $row['id']?>'>
+           </center>
+           </td>
+           <?php } ?>
+            <td>
+            <center>
+           <input class="move_sec" type='checkbox' name='move_sec' id='<?php echo $row['id']?>'></center>
+           </center>
+           </td>
+
+           </tr>
+          <?php
+        } }
+        ?>
+
+        <tfoot>
+<tr >
+
+
+</tr>
+</tfoot>
+         </table>
+
+         <table  class="table  table-condensed table-hover table-bordered" cellspacing="0" width="100%">
+         <tr>
+            <td  ><center>
+<button type="button" class="btn  btn-primary btn-success" data-toggle="modal" data-target="#dropmodal">Send To</button>
+  <div class="btn-group">
+ <input class="btn  btn-info" type='button' value='Verify' onclick='admin_checked_data(); return false;'>
+  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><center><button type="button" class="btn  btn-primary btn-info" data-toggle="modal" data-target="#verifyall">Verify All</button></center></li>
+
+  </ul>
+</div>
+  <input class="btn  btn-warning" type='button' value='Move' onclick='move_sec(); return false;'>
+ </center>
+ </td>
+ </tr>
+         </table>
+          </div>
+
+
+      <?php
+    }}
+    else{
+      ?><center>
+         <div class='col-md-4 admin jumbotron' style="float: none;
+     margin-left: auto;
+     margin-right: auto;">
+           <h3>ADMIN LOGIN</h3>
+           <form role='form' action='login_check.php' method='post'>
+             <div class='form-group'>
+               <label id="lbl" for='name'>Username</label>
+               <input type='name' class='form-control' name='admin-username' id='admin-username' placeholder='Enter Username' autofocus>
+             </div>
+             <div class='form-group'>
+               <label id="lbl" for='password'>Password</label>
+               <input type='password' name='admin-pass' class='form-control' id='admin-pass' placeholder='Password'>
+             </div>
+             <input type='submit' value='Submit' class='btn btn-default'>
+           </form>
+         </div>
+         </center>
+       </div>
+     </div>
+     <?php
+    }
+
+    ?>
+
+      </div>
+   </div>
+
+    <script src="jquery-1.11.0.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+
+<style type="text/css">
+
+  .container-fluid {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -142px;
+}
+.container-fluid:after {
+  content: "";
+  display: block;
+}
+.site-footer, .container-fluid:after {
+  /* .push must be the same height as footer */
+  height: 142px;
+}
+.site-footer {
+  background:#343841;
+  color:white;
+
+}
+</style>
+
+
+<div id="verifyall" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Kujdes</h4>
+      </div>
+      <div class="modal-body">
+        <p>Ju do ti verifikoni te gjithe klientet me kete veprim.</p>
+        <p>Deshironi te vazhdoni?</p>
+      </div>
+      <div class="modal-footer">
+      <a class="btn btn-primary btn-success " href="action.php?verify=all">Verify All</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="dropmodal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Kujdes</h4>
+      </div>
+      <div class="modal-body">
+     <select id="operator" name="operator">
+    <?php
+    $query="SELECT username FROM operator";
+$results=mysqli_query($con,$query);
+
+    while($row=mysqli_fetch_assoc($results)){?>
+
+
+  <option value="<?php echo $row['username'] ?>"><?php echo $row['username'] ?></option>
+
+
+
+<?php } mysqli_close($con);?>
+</select>
+      </div>
+      <div class="modal-footer">
+      <input class="btn  btn-info" type='button' value='Send' onclick='sendto(); return false;'>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+      function admin_checked_data () {
+        var arr = [];
+        $('.admin-check').each(function () {
+          if($(this).is(':checked'))
+            arr.push($(this).attr('id'));
+        });
+        if(arr){
+          arr = JSON.stringify(arr);
+          $.post("admin_check.php",{arr:arr},function(data){
+            window.location.reload();
+          });
+        }
+
+      }
+
+
+function sendto () {
+        var snd = [];
+          var operator=$('#operator option:selected').attr('value');
+        $('.send-to').each(function () {
+          if($(this).is(':checked'))
+            snd.push($(this).attr('id'));
+        });
+        if(snd){
+          snd = JSON.stringify(snd);
+          $.post("sendto.php",{snd:snd,operator:operator},function(data){
+            window.location.reload();
+          });
+        }
+
+      }
+     function move_sec () {
+        var arr = [];
+        $('.move_sec').each(function () {
+          if($(this).is(':checked'))
+            arr.push($(this).attr('id'));
+        });
+        if(arr){
+          arr = JSON.stringify(arr);
+          $.post("move_sec_back.php",{arr:arr},function(data){
+            window.location.reload();
+          });
+        }
+
+      }
+
+
+    </script>
+
+
+  </body>
+
+<?php
+  include 'include/footer.php';
+?>
+
+
+</html>
