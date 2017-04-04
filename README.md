@@ -1,23 +1,8 @@
 Introduction
 ============
 
-![Bower version](https://img.shields.io/bower/v/adminlte.svg)
-[![npm version](https://img.shields.io/npm/v/admin-lte.svg)](https://www.npmjs.com/package/admin-lte)
-[![Packagist](https://img.shields.io/packagist/v/almasaeed2010/adminlte.svg)](https://packagist.org/packages/almasaeed2010/adminlte)
-[![CDNJS](https://img.shields.io/cdnjs/v/admin-lte.svg)](https://cdnjs.com/libraries/admin-lte)
+**AV-crm** -- is a fully responsive call center usage CRM. Based on **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework and **[AdminLTE](https://almsaeedstudio.com)** template. Easy  to use and fits many screen resolutions from small mobile devices to large desktops. Check out the live preview now and see for yourself.
 
-**AdminLTE** -- is a fully responsive admin template. Based on **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework. Highly customizable and easy to use. Fits many screen resolutions from small mobile devices to large desktops. Check out the live preview now and see for yourself.
-
-**Download & Preview on [Almsaeed Studio](https://almsaeedstudio.com)**
-
-Looking for Premium Templates?
-------------------------------
-**Almsaeed studio just opened a new premium templates page. Hand picked to insure the best quality and the most affordable prices. Visit https://almsaeedstudio.com/premium for more information.**
-
-
-!["AdminLTE Presentation"] (https://almsaeedstudio.com/AdminLTE2.png "AdminLTE Presentation")
-
-**AdminLTE** has been carefully coded with clear comments in all of its JS, LESS and HTML files. LESS has been used to increase code customizability.
 
 Installation
 ------------
