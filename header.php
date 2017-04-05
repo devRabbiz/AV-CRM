@@ -36,9 +36,9 @@ include_once 'functions.php'
 
 
 
- <script src="/dist/js/pace.min.js"></script>
-  <script src="/dist/js/moment.js"></script>
-  <script src="/dist/js/clipboard.min.js"></script>
+ <script src="dist/js/pace.min.js"></script>
+  <script src="dist/js/moment.js"></script>
+  <script src="dist/js/clipboard.min.js"></script>
   <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
 
