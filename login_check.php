@@ -9,7 +9,7 @@ if (isset($_POST['admin-username'])) {
         die('Error: ' . mysqli_error());
       }
       else{
-        $array=mysqli_fetch_array($result,MYSQL_NUM);
+        $array=mysqli_fetch_array($result);
 
         if($array){
         	$_SESSION['login_username']=$_POST['admin-username'];

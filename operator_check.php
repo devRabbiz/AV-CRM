@@ -8,7 +8,7 @@ session_start();
         die('Error: ' . mysqli_error());
       }
       else{
-        $array=mysqli_fetch_array($result,MYSQL_NUM);
+        $array=mysqli_fetch_array($result);
 
         if($array){
         	$_SESSION['operator_username']=$_POST['operator-username'];
