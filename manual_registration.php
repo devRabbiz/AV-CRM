@@ -1,5 +1,4 @@
 <?php
-include 'include/header.php';
 
 if (isset($_SESSION['login_username'])) {
  
@@ -86,6 +85,6 @@ if (isset($_SESSION['login_username'])) {
   </body>
   <?php
 }
-  include 'include/footer.php';
+ 
 ?>
 </html>

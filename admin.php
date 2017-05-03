@@ -184,12 +184,12 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." />
 
             <a href="export.php?export=new" class='btn btn-default btnf'>Download Newest</a>
 
-             <a href="manual_registration.php" class="btn btn-default btnf">Create New</a>
+             <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#manual_registration">Create New</button>
              <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
             </td>
 
             <td  ><center>
-            <div id="uploadmodal" class="modal fade" role="dialog">
+<div id="uploadmodal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -199,7 +199,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." />
                   <h4 class="modal-title">Upload List</h4>
                 </div>
                 <div class="modal-body">
-                  
+              
           <?php if (isset($_GET['success'])) { ?>
 
           <script type="text/javascript">
@@ -224,6 +224,29 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." />
             <br>
             <input type="submit" class="btn btn-primary" name="Submit" value="Submit" /> 
           </form> 
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+  </div>
+</div>
+
+
+      <div id="manual_registration" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Upload List</h4>
+                </div>
+                <div class="modal-body">
+                  <?php include_once "manual_registration.php"  ?>
 
 
                 </div>
