@@ -195,7 +195,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
     </div>
-<div class="container" style="margin-top: 20px">
+<div class="container" style="width: auto !important ;">
 <a href="operator_manual_registration.php" class="btn btn-default btnf">Create New</a>
 
  <ul class="pager" style="float: right;">
