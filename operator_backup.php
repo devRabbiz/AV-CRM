@@ -1,6 +1,6 @@
 <?php
-  if (isset($_SESSION['operator_username'])) {
-//include_once 'include/header.php';
+include_once 'include/header.php';
+
     if($result = $op1){
         if(mysqli_num_rows($result) > 0){
           
@@ -10,7 +10,7 @@
               echo "";
             else{
 
- ?>
+             ?>
 
 
 <audio id="myAudio">
@@ -108,7 +108,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   $startrow = (int)$_GET['startrow'];
 }
 
-
+	if (isset($_SESSION['operator_username'])) {
    
 
        $lang_check=mysqli_query($con,"SELECT lang FROM operator WHERE username='".$_SESSION['operator_username']."'");
@@ -125,48 +125,48 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
         switch ($pager) {
                 case 'potential':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Potential' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
-                 $ac1="active";
+                 $ac1="class='active'";
                   break;
                    case 'followup':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Follow Up' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
-                 $ac2="active";
+                 $ac2="class='active'";
                   break;
                    case 'interested':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Interested' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
-                 $ac3="active";
+                 $ac3="class='active'";
                   break;
                    case 'noninterested':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Non Interested' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
-                 $ac4="active";
+                 $ac4="class='active'";
                   break;
                    case 'nonanswer':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Non Answer' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
-                 $ac5="active";
+                 $ac5="class='active'";
                   break;
                    case 'callfailed':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Call Failed' ORDER BY jobs.id DESC LIMIT $startrow, 30");
-                 $ac6="active";
+                 $ac6="class='active'";
                   break;
                    case 'secretary':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Secretary' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
-                 $ac7="active";
+                 $ac7="class='active'";
                   break;
                   case 'new':
                   $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='new' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
-                 $ac8="active";
+                 $ac8="class='active'";
                   break;
                   case 'home':
                     $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' 
                     ORDER BY ISNULL(jobs.meet) ASC ,jobs.meet ASC  LIMIT $startrow, 30");
                  // $r=$op2;
-                    $ac0="active";
+                    $ac0="class='active'";
                     break;
 
 
                 default:
 
                  $r=$op2;
-                 $ac0="class='active";
+                 $ac0="class='active'";
                   break;
 
 }
@@ -174,6 +174,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 ?>
 <head>
 	
+  <link rel="stylesheet" href="dist/css/bootstrap.min.css" />
 
 
 </head>
@@ -191,14 +192,99 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
       <div class="navbar-header">
           <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
        </div>
-            
+              <div class="navbar navbar-default side-collapse in">
+                <nav role="navigation" class="navbar-collapse">
+                  <ul class="nav navbar-nav">
+                      <li role="presentation" <?php echo " ".$ac0." "; ?> ><a style="color: #05147e;font-weight: bold; width:120px;"  href="<?php echo $_SERVER['PHP_SELF'].'?pager=home'?>">All 
+                      <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                      <li role="presentation" <?php echo " ".$ac1." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=potential'?>">Potential 
+                      <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='Potential' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                       <li role="presentation" <?php echo " ".$ac2." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=followup'?>">Follow Up
+                       <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='Follow Up' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                      <li role="presentation" <?php echo " ".$ac3." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=interested'?>">Interested
+                      <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='Interested' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                      <li role="presentation" <?php echo " ".$ac4." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=noninterested'?>">No Interes
+                      <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='Non Interested' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                      <li role="presentation" <?php echo " ".$ac5." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=nonanswer'?>">Non Answer
+                      <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='Non Answer' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo htmlentities($ptotal);?>
+                      </span></a></li>
+                     <li role="presentation" <?php echo " ".$ac6." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=callfailed'?>">Call Failed
+                     <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='Call Failed' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                       <li role="presentation" <?php echo " ".$ac7." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=secretary'?>">Secretary
+                       <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='Secretary' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                        <li role="presentation" <?php echo " ".$ac8." "; ?> ><a style="color: #05147e;font-weight: bold;width:120px;" href="<?php echo $_SERVER['PHP_SELF'].'?pager=new'?>">New
+                        <span class="badge" style="right:5px;position: absolute;top: 2px">                        <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$operator."' AND status='New' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></a></li>
+                  </ul>
+                </nav>
+              </div>
      
 
 
     </div>
-<div class="container" style="width: auto !important ;">
+<div class="container" style="margin-top: 20px">
 <a href="operator_manual_registration.php" class="btn btn-default btnf">Create New</a>
+<script type="text/javascript">
+$(document).ready(function(){
 
+        
+       
+    
+    $('.search-box input[type="text"]').on("keyup input", function(){
+        /* Get input value on change */
+        var term = $(this).val();
+        resultDropdown = $(this).siblings(".result");
+        if(term.length){
+
+            $.get("fetch_operator.php", {query: term}).done(function(data){
+                // Display the returned data in browser
+                resultDropdown.html(data);
+            });
+        } else{
+            resultDropdown.empty();
+        }
+    });
+        // Set search input value on click of result item
+    $(document).on("click", ".result p", function(){
+        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+        $(this).parent(".result").empty();
+    });
+});
+
+</script>
+
+
+    <div class="search-box ">
+        <input type="text" autocomplete="off" id="sf" class="btnf"  onblur="setTimeout(function() { if (typeof resultDropdown !== 'undefined') {
+    // the variable is defined
+resultDropdown.empty();} }, 110);; " placeholder="Search client.." />
+        <div class="result"></div>
+    </div>
  <ul class="pager" style="float: right;">
     <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
     else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
@@ -255,7 +341,8 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
            
            
            <?php  if (isset($row11['lcall'])) {
-            
+             # code...
+           
                 $date_arr= explode(" ", $row11['lcall']);
                     $date= $date_arr[0];
                     $time= $date_arr[1];

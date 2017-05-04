@@ -18,10 +18,11 @@
     //BoxRefresh Plugin
     enableBoxRefresh: true,
     //Bootstrap.js tooltip
-    enableBSToppltip: true
+    enableBSToppltip: false
   };
 </script>
 <!-- AdminLTE App -->
+
 <script src="dist/js/app.min.js"></script>
 
 

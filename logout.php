@@ -20,7 +20,7 @@ header('Location:admin.php');
 
 session_start();
 session_destroy();
-header('Location:operator.php');
+header('Location:login_operator.php');
 
 
 	
