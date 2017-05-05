@@ -66,6 +66,10 @@ if (!isset($_GET['pager'])) {
             $_GET['pager']='new';
               include 'operator_load.php'; 
             break;
+            case 'latest':
+            $_GET['pager']='latest';
+              include 'operator_load.php'; 
+            break;
            
             
           default:

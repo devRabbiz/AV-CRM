@@ -1,6 +1,9 @@
 <?php
-  include 'include/header.php';
+  include 'header.php';
 ?>
+ 
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -38,8 +41,7 @@ $(document).ready(function(){
             <div class="panel-body">
               <div class="row">
 
-             
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/images/user-icon.img" class="img-circle img-responsive"> </div>
+
                
 
                 <div class=" col-md-9 col-lg-9 "> 
@@ -229,8 +231,8 @@ Leave a note:
 
 
 <div style="overflow-y: scroll;height: 400px;">
-
-<table width="100%">
+</br>
+<ul class="timeline">
 <?php
 
           
@@ -243,21 +245,23 @@ Leave a note:
          while($row = $result1->fetch_assoc()){
             ?>
 
-<tr><td>
-            <div class="panel panel-info">
-  <div class="panel-heading"><?php echo $row['date'] ;?></div>
-  <div class="panel-body">
-     <?php echo $row['note'] ;?>
-  </div>
-</div>
-</td>
+           <li>
+              <i class="fa fa-comments bg-yellow"></i>
 
-</td>
-</tr>
+              <div class="timeline-item">
+                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?></span>
+
+                <div class="timeline-body">
+                   <?php echo $row['note'] ;?>
+                </div>
+                
+              </div>
+            </li>
+
 
 
 <?php }  } ?>
-</table>
+</ul>
 </div>
 </div>
 

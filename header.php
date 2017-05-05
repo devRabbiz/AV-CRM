@@ -28,15 +28,19 @@ include_once 'functions.php'
         apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-datetimepicker.min.css" />
 
 
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 
  
   <script src="dist/js/moment.js"></script>
   <script src="dist/js/clipboard.min.js"></script>
   <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <!-- 

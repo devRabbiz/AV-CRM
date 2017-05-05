@@ -1,3 +1,50 @@
+<style type="text/css">@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+ .popover {
+    max-width: 100%;
+    max-height:100%;
+}
+iframe{
+  width: 500px;
+    height:500px;
+}
+body{
+  overflow: hidden;
+}
+</style>
+
+
+
+<script type="text/javascript">
+  var originalLeave = $.fn.popover.Constructor.prototype.leave;
+$.fn.popover.Constructor.prototype.leave = function(obj){
+  var self = obj instanceof this.constructor ?
+    obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+  var container, timeout;
+
+  originalLeave.call(this, obj);
+
+  if(obj.currentTarget) {
+    container = $(obj.currentTarget).siblings('.popover')
+    timeout = self.timeout;
+    container.one('mouseenter', function(){
+      //We entered the actual popover – call off the dogs
+      clearTimeout(timeout);
+      //Let's monitor popover content instead
+      container.one('mouseleave', function(){
+        $.fn.popover.Constructor.prototype.leave.call(self, self);
+      });
+    })
+  }
+};
+
+
+$('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 10}});
+
+</script>
+
+
+
+
 <?php
   if (isset($_SESSION['operator_username'])) {
 //include_once 'include/header.php';
@@ -121,7 +168,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           $pager=$_GET['pager'];
         }
 
-          $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8="";
+          $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8=$ac9="";
         switch ($pager) {
                 case 'potential':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Potential' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
@@ -155,6 +202,10 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                   $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='new' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
                  $ac8="active";
                   break;
+                  case 'latest':
+                   $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' ORDER BY jobs.id DESC LIMIT $startrow, 30");
+                    $ac9="active";
+                    break;
                   case 'home':
                     $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' 
                     ORDER BY ISNULL(jobs.meet) ASC ,jobs.meet ASC  LIMIT $startrow, 30");
@@ -229,7 +280,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 <tr>
             <td><?php echo $row['id'] ?></td>
-           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"><?php echo $row['name'] ?></a></td>
+           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true" data-html=true data-content="<iframe src='operator_view_user.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
           <td><?php echo $row['status'] ?></td>
            <td width="30%"><?php
 

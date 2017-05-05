@@ -132,6 +132,12 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           </a>
         </li>
 
+        <li class=" treeview <?php echo " ".$ac9." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=latest'?>">
+            <i class="fa fa-clock-o "></i> <span>Latest</span>
+          </a>
+        </li>
+
 
        
 
