@@ -77,11 +77,11 @@ if (!isset($_GET['pager'])) {
 
       else {
 
-        include_once('login_operator.php');
+        header("Location:login_operator.php");
       }
 ?>
               
-
+ 
     </section>
 
     <?php 

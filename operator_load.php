@@ -199,17 +199,20 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 <div class="container" style="width: auto !important ;">
 <a href="operator_manual_registration.php" class="btn btn-default btnf">Create New</a>
 
- <ul class="pager" style="float: right;">
-    <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
-    else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
-    <li><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
+     <ul class="pager" style="float: right;">
+        <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
+        else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
+        <li><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
 
-    </ul>
- <table id="etab1" class="table  table-condensed table-hover table-bordered" cellspacing="0" width="100%">
+     </ul>
+
+<script src="dist/js/jquery.tablescroll.js"></script>
+
+ <table id="etab1" class="table table-striped table-hover"  width="100%">
  <tr>
             <th><strong>ID</strong></th>
             <th><strong>Name</strong></th>
-            <th><center><strong>Status</strong></center></th>
+            <th><strong>Status</strong></th>
             <th><center><strong>Note</strong></center></th>
             <th><center><strong>Last Call</strong></center></th>
             <th><center><strong>Meeting</strong></center></th>
@@ -301,7 +304,18 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 </tr>
   <?php }   ?>
 </table>
+
 </div>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($)
+{
+
+
+$('#etab1').tableScroll({containerClass:'tablescroll'});
+});
+</script>
+
 <script type="text/javascript">
       function done1 () {
         var arr = [];
