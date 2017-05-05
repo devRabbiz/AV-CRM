@@ -280,7 +280,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 <tr>
             <td><?php echo $row['id'] ?></td>
-           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true" data-html=true data-content="<iframe src='operator_view_user.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
+           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true" data-html=true data-content="<iframe src='operator_view_user_hover.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
           <td><?php echo $row['status'] ?></td>
            <td width="30%"><?php
 
