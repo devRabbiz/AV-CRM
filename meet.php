@@ -14,6 +14,7 @@ $query = "UPDATE jobs SET meet='".$_POST['dt']."',status='".$status."' WHERE id=
 			
 } else{
 	$query = "UPDATE jobs SET status='".$status."' WHERE id='".$id."'AND operator='".$_SESSION['operator_username']."'";
+		$cls=mysqli_query($con,"UPDATE jobs SET meet=NULL WHERE id='".$id."' AND operator='".$_SESSION['operator_username']."'");
 		$result = mysqli_query($con,$query);
 }
 
@@ -52,7 +53,7 @@ if ($res=$r22->num_rows ==0) {
 
 
 }
-header('Location: operator.php' );
+header('Location: operator_view_user.php?user_id='.$id );
 mysqli_close($con);
 
 

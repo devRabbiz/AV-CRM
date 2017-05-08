@@ -136,24 +136,62 @@ if (isset($row['meet'])){
                    $time= $date_arr[1];
    ?>
             
-   <div class="panel panel-danger">
+<div class="panel panel-danger">
   <div class="panel-heading">Meeting: <span style="float: right;color: black"> <?php echo $row['status'] ?></span> </div>
   <div class="panel-body">
+<center>
+<form method="POST" action="meet.php" >
+<select id="status" name="status" required="" style="height: 34px;width: 298px;border: 1px solid #ccc;border-radius: 4px;color:#555">
+<option  disabled="disabled" selected="selected" value="" >Select Status</option>
+<option value="Potential">Potential</option>
+<option value="Follow Up">Follow Up</option>
+<option value="Interested">Interested</option>
+<option value="Non Interested">Non Interested</option>
 
-    <center>
-  <div>
+<option value="Non Answer">Non Answer</option>
+ <option value="Call Failed">Call Failed</option>
+<option value="Secretary">Secretary</option>
+ <option value="Deposit">Deposit</option>
 
-  <span class="alert alert-info"><?php echo $time; ?></span>
-            <span class="alert alert-success"><?php echo $date ?></span>
-             
- <a style='position:absolute;right:17px;' class="btn btn-warning" href="operator_view_user_meet_edit.php?user_id=<?php echo $_GET['user_id']; ?>">Edit</a>
+</select>
+<script type="text/javascript">
+$(function () {
+  $("#status").change(function() {
+    var val = $(this).val();
+    if(val === "Potential" || val==="Follow Up" || val==="Interested") {
+       
+      
+            $('#s111').html("<input type='text' name='dt' id='dat<?php echo $_GET['user_id']; ?>' class='form-control' placeholder='<?php echo $date.' '.$time; ?>' required  />")
+            $('#dat<?php echo $_GET['user_id']; ?>').datetimepicker();
+ $("#datetimepicker1").show();
+    }
+    else{
+      $('#s111').html('');
+      $("#datetimepicker1").hide();
+    }
+    
+  });
+});
+</script>
 
+             <div class='input-group date' id='datetimepicker1'>
+
+      <div id="s111">  </div>
+           <input type='hidden' name='id'  value='<?php echo $_GET['user_id']; ?>'/> 
+        
 </div>
-</center>
+                  <input class="btn btn-default" style="width: 100px" type="submit" value="OK">
+                
 
-  </div>
+                </form>
+
+
+        <script type="text/javascript">
+            
+        </script>
+       </center>
 </div>
-
+</div>
 
 
 <?php } else{ ?>
