@@ -222,7 +222,7 @@ form button:hover {
   <div class="container">
     <h1>L`Avenir</h1>
     <form class="form" role='form' action='operator_check.php' method='post'>
-      <input type="text" name="operator-username" placeholder="Username" id='operator-username' required="required" class="input-txt" />
+      <input type="text" name="operator-username" placeholder="Username" id='operator-username' required="required" class="input-txt" autofocus />
        <input type="password"  name='operator-pass' placeholder="Password" id='operator-pass' required="required" class="input-txt" />
       <button type="submit" id="login-button">Login</button>
     </form>
