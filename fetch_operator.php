@@ -20,12 +20,12 @@ if(isset($query)){
             while($row = mysqli_fetch_array($result)){
                 echo "<a href='operator_view_user.php?user_id=";
                 echo $row['id'];
-                echo "'><p>" . $row['name'] . "</p></a>";
+                echo "'><div style='height:10px;width:100%;margin:10px'>" . $row['name'] . "</div></a><hr>";
             }
             // Close result set
             mysqli_free_result($result);
         } else{
-            echo "<p>No client found : <b>$query</b></p>";
+            echo "<p><center>No client found!</center></p>";
         }
     } else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
