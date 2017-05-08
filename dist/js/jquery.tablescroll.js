@@ -181,7 +181,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 	{
 		flush: true, // makes the last thead and tbody column flush with the scrollbar
 		width: null, // width of the table (head, body and foot), null defaults to the tables natural width
-		height: $( window ).height()-200, // height of the scrollable area
+		height: $( window ).height()-180, // height of the scrollable area
 		containerClass: 'tablescroll' // the plugin wraps the table in a div with this css class
 	};
 

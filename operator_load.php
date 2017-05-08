@@ -3,7 +3,7 @@
     max-width: 100%;
     max-height:100%;
 }
-iframe{
+.iframe{
   width: 500px;
     height:500px;
 }
@@ -38,7 +38,7 @@ $.fn.popover.Constructor.prototype.leave = function(obj){
 };
 
 
-$('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 10}});
+$('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'right', delay: {show: 10, hide: 10}});
 
 </script>
 
@@ -248,7 +248,29 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
     </div>
 <div class="container" style="width: auto !important ;">
-<a href="operator_manual_registration.php" class="btn btn-default btnf">Create New</a>
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info " data-toggle="modal" data-target="#manual-reg">Create New</button>
+
+<!-- Modal -->
+<div id="manual-reg" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Lead</h4>
+      </div>
+      <div class="modal-body">
+        <iframe   style="width:100%!important;height: 500px!important;" frameborder='0' src="operator_manual_registration.php"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
      <ul class="pager" style="float: right;">
         <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
@@ -280,7 +302,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 <tr>
             <td><?php echo $row['id'] ?></td>
-           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true" data-html=true data-content="<iframe src='operator_view_user_hover.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
+           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true"  data-html=true data-content="<iframe class='iframe' scrolling='yes' frameborder='0' marginwidth='0' marginheight='0' src='operator_view_user_hover.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
           <td><?php echo $row['status'] ?></td>
            <td width="30%"><?php
 

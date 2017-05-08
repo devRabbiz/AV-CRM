@@ -14,7 +14,7 @@ if (!$result)
   die('Errorvdvfd: ' . mysqli_error());
   }
   else
-  {			$array=mysqli_fetch_array($result,MYSQL_NUM);
+  {			$array=mysqli_fetch_array($result);
 			// echo $array;
   			if(!$array)
 	  		{

@@ -122,10 +122,7 @@ $(document).ready(function(){
                         </td>
                       </tr>
                      
-                   
-                      <tr><td>
-                        <td></td>
-                      </td></tr>
+                  
 
                     </tbody>
                   </table>
@@ -134,29 +131,7 @@ $(document).ready(function(){
                 </div>
               </div>
             </div>
-                 <div class="panel-footer">
-                             <?php 
-                                  $nextquery= "SELECT * FROM jobs WHERE operator='".$_SESSION['operator_username']."'AND  id < '".$_GET['user_id']."' ORDER BY id DESC LIMIT 1 "; 
-                                  $nextresult = mysqli_query($con,$nextquery);
-                                  if(mysqli_num_rows($nextresult) > 0)
-                                  {
-                                      $nextrow = mysqli_fetch_array($nextresult);
-                                      
-                                      $nextid  = $nextrow['id'];
-                                  } else{
-                                      $nextid=$_GET['user_id'];
-                                  }
-                             ?>
-                             
-                             <a  class="btn btn-danger" href="operator.php">close</a>
-                             <a class="btn btn-primary"   href="operator_view_user.php?user_id=<?php echo $nextid;?>">next</a> 
-                              <span class="pull-right">
-
-                            <a href="operator_user_edit.php?user_id=<?php echo $_GET['user_id'] ?>" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            </span>
-                            
-
-                    </div>
+              
 
           </div>
   
@@ -244,11 +219,11 @@ $(function () {
   });
 });
 </script>
+  
+               <div class='input-group date' id='datetimepicker1'>
 
-             <div class='input-group date' id='datetimepicker1'>
-
-      <div id="s111">  </div>
-           <input type='hidden' name='id'  value='<?php echo $_GET['user_id']; ?>'/> 
+                <div id="s111">  </div>
+               <input type='hidden' name='id'  value='<?php echo $_GET['user_id']; ?>'/> 
         
 </div>
                   <input class="btn btn-default" style="width: 100px" type="submit" value="OK">
@@ -265,7 +240,9 @@ $(function () {
 </div>
 
  <?php  } } } } ?>
-
+<div class="panel panel-warning">
+  <div class="panel-heading">Notes: </div>
+  <div class="panel-body">
 Leave a note:
 <div class="input-group" style="width: 90%"> 
 <form method="POST" action="addnote.php">
@@ -282,7 +259,7 @@ Leave a note:
 </div>
 
 
-<div style="overflow-y: scroll;height: 400px;">
+<div >
 </br>
 <ul class="timeline">
 <?php
@@ -314,6 +291,7 @@ Leave a note:
 
 <?php }  } ?>
 </ul>
+</div>
 </div>
 </div>
 

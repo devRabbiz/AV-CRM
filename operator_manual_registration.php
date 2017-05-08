@@ -1,5 +1,64 @@
 <?php
-include 'include/header.php';
+require_once 'db_connect.php';
+require_once 'session.php';
+include_once 'functions.php'
+?>
+ 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Admin| L`Avenir</title>
+
+  <script type="text/javascript" src="/dist/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-datetimepicker.min.css" />
+
+
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+ 
+  <script src="dist/js/moment.js"></script>
+  <script src="dist/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- 
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../../dikst/css/stsdyle.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="dist/css/bootstrap-datetimepicker.min.css" />
+-->
+ 
+ 
+
+  <link rel="shortcut icon" type="image/png" href="/images/hlogo.png"/>
+</head>
+
+<?php
+
 if (isset($_SESSION['operator_username'])) {
 
 
@@ -8,7 +67,7 @@ if (isset($_SESSION['operator_username'])) {
 
 
 
-    <div class="container jumbotron" id="form-container">
+    <div class="form-container well">
 
       <div class="alerts"></div>
     <form role="form">
@@ -42,7 +101,7 @@ if (isset($_SESSION['operator_username'])) {
 
 
        <center>
-         <a class="btn btn-default btn-info" onclick="window.history.back(); return false;">Back</a>
+        
   
     <input type="hidden" id="reg_by" name="reg_by" value="<?php echo $_SESSION['operator_username']; ?>">
     <input type="button" value="Submit" class="btn btn-primary" onclick="submit_form(); return false;">
@@ -51,14 +110,9 @@ if (isset($_SESSION['operator_username'])) {
 
       
 
-    </div><!-- /.container -->
+  
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-     <script src="jquery-1.11.0.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
     <script type="text/javascript">
 
 
@@ -76,7 +130,7 @@ if (isset($_SESSION['operator_username'])) {
                   alert(ss);
             $('#form-container').css("visibility","hidden");
 
-        location.reload();
+        window.top.location.reload();
 
             });
      
@@ -86,6 +140,6 @@ if (isset($_SESSION['operator_username'])) {
   </body>
   <?php
 }
-  include 'include/footer.php';
+  
 ?>
 </html>

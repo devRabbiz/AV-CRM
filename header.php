@@ -51,7 +51,18 @@ include_once 'functions.php'
   <link href="style.css" rel="stylesheet"/>
   <link rel="stylesheet" href="dist/css/bootstrap-datetimepicker.min.css" />
 -->
- 
+ <style type="text/css">
+   a{
+    text-decoration: none !important;
+   }
+   .pager{
+    margin: 0px !important;
+   }
+   #etab1{
+     margin-top: 10px;
+   }
+  
+ </style>
  
 
   <link rel="shortcut icon" type="image/png" href="/images/hlogo.png"/>

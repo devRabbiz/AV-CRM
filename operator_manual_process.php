@@ -42,7 +42,7 @@ if (!$result)
 			  {
 			  die('Erroraaaaaaaaa: ' . mysqli_error());
 			  }
-			  $array=mysqli_fetch_array($result,MYSQL_NUM);
+			  $array=mysqli_fetch_array($result);
 			  if($array)
 				  {
 				  	$post_data = array('id' => $array[1],'presence'=>0);
