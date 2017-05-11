@@ -138,6 +138,14 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           </a>
         </li>
 
+        <li class=" treeview <?php echo " ".$ac10." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=statistics'?>">
+            <i class="fa fa-bar-chart"></i> <span>Statistics</span>
+          </a>
+        </li>
+
+
+
 
        
 

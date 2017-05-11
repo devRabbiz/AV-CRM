@@ -1,6 +1,6 @@
 <?php
  $con=mysqli_connect("127.0.0.1","root","","reg_db");
- //global $conn=mysqli_connect("127.0.0.1","root","","reg_db");
+ $conn= new mysqli_connect("127.0.0.1","root","","reg_db");
 $bd=$con;
  
 // Check connection

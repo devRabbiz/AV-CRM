@@ -65,7 +65,7 @@ $(document).ready(function(){
                         <tr>
                         <td>Phone Number:</td>
                         <td>
-                        <a style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[10]; ?>'" > <img src="/images/phone.png" height="30px">
+                        <a id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[10]; ?>'" > <img src="/images/phone.png" height="30px">
                         </a>
                         </td>
                       </tr>
@@ -288,6 +288,21 @@ Leave a note:
 
         } }
         ?>
-
+<script type="text/javascript">
+  $('#callbtn').click(function(){
+    $.ajax({
+        url : 'operator_count_calls.php', 
+        type : 'post',
+        data:{
+          id:"<?php echo (int)$_GET['user_id'] ?>",
+          admin:"<?php echo $_SESSION['operator_username'] ?>"
+          
+             },  
+        success : function(data){
+          console.log(data);
+        }
+    });
+});
+</script>
        
         </html>

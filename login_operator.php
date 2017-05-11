@@ -207,8 +207,19 @@ form button:hover {
             transform: translateY(-700px) rotate(600deg);
   }
 }
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100'
+
+.text {
+  font-weight: 100;
+  font-size: larger !important;
+  color: #fafafa;
+}
+.dud {
+  color: #e2e2e2;
+}
 
  </style>
+
 
   <?php
 
@@ -220,7 +231,7 @@ form button:hover {
 
 <div class="wrapper">
   <div class="container">
-    <h1>L`Avenir</h1>
+     <h1 class="text"></h1>
     <form class="form" role='form' action='operator_check.php' method='post'>
       <input type="text" name="operator-username" placeholder="Username" id='operator-username' required="required" class="input-txt" autofocus/>
        <input type="password"  name='operator-pass' placeholder="Password" id='operator-pass' required="required" class="input-txt" />
@@ -241,4 +252,112 @@ form button:hover {
     <li></li>
   </ul>
 </div>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    if ($('#operator-username').value.length != 0 ) {
+      console.log("set");
+      $('.form').submit();
+    }
+    else{
+      console.log("not set");
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">// ——————————————————————————————————————————————————
+// TextScramble
+// ——————————————————————————————————————————————————
+
+class TextScramble {
+  constructor(el) {
+    this.el = el
+    this.chars = '!<>-_\\/[]{}—=+*^?#________'
+    this.update = this.update.bind(this)
+  }
+  setText(newText) {
+    const oldText = this.el.innerText
+    const length = Math.max(oldText.length, newText.length)
+    const promise = new Promise((resolve) => this.resolve = resolve)
+    this.queue = []
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || ''
+      const to = newText[i] || ''
+      const start = Math.floor(Math.random() * 40)
+      const end = start + Math.floor(Math.random() * 40)
+      this.queue.push({ from, to, start, end })
+    }
+    cancelAnimationFrame(this.frameRequest)
+    this.frame = 0
+    this.update()
+    return promise
+  }
+  update() {
+    let output = ''
+    let complete = 0
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i]
+      if (this.frame >= end) {
+        complete++
+        output += to
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < 0.28) {
+          char = this.randomChar()
+          this.queue[i].char = char
+        }
+        output += `<span class="dud">${char}</span>`
+      } else {
+        output += from
+      }
+    }
+    this.el.innerHTML = output
+    if (complete === this.queue.length) {
+      this.resolve()
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update)
+      this.frame++
+    }
+  }
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)]
+  }
+}
+
+// ——————————————————————————————————————————————————
+// Example
+// ——————————————————————————————————————————————————
+
+const phrases = [
+  'Welcome',
+  'to',
+  'L`Avenir'
+
+]
+
+const el = document.querySelector('.text')
+const fx = new TextScramble(el)
+
+let counter = 0
+const next = () => {
+  fx.setText(phrases[counter]).then(() => {
+    setTimeout(next, 800)
+  })
+  counter = (counter + 1) % phrases.length
+}
+
+next()</script>
 

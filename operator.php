@@ -70,6 +70,10 @@ if (!isset($_GET['pager'])) {
             $_GET['pager']='latest';
               include 'operator_load.php'; 
             break;
+            case 'statistics':
+            $_GET['pager']='statistics';
+              include 'charts/chart_calls.php'; 
+            break;
            
             
           default:
