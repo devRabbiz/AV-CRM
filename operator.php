@@ -100,6 +100,5 @@ if (!isset($_GET['pager'])) {
 
 <?php  include_once('footer.php') 
 
-
 ?>
 

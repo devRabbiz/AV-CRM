@@ -384,6 +384,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 </div>
 
+
+
+
 <script type="text/javascript">
   jQuery(document).ready(function($)
 {
@@ -443,5 +446,13 @@ $('#etab1').tableScroll({containerClass:'tablescroll'});
 </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
 
 <?php } else  header("Location:login_operator.php");?>

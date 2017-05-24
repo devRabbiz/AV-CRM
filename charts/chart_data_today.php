@@ -1,4 +1,5 @@
 <?php
+include_once '../session.php';
 //address of the server where db is installed
 $servername = "localhost";
 
@@ -22,7 +23,7 @@ if ($conn->connect_error) {
 }
 
 //the SQL query to be executed
-$query = "SELECT  * FROM call_count  GROUP BY id ";
+$query = "SELECT  * FROM call_count where admin='".$_SESSION['operator_username']."'  GROUP BY id ";
 
 
 //storing the result of the executed query
@@ -39,7 +40,7 @@ if ($result->num_rows > 0) {
   	$query1="SELECT name FROM user WHERE id='".$row['id']."'";
 	$result1 = $conn->query($query1);
 
-    $check=mysqli_query($conn,"SELECT * FROM call_count WHERE id='".$row['id']."' AND DATE(date) = CURDATE() ") or die('error ktu'.mysqli_error($conn));
+    $check=mysqli_query($conn,"SELECT * FROM call_count WHERE id='".$row['id']."' AND admin='".$_SESSION['operator_username']."'  AND DATE(date) = CURDATE() ") or die('error ktu'.mysqli_error($conn));
         $calls=mysqli_num_rows($check);
 
   	while($row1 = $result1->fetch_assoc()) {
