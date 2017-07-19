@@ -61,7 +61,7 @@ $data=mysqli_fetch_assoc($result2);
 </table>
 
 <div class="well col-md-12">
-<table id="tabb" class="table table-condensed table-hover table-bordered" style="width: 70%" data-sort="table">
+<table id="tabb" class="table-hover table-bordered" style="width: 100%" data-sort="table">
       <thead>
       	<tr>
       		<th>Operator:</th>

@@ -74,10 +74,7 @@ include_once 'functions.php'
         $user=$_SESSION['login_username'];
         $role="Administrator";
       }
-    elseif(isset($_SESSION['login_student_username'])){
-      $user=$_SESSION['login_student_username'];
-      $role="Client";
-    }
+    
     elseif (isset($_SESSION['operator_username'])) {
       $user=$_SESSION['operator_username'];
       $role="Operator";
@@ -92,12 +89,24 @@ include_once 'functions.php'
 
 
 
-<body class="hold-transition skin-blue-light sidebar-mini sidebar-collapse">
+<body class="hold-transition skin-blue-light sidebar-mini <?php if (!isset($_SESSION['login_username'])): ?>
+  sidebar-collapse
+<?php endif ?>">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="operator.php" class="logo">
+    <a
+
+     <?php if (isset($_SESSION['login_username'])): ?>
+      href="admin.php"
+    <?php endif ?>
+
+    <?php if (!isset($_SESSION['login_username'])): ?>
+      href="operator.php"
+    <?php endif ?>
+
+     class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>L`</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -119,7 +128,7 @@ include_once 'functions.php'
 
 
 
-	<?php if(isset($_SESSION['operator_username'])){ ?>
+	<?php if(isset($_SESSION['operator_username']) || isset($_SESSION['login_username'])){ ?>
 
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">

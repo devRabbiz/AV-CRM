@@ -1,3 +1,168 @@
+<script type="text/javascript">
+   $(document).ready(function(){
+    setInterval(function() {getNotifications()}, 5000);
+   });
+
+   function getNotifications() {
+
+$.ajax({
+  type: 'GET',
+  url: 'notifications.php',
+  dataType: 'json',
+  success: function(data) {
+
+   $('.container1').html("");
+var data = JSON.parse(JSON.stringify(data));
+       for (var i in data) 
+            {
+       $('.container1').append("<section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> ")
+
+           }
+  },
+  error: function() {
+    
+  }
+});
+}
+
+function removeNotification(id) {
+  $.post("notifications.php",{id:id},function(data){
+            
+          });
+  
+  getNotifications();
+}
+
+
+</script>
+<div class="container1">
+  
+
+</div>
+<style type="text/css">
+
+.aa{
+  position: absolute;
+    right: 20px;
+    color: #3c8dbc;
+    z-index: 99999999;
+    text-decoration: none;
+    cursor: pointer;
+}
+.aa:hover{
+    
+      color: #5bc0de;
+}
+.container1 {
+    
+    width: 380px;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    word-wrap: break-word;
+}
+.notif:hover{ background: rgba(1, 1, 1, 0.82)}
+.notif:hover > .aa { color: #5bc0de; }
+
+.container1 .notif {
+  margin: 10px 0;
+}
+
+.notif {
+  position: relative;
+  padding: 25px 30px 25px 30px;
+  min-height: 50px;
+  line-height: 22px;
+  background: rgba(1, 1, 1, 0.77);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+
+.notif p {
+  font-size: 11px;
+  color: white;
+}
+
+.notif-title {
+      margin: 0 0 5px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #3c8dbc;
+}
+
+
+
+.notif-notice .notif-title:before, .notif-notice .notif-title:after {
+  top: 44px;
+  left: 55px;
+  width: 4px;
+  height: 12px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.notif-notice .notif-title:after {
+  top: 50px;
+  left: 48px;
+  width: 8px;
+  height: 4px;
+}
+
+.notif-alert:before {
+  background: #e34f4f;
+  border-color: #c14343;
+}
+
+.notif-alert .notif-title:before, .notif-alert .notif-title:after {
+  top: 43px;
+  left: 53px;
+  width: 4px;
+  height: 14px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.notif-alert .notif-title:after {
+  top: 48px;
+  left: 48px;
+  width: 14px;
+  height: 4px;
+}
+
+.notif-warn:before {
+  background: #f1e472;
+  border-color: #cec260;
+}
+
+.notif-warn .notif-title:before, .notif-warn .notif-title:after {
+  top: 42px;
+  left: 53px;
+  width: 4px;
+  height: 11px;
+  background: #5c562b;
+}
+
+.notif-warn .notif-title:after {
+  top: 54px;
+  height: 4px;
+}
+
+
+
+
+
+</style>
+
+
+
+
 <style type="text/css">@import url('http://getbootstrap.com/dist/css/bootstrap.css');
  .popover {
     max-width: 100%;
@@ -12,7 +177,15 @@ body{
 }
 </style>
 
-
+ <script type="text/javascript">
+   function callb(num) {
+      $('.chat').animate({
+        height: 450
+    }, 500);
+      
+     top.wphone.webphone_api.call(num);
+   }
+ </script>
 
 <script type="text/javascript">
   var originalLeave = $.fn.popover.Constructor.prototype.leave;
@@ -20,9 +193,7 @@ $.fn.popover.Constructor.prototype.leave = function(obj){
   var self = obj instanceof this.constructor ?
     obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
   var container, timeout;
-
   originalLeave.call(this, obj);
-
   if(obj.currentTarget) {
     container = $(obj.currentTarget).siblings('.popover')
     timeout = self.timeout;
@@ -36,10 +207,7 @@ $.fn.popover.Constructor.prototype.leave = function(obj){
     })
   }
 };
-
-
 $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'right', delay: {show: 10, hide: 10}});
-
 </script>
 
 
@@ -115,9 +283,9 @@ function clearmeet<?php echo $row1[2];?>() {
   var check<?php echo $row1[2];?>=setInterval(function() {
       var a<?php echo $row1[2];?> =new Date();
      var z<?php echo $row1[2];?>=parseInt((a<?php echo $row1[2];?>.getTime()-a<?php echo $row1[2];?>.getMilliseconds())/1000);
-     console.log(z<?php echo $row1[2];?>);
-     console.log("--------");
-     console.log(x<?php echo $row1[2];?>);
+     //console.log(z<?php echo $row1[2];?>);
+     //console.log("--------");
+     //console.log(x<?php echo $row1[2];?>);
     if (z<?php echo $row1[2];?>>x<?php echo $row1[2];?>){
   var notif<?php echo $row1[2];?> = document.getElementById("myAudio"); 
         notif<?php echo $row1[2];?>.play(); 
@@ -133,7 +301,7 @@ function clearmeet<?php echo $row1[2];?>() {
     clearInterval(check<?php echo $row1[2];?>);
     }
 
-
+    getNotifications();
 
 
   }, 1000);
@@ -306,7 +474,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 <tr>
             <td><?php echo $row['id'] ?></td>
-           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true"  data-html=true data-content="<iframe class='iframe' scrolling='yes' frameborder='0' marginwidth='0' marginheight='0' src='operator_view_user_hover.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
+           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true"  data-html=true data-content="<iframe name='hoverprofile' class='iframe' scrolling='yes' frameborder='0' marginwidth='0' marginheight='0' src='operator_view_user_hover.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
           <td><?php echo $row['status'] ?></td>
            <td width="30%"><?php
 

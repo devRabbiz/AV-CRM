@@ -18,9 +18,9 @@ if(isset($query)){
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
-                echo "<a  style='height:30px;background:blue' href='view_user.php?user_id=";
+                echo "<a id='atitle'  style='height:30px;background:blue' onclick='show_profile(";
                 echo $row['id'];
-                echo "'><p>" . $row['name'] . "</p></a>";
+               echo ")'><div style='height:10px;width:100%;margin:10px'>" . $row['name'] . "</div></a><hr>";
             }
             // Close result set
             mysqli_free_result($result);

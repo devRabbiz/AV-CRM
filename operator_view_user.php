@@ -1,5 +1,6 @@
 <?php
   include 'header.php';
+
 ?>
  
 
@@ -280,8 +281,8 @@ Leave a note:
           </div>
 
 
-
-  </body>
+</body>
+  
         <?php
           }
     }
@@ -304,5 +305,18 @@ Leave a note:
     });
 });
 </script>
+      
+    <style type="text/css">
+      .main-footer{
+        bottom: 0px;
        
-        </html>
+         width: 100%;
+
+      }
+     
+    </style>
+</html>
+   <?php 
+      //include 'menu_operator.php';
+      include 'footer.php'; 
+   ?>

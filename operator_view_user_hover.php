@@ -117,6 +117,8 @@ $(document).ready(function(){
                         <tr>
                         <td>Phone Number:</td>
                         <td>
+                       <!-- <a  id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="top.callb(<?php echo $array[10]; ?>)" > <img src="/images/phone.png" height="30px">
+                        </a>-->
                         <a  id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[10]; ?>'" > <img src="/images/phone.png" height="30px">
                         </a>
                         </td>
@@ -139,7 +141,7 @@ $(document).ready(function(){
 
 </div>
          
- 
+
 
 <div  class="col-md-4">
 

@@ -36,7 +36,7 @@ if (!isset($_GET['pager'])) {
             case 'followup':
             $_GET['pager']='followup';
               include 'operator_load.php'; 
-              $f=' active';
+             
             break;
 
             case 'interested':

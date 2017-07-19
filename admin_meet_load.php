@@ -109,9 +109,9 @@ $data=mysqli_fetch_assoc($result);
 <table id="etab1" class="table  table-condensed table-hover table-bordered pi" cellspacing="0" width="100%">
   <thead class="st">
           <tr >
-            <th><strong>Name</strong></th>
+            <th width="50%"><strong>Name</strong></th>
    
-            <th><strong>Meeting</strong></th>
+            <th width="50%"><strong>Meeting</strong></th>
 
 
           </tr>
@@ -138,7 +138,7 @@ $data=mysqli_fetch_assoc($result);
 
            
 
-           <td style="text-align: justify;"><center>
+           <td style="text-align: justify;">
 
 <?php
 
@@ -157,7 +157,7 @@ $data=mysqli_fetch_assoc($result);
           <?php } ?>
             <span class="label label-primary"><?php echo $date ?></span>
             <?php } ?>
-          </center>
+          
           </td>
            </tr>
            </div>
@@ -196,27 +196,7 @@ $data=mysqli_fetch_assoc($result);
 
 
 
- <table  class="table  table-condensed table-hover table-bordered" cellspacing="0" width="100%">
-         <tr>
-            <td  ><center>
-<button type="button" class="btn  btn-primary btn-success" data-toggle="modal" data-target="#dropmodal">Send To</button>
-  <div class="btn-group">
- <input class="btn  btn-info" type='button' value='Verify' onclick='admin_checked_data(); return false;'>
-  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><center><button type="button" class="btn  btn-primary btn-info" data-toggle="modal" data-target="#verifyall">Verify All</button></center></li>
-
-  </ul>
-</div>
-  
-  <button type="button" class="btn  btn-warning" data-toggle="modal" data-target="#moveto">Move To</button>
- </center>
- </td>
- </tr>
-         </table>
+ 
           </div>
 
 

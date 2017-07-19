@@ -47,32 +47,44 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
 
-        <li class=" treeview <?php echo $h ?>" >
-          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=home'?>">
-            <i class="fa fa-dashboard"></i> <span>Trader</span>
-           <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+        <li class="treeview <?php echo " ".$ac8." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=all'?>">
+            <i class="fa fa-globe"></i> <span>All</span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="manual_registration.php"><i class="fa fa-user-plus"></i>Create New</a></li>
-            
-          </ul>
         </li>
 
-        <li class="treeview <?php echo $s ?>">
+        <li class="treeview <?php echo " ".$ac1." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=home'?>">
+            <i class="fa fa-user"></i> <span>Trader</span>
+          </a>
+        </li>
+
+        <li class="treeview <?php echo " ".$ac2." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=sec'?>">
             <i class="fa fa-check"></i> <span>Finish</span>
           </a>
         </li>
 
-        <li class="treeview <?php echo $f ?>">
+        <li class="treeview <?php echo " ".$ac3." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=ftd'?>">
             <i class="fa fa-thumbs-up"></i> <span>FTD</span>
           </a>
         </li>
 
-        <li class="treeview <?php echo $l ?>">
+         <li class="treeview <?php echo " ".$ac6." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=callback'?>">
+            <i class="fa fa-exchange"></i> <span>Callback</span>
+          </a>
+        </li>
+
+        <li class="treeview <?php echo " ".$ac7." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=not_interested'?>">
+            <i class="fa fa-exclamation"></i> <span>Not Interested</span>
+          </a>
+        </li>
+
+
+        <li class="treeview <?php echo " ".$ac5." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=op_leads'?>">
             <i class="fa fa-dashboard"></i> <span>Op_leads</span>
           </a>
@@ -84,7 +96,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           </a>
         </li>
 
-        <li class=" treeview  <?php echo $o ?>">
+        <li class=" treeview  <?php echo " ".$ac4." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=operator'?>">
             <i class="fa fa-dashboard"></i> <span>Reg.Operator</span>
           </a>
@@ -92,7 +104,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
 
         <li class=" treeview">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=list_operator'?>">
-            <i class="fa fa-users"></i> <span>Operator</span>
+            <i class="fa fa-users"></i> <span>Operators</span>
           </a>
         </li>
 

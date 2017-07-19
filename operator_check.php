@@ -12,7 +12,7 @@ session_start();
 
         if($array){
         	$_SESSION['operator_username']=$_POST['operator-username'];
-          	header("Location:operator.php");
+          	header("Location:operator.php?login=true");
 
 
         }

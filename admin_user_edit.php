@@ -11,7 +11,7 @@
 		if(!$result)
 			die('Error: ' . mysqli_error());
 		else{
-			$array=mysqli_fetch_array($result,MYSQL_NUM);
+			$array=mysqli_fetch_array($result);
           if($array){
           	?>
           	<div class="alerts"></div>
@@ -133,7 +133,7 @@ $(document).ready(function (e) {
     </td>
 
     </form>
-
+admin_user_edit.ph
           <td>
             <form method = "post" action="admin_delete_user.php?user_id=<?php echo $array[0]?>"><input type="submit" value="Delete" class="btn btn-danger"></form>
             </div>

@@ -56,7 +56,7 @@ body :-ms-input-placeholder {
 .container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 50px 0;
   height: 400px;
   text-align: center;
 }
@@ -233,12 +233,16 @@ form button:hover {
   <div class="container">
      <h1 class="text"></h1>
     <form class="form" role='form' action='operator_check.php' method='post'>
-      <input type="text" name="operator-username" placeholder="Username" id='operator-username' required="required" class="input-txt" autofocus/>
+      <input type="text" name="operator-username" placeholder="Username" id='operator-username' required="required" class="input-txt" />
        <input type="password"  name='operator-pass' placeholder="Password" id='operator-pass' required="required" class="input-txt" />
+
+       
       <button type="submit" id="login-button">Login</button>
     </form>
   </div>
   
+
+
   <ul class="bg-bubbles">
     <li></li>
     <li></li>
@@ -253,21 +257,6 @@ form button:hover {
   </ul>
 </div>
 
-<script type="text/javascript">
-
-  $(document).ready(function(){
-
-    if ($('#operator-username').value.length != 0 ) {
-      console.log("set");
-      $('.form').submit();
-    }
-    else{
-      console.log("not set");
-    }
-
-  });
-
-</script>
 
 
 
