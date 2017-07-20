@@ -65,7 +65,7 @@ $(document).ready(function(){
                          <tr>
                         <tr>
                         <td>Phone Number:</td>
-                        <td>
+                        <td><?php echo $array[10]; ?>
                         <a id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[10]; ?>'" > <img src="/images/phone.png" height="30px">
                         </a>
                         </td>
