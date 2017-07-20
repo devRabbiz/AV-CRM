@@ -1,7 +1,125 @@
+<?php if (isset($_GET['login'])) { 
+	 $full_name=mysqli_query($con,"SELECT * FROM operator WHERE username='".$_SESSION['operator_username']."'");
+      $full_name=$full_name->fetch_assoc();
+
+ ?>
+<div class="back">
+<h1>Welcome <strong><?php echo $full_name['full_name'] ?></strong></h1>
+<audio src="dist/welcome_message.mp3" autoplay=""></audio>
+</div>
+
 <script type="text/javascript">
-   $(document).ready(function(){
-    setInterval(function() {getNotifications()}, 5000);
-   });
+	$(document).ready(function(){
+		setTimeout(hid,6000);
+		setTimeout(playname,1500);
+	});
+
+function playname(){
+	var audion = new Audio("dist/audio_name/<?php echo $full_name['username'];?>.mp3");
+		audion.play();
+}
+function hid(){
+	$('.back').remove();
+}
+</script>
+<style type="text/css">
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700|Dosis:200,400,600);
+
+  .back {
+    background-color:rgba(60, 141, 188, 0.82);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+}
+h1 {
+  font-family: Dosis;
+  font-weight: 200;
+  position: absolute;
+  text-align: center;
+  display: block;
+  color: #fff;
+  top: 50%;
+  width: 100%;
+  margin-top: -55px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  opacity: 0;
+  -webkit-animation: anim 3.2s ease-out forwards 1s;
+  animation: anim 3.2s ease-out forwards 1s;
+}
+strong {
+  display: block;
+  font-weight: 400;
+}
+
+
+@-webkit-keyframes anim {
+  0% {
+    text-shadow: 0 0 50px #fff;
+    letter-spacing: 80px;
+    opacity: 0;
+    -webkit-transform: rotateY(-90deg);
+  }
+  50% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -webkit-transform: rotateY(0deg);
+  }
+  75% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -webkit-transform: rotateY(0deg) translateZ(60px);
+  }
+  100% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    letter-spacing: 8px;
+    -webkit-transform: rotateY(0deg) translateZ(100px);
+  }
+
+}
+@keyframes anim {
+  0% {
+    text-shadow: 0 0 50px #fff;
+    letter-spacing: 80px;
+    opacity: 0;
+    -moz-transform: rotateY(-90deg);
+  }
+  50% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -moz-transform: rotateY(0deg);
+  }
+  75% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -moz-transform: rotateY(0deg) translateZ(60px);
+  }
+  100% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    letter-spacing: 8px;
+    -moz-transform: rotateY(0deg) translateZ(100px);
+
+  }
+
+}
+</style>
+
+
+
+<?php } ?>
+<script type="text/javascript">
+   $(document).ready(getNotifications());
 
    function getNotifications() {
 
@@ -15,7 +133,15 @@ $.ajax({
 var data = JSON.parse(JSON.stringify(data));
        for (var i in data) 
             {
-       $('.container1').append("<section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> ")
+                
+              
+    
+      document.title="New__Notification__";
+      (function titleMarquee() {
+    document.title = document.title.substring(1)+document.title.substring(0,1);
+    setTimeout(titleMarquee, 200);
+})();
+     $('.container1').append("<section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> ")
 
            }
   },
@@ -29,7 +155,7 @@ function removeNotification(id) {
   $.post("notifications.php",{id:id},function(data){
             
           });
-  
+  document.title="Admin| L`Avenir";
   getNotifications();
 }
 
