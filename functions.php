@@ -59,7 +59,7 @@ function admin_notifications($con,$login_username){
 //case home
 function admin_case_home($con,$login_username,$startrow){
 
-	return $a=mysqli_query($con,"SELECT * FROM user  WHERE sendto IS NULL AND sec='1' AND reg_by='".$_SESSION['login_username']."'  ORDER BY id DESC LIMIT $startrow, 30  ");
+	return $a=mysqli_query($con,"SELECT * FROM user  WHERE sendto IS NULL AND sec='1'  ORDER BY id DESC LIMIT $startrow, 30  ");
 }
 
 function admin_case_sec($con,$login_username,$startrow){
