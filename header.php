@@ -157,7 +157,13 @@ include_once 'functions.php'
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane active" id="control-sidebar-home-tab">
-       <div style="color:white;text-align: center;"><a class="btn btn-default"  href="logout.php">Logout</a></div>
+       <div style="color:white;text-align: center;">
+       <?php if (isset($_SESSION['login_username'])): ?>
+       <a class="btn btn-primary" data-toggle="modal" data-target="#sendNotification">Send Notification</a>
+       <?php endif ?>
+       <a class="btn btn-default"  href="logout.php">Logout</a>
+
+       </div>
         
         <!-- /.control-sidebar-menu -->
 
@@ -169,6 +175,23 @@ include_once 'functions.php'
   </aside>
   <!-- /.control-sidebar -->
 
+<div id="sendNotification" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width: 900px !important">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Notifications</h4>
+      </div>
+      <div class="modal-body">
+        <iframe src="admin_send_notification.php" width="880px" height="500px"></iframe>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 
-
+  </div>
+</div>
