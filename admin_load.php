@@ -1,6 +1,238 @@
 <?php
 include_once 'header.php';
 
+ if (isset($_GET['login'])) { 
+   $full_name=mysqli_query($con,"SELECT * FROM admins WHERE username='".$_SESSION['login_username']."'");
+      $full_name=$full_name->fetch_assoc();
+
+ ?>
+<div class="back">
+<h1>Welcome <strong><?php echo $full_name['full_name'] ?></strong></h1>
+<audio src="dist/welcome_message.mp3" autoplay=""></audio>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    setTimeout(hid,6000);
+    setTimeout(playname,1500);
+  });
+
+function playname(){
+  var audion = new Audio("dist/audio_name/<?php echo $full_name['username'];?>.mp3");
+    audion.play();
+}
+function hid(){
+  $('.back').remove();
+}
+</script>
+<style type="text/css">
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700|Dosis:200,400,600);
+
+  .back {
+    background-color:rgba(60, 141, 188, 0.82);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+}
+h1 {
+  font-family: Dosis;
+  font-weight: 200;
+  position: absolute;
+  text-align: center;
+  display: block;
+  color: #fff;
+  top: 50%;
+  width: 100%;
+  margin-top: -55px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  opacity: 0;
+  -webkit-animation: anim 3.2s ease-out forwards 1s;
+  animation: anim 3.2s ease-out forwards 1s;
+}
+strong {
+  display: block;
+  font-weight: 400;
+}
+
+
+@-webkit-keyframes anim {
+  0% {
+    text-shadow: 0 0 50px #fff;
+    letter-spacing: 80px;
+    opacity: 0;
+    -webkit-transform: rotateY(-90deg);
+  }
+  50% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -webkit-transform: rotateY(0deg);
+  }
+  75% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -webkit-transform: rotateY(0deg) translateZ(60px);
+  }
+  100% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    letter-spacing: 8px;
+    -webkit-transform: rotateY(0deg) translateZ(100px);
+  }
+
+}
+@keyframes anim {
+  0% {
+    text-shadow: 0 0 50px #fff;
+    letter-spacing: 80px;
+    opacity: 0;
+    -moz-transform: rotateY(-90deg);
+  }
+  50% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -moz-transform: rotateY(0deg);
+  }
+  75% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    -moz-transform: rotateY(0deg) translateZ(60px);
+  }
+  100% {
+    text-shadow: 0 0 1px #fff;
+    opacity: 0.8;
+    letter-spacing: 8px;
+    -moz-transform: rotateY(0deg) translateZ(100px);
+
+  }
+
+}
+</style>
+
+
+
+<?php }
+
+if (isset($_SESSION['login_username'])) {
+
+
+ 
+    if($result =$admin1){
+        if(mysqli_num_rows($result) > 0){
+            while($row1 = mysqli_fetch_array($result)){
+
+            if (is_null($row1[2]))
+              echo "";
+            else{
+
+             ?>
+
+<audio id="myAudio">
+  <source src="/files/notif.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+           <script type="text/javascript">
+  var prove<?php echo $row1[1];?>="<?php echo $row1[2]; ?>";
+  console.log(prove<?php echo $row1[1];?>);
+  console.log("<?php echo $row1[4] ?>");
+  // Split timestamp into [ Y, M, D, h, m, s ]
+var t<?php echo $row1[1];?> = prove<?php echo $row1[1];?>.split(/[- :]/);
+
+// Apply each element to the Date function
+var d<?php echo $row1[1];?> = new Date(Date.UTC(t<?php echo $row1[1];?>[0], t<?php echo $row1[1];?>[1]-1, t<?php echo $row1[1];?>[2], t<?php echo $row1[1];?>[3]-2, t<?php echo $row1[1];?>[4], t<?php echo $row1[1];?>[5]));
+
+var x<?php echo $row1[1];?>=parseInt((d<?php echo $row1[1];?>.getTime()-d<?php echo $row1[1];?>.getMilliseconds())/1000);
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (!Notification) {
+    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    return;
+  }
+
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+});
+
+function notifyMe<?php echo $row1[1];?>() {
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var notification = new Notification('You have a meeting now', {
+      icon: 'images/meet.ico',
+      body: "<?php echo $row1[4] ?>",
+    });
+
+    Notification.onclick = function () {
+      window.open("view_user.php?user_id=<?php echo $row1[1] ?>");
+    };
+
+  }
+
+}
+function clearmeet<?php echo $row1[1];?>() {
+
+            var admin='<?php echo $_SESSION['login_username']; ?>';
+          $.post("clearmeet_admin.php",{id:<?php echo $row1[1]; ?>,admin:admin},function(data){
+            //window.location.reload();
+          });
+        };
+
+  var check<?php echo $row1[1];?>=setInterval(function() {
+      var a<?php echo $row1[1];?> =new Date();
+     var z<?php echo $row1[1];?>=parseInt((a<?php echo $row1[1];?>.getTime()-a<?php echo $row1[1];?>.getMilliseconds())/1000);
+     console.log(z<?php echo $row1[1];?>);
+     console.log("--------");
+     console.log(x<?php echo $row1[1];?>);
+    if (z<?php echo $row1[1];?>>x<?php echo $row1[1];?>){
+      var notif<?php echo $row1[1];?> = document.getElementById("myAudio"); 
+        notif<?php echo $row1[1];?>.play(); 
+
+
+      notifyMe<?php echo $row1[1];?>();
+      if(confirm('<?php echo $row1[4] ?>'))
+        show_profile(<?php echo $row1[1] ?>);
+      else
+         show_profile(<?php echo $row1[1] ?>);
+
+      //alert("<?php echo $row1[1] ?>");
+      clearmeet<?php echo $row1[1];?>();
+    clearInterval(check<?php echo $row1[1];?>);
+    }
+
+
+
+
+  }, 1000);
+
+
+$(document).ready(function() {
+  setTimeout(function(){
+   window.location.reload(1);
+}, 300000)
+
+});
+
+
+
+</script>
+<?php   }
+
+          }
+        }
+      }
+       }  
+
      if(isset($_SESSION['admin-logout'])){?>
       <div class='alert alert-danger alert-dissmissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><?php echo $_SESSION['admin-logout']?></div>
       <?php unset($_SESSION['admin-logout']);}?>
@@ -77,120 +309,6 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
 
-
-
-
-
-<audio id="myAudio">
-  <source src="/files/notif.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
- <script type="text/javascript">
-
-document.addEventListener('DOMContentLoaded', function () {
-  if (!Notification) {
-    alert('Desktop notifications not available in your browser. Try Chromium.'); 
-    return;
-  }
-
-  if (Notification.permission !== "granted")
-    Notification.requestPermission();
-});
-
-function notifyMe(a,b) {
-  if (Notification.permission !== "granted")
-    Notification.requestPermission();
-  else {
-    var notification = new Notification('You have a meeting now', {
-      icon: 'images/meet.ico',
-      body: b,
-    });
-
-    Notification.onclick = function () {
-      window.open("view_user.php?user_id="+a);
-    };
-
-  }
-
-}
-
-
-
-   $(document).ready(function(){
-    setInterval(function() {getJobs()}, 5000);
-   });
-
-function toTimestamp(strDate){
-   var datum = Date.parse(strDate);
-   return datum/1000;
-}
-function getJobs() {
-
-$.ajax({
-  type: 'GET',
-  url: 'admin_jobs.php',
-  dataType: 'json',
-  success: function(data) {
-
-var data = JSON.parse(JSON.stringify(data));
-       for (var i in data) 
-            {
- var jobDate= new Date(data[i].meet); 
-  jobDate=toTimestamp(jobDate);
-  jobDate=parseInt(jobDate);
-  
-  var currentDate = Date();
-  currentDate=toTimestamp(currentDate);
-  currentDate=parseInt(currentDate);
-
-  console.log(data[i].name);
-  console.log(jobDate+"--job");
-  console.log(currentDate+"--now");
-
-
-
-
-
-    if (currentDate > jobDate){
-      console.log('is');
-      var notif = document.getElementById("myAudio"); 
-        notif.play(); 
- if(confirm(data[i].name)){
-  if ($('#showprofile').is(':visible')) {
-    $('#showprofile').modal('toggle');
-  }
-  notifyMe(data[i].def,data[i].name);
-     show_profile(data[i].def);
-    removeJob(data[i].id);    
-    }
-    
-    
-    }
-
-      
-           }
-  },
-  error: function() {
-    
-  }
-});
-}
-
-function removeJob(id) {
-  $.post("clearmeet_ajax.php",{id:id},function(data){
-            
-          });
-}
-
-
-</script>
-
-
-
-
-
-
 <style type="text/css">
   
   .content{
@@ -260,7 +378,7 @@ function removeJob(id) {
     </div>
 
   </div>
-</div>
+</div><
 
              <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
             </td>
@@ -335,7 +453,7 @@ function removeJob(id) {
 
 
     </center>
-show_profile()
+
             </td>
 
 
@@ -731,7 +849,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-      <iframe style="width: 100%;height: 600px;" scrolling="no" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
+      <iframe style="width: 100%;height: 550px;" scrolling="no" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
         
      </div>
       <div class="modal-footer">
@@ -747,7 +865,6 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 
       function show_profile(id){
         var linku="view_user_modal.php?user_id="+id;
-
       $("#shprofile").attr("src",linku);
 
         $('#showprofile').modal('toggle');
@@ -851,7 +968,3 @@ if (isset($_GET['upload'])){ ?>
 <?php  include_once('footer.php') 
 
 ?>
-
-
-
-
