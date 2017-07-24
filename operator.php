@@ -1,10 +1,5 @@
-
 <?php 
-
-
 include_once 'header.php'; ?>
- 
-
 
   <div class="content-wrapper">
     <section class="content">
@@ -83,9 +78,15 @@ if (!isset($_GET['pager'])) {
 
       }
 
-      else {
+      else { ?>
 
-        header("Location:login_operator.php");
+<script type="text/javascript">
+  window.location.href="login_operator.php";
+</script>
+
+
+      <?php  
+       
       }
 ?>
               
