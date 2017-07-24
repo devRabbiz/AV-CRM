@@ -1,5 +1,5 @@
 <?php
-  include 'include/header.php';
+  include 'header.php';
 ?>
     <div class="container-fluid">
       <div class="row admin-outer jumbotron">
@@ -133,7 +133,7 @@ $(document).ready(function (e) {
     </td>
 
     </form>
-admin_user_edit.ph
+
           <td>
             <form method = "post" action="admin_delete_user.php?user_id=<?php echo $array[0]?>"><input type="submit" value="Delete" class="btn btn-danger"></form>
             </div>
