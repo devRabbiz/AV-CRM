@@ -18,7 +18,7 @@ if (isset($_POST['admin-username'])) {
         }
         else
           $_SESSION['admin-invalid'] = "Invalid Username or password for Admin";
-        	header("Location:admin.php");
+        	header("Location:admin.php?login=true");
       }
     }
 
