@@ -17,17 +17,17 @@ $(document).ready(function(){
 
       <div class="admin-outer jumbotron">
 
-      	<?php
+        <?php
         if(isset($_SESSION['operator_username'])){
-      	if(isset($_GET['user_id'])){
-      		
-      		$result = op_view_user($con,$_GET['user_id'],$_SESSION['operator_username']);
-		if(!$result)
-			die('Error: ' . mysqli_error());
-		else{
-			$array=mysqli_fetch_array($result);
+        if(isset($_GET['user_id'])){
+          
+          $result = op_view_user($con,$_GET['user_id'],$_SESSION['operator_username']);
+    if(!$result)
+      die('Error: ' . mysqli_error());
+    else{
+      $array=mysqli_fetch_array($result);
           if($array){
-          	?>
+            ?>
 
 <div class="row">
 <div  class="col-md-4" style="width: 600px;">
@@ -252,7 +252,19 @@ Leave a note:
               <i class="fa fa-comments bg-yellow"></i>
 
               <div class="timeline-item">
-                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?></span>
+                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?><button class="rmNote" onclick="removeNote(<?php echo $row['def'] ;?>)">X</button></span>
+
+                <style type="text/css">
+                  .rmNote{
+
+                    margin-left: 5px;
+                    border: 1px;
+                  }
+                  .rmNote:hover{
+                    background: #dd4b39;
+                    color: white;
+                  }
+                </style>
 
                 <div class="timeline-body">
                    <?php echo $row['note'] ;?>
@@ -290,6 +302,7 @@ Leave a note:
         } }
         ?>
 <script type="text/javascript">
+
   $('#callbtn').click(function(){
     $.ajax({
         url : 'operator_count_calls.php', 
@@ -304,7 +317,26 @@ Leave a note:
         }
     });
 });
+
+function removeNote(def){
+
+  $.post("addnote.php?remove=true",{def:def},function(data){
+    console.log(data);
+    window.location.reload();
+
+  });
+
+
+}
+
+
+
+
 </script>
+
+
+
+
       
     <style type="text/css">
       .main-footer{
