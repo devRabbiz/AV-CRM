@@ -40,6 +40,11 @@ if (!isset($_GET['pager'])) {
             case 'ftd':
             $_GET['pager']='ftd';
               include 'admin_load.php'; 
+            break;
+
+            case 'web':
+            $_GET['pager']='web';
+              include 'admin_load.php'; 
             break; 
 
             case 'callback':
@@ -122,4 +127,3 @@ if (!isset($_GET['pager'])) {
 <?php  include_once('footer.php') 
 
 ?>
-
