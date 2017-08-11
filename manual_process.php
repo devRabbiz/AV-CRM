@@ -19,9 +19,9 @@ if (!$result)
   			if(!$array)
 	  		{
 	  		
-	  		$sql="INSERT INTO user (name,email,phone_no,alt_phone,company,reg_by,lang)
+	  		$sql="INSERT INTO user (name,email,phone_no,alt_phone,company,reg_by,lang,web)
 			VALUES
-			('".$_POST['name']."','".$_POST['email']."','".$_POST['phone_no']."','".$_POST['alt_phone']."','".$_POST['company']."','".$_POST['reg_by']."','".$lang."')";
+			('".$_POST['name']."','".$_POST['email']."','".$_POST['phone_no']."','".$_POST['alt_phone']."','".$_POST['company']."','".$_POST['reg_by']."','".$lang."','".$_POST['web']."')";
 
 			if (!mysqli_query($con,$sql))
 			  {
