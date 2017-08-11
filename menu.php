@@ -71,6 +71,12 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           </a>
         </li>
 
+        <li class="treeview <?php echo " ".$ac11." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=web'?>">
+            <i class="fa fa-magnet"></i> <span>Web</span>
+          </a>
+        </li>
+
          <li class="treeview <?php echo " ".$ac6." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=callback'?>">
             <i class="fa fa-exchange"></i> <span>Callback</span>
