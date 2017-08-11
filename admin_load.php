@@ -257,7 +257,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
         } else{
           $pager=$_GET['pager'];
         }
-  $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8=$ac9=$ac10="";
+  $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8=$ac9=$ac10=$ac11="";
         
         switch ($pager) {
 
@@ -300,6 +300,10 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 $r=mysqli_query($con,"SELECT * FROM user  ORDER BY id DESC LIMIT $startrow, 30  ");
                 $ac8="active";
           break;
+          case 'web':
+                $r=mysqli_query($con,"SELECT * FROM user where web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $ac11="active";
+            break;
 
           default:
 
