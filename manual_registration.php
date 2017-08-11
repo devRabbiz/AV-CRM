@@ -97,7 +97,9 @@ if (isset($_SESSION['login_username'])) {
         <label for="company">Company</label>
         <input type="company" class="form-control" id="company" placeholder="Enter Company"  return false;">
       </div>
-
+    <label for="web">
+          <input type="checkbox" id="web" name="web">
+It`s from web</label>
 
        <center>
          <a class="btn btn-default btn-info" onclick="window.history.back(); return false;">Back</a>
@@ -117,11 +119,21 @@ if (isset($_SESSION['login_username'])) {
      <script src="jquery-1.11.0.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script> -->
     <script type="text/javascript">
+var web=1;
+  $('#web').click(function (){
 
-
+   if($(this).is(':checked')){
+               web=0;
+            } else{
+               web=1;
+            } 
+});
     function submit_form(){
+
+
+
       
-        $.post("manual_process.php",{name:$("#name").val(),email:$("#email").val(),phone_no:$("#phone").val(),alt_phone:$("#alt_phone").val(),company:$("#company").val(),reg_by:$("#reg_by").val()}, function(data){
+        $.post("manual_process.php",{name:$("#name").val(),email:$("#email").val(),phone_no:$("#phone").val(),alt_phone:$("#alt_phone").val(),company:$("#company").val(),reg_by:$("#reg_by").val(),web:web}, function(data){
       console.log(data);
                         var obj = $.parseJSON(data);
                console.log(obj);
