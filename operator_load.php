@@ -289,7 +289,7 @@ function removeNotification(id) {
 
 
 
-<style type="text/css">@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+<style type="text/css">
  .popover {
     max-width: 100%;
     max-height:100%;
