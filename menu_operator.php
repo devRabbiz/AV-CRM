@@ -58,8 +58,16 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
                       </span></span>
           
           </a>
-          
         </li>
+        
+        <li class=" treeview <?php echo " ".$ac11." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=web'?>">
+            <i class="fa fa fa-magnet"></i> <span>Web<span class="badge" style="right:5px;position: absolute;">                        <?php $stat=mysqli_query($con,"SELECT * FROM user WHERE web=0 AND sendto='".$_SESSION['operator_username']."' ");
+                         $ptotal=mysqli_num_rows($stat);
+                         echo $ptotal;?>
+                      </span></span>
+          </a>
+        </li>     
 
         <li class="treeview <?php echo " ".$ac1." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=potential'?>">
@@ -69,6 +77,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
                       </span></span>
           </a>
         </li>
+
 
         <li class="treeview <?php echo " ".$ac2." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=followup'?>">
