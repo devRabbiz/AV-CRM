@@ -290,6 +290,7 @@ function removeNotification(id) {
 
 
 <style type="text/css">
+
  .popover {
     max-width: 100%;
     max-height:100%;
@@ -462,7 +463,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           $pager=$_GET['pager'];
         }
 
-          $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8=$ac9=$ac10="";
+          $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8=$ac9=$ac10=$ac11="";
         switch ($pager) {
                 case 'potential':
                  $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$_SESSION['operator_username']."' and jobs.status='Potential' ORDER BY jobs.id DESC  LIMIT $startrow, 30");
@@ -510,6 +511,12 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                     case 'statistics':
                       $ac10="active";
                       break;
+
+                  case 'web':
+                   $r=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no,user.web FROM jobs,user WHERE user.id=jobs.id AND user.web=0 AND jobs.operator='".$_SESSION['operator_username']."' ORDER BY jobs.id DESC LIMIT $startrow, 30");
+                    $ac11="active";
+                    break;
+
 
 
                 default:
