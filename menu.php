@@ -45,7 +45,76 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">
+          
+      <ol class="breadcrumb" style="margin:0px">
+        <li><a href="#"><i class="fa fa-dashboard"></i></a></li>
+        <li class="active">
+          <?php 
+              switch ($pager) {
+                case 'all':
+                  echo "All";
+                break;
+                case 'home':
+                  echo "Trader";
+                break;
+                case 'sec':
+                  echo "Finish";
+                break;
+                case 'ftd':
+                  echo "FTD";
+                break;
+                case 'web':
+                  echo "WEB";
+                break;
+                case 'callback':
+                  echo "Callback";
+                break;
+                case 'op_leads':
+                  echo "Operator Leads";
+                break;
+                case 'meeting':
+                  echo "Meeting";
+                break;
+                case 'operator':
+                  echo "Reg by Operators";
+                break;
+                case 'list_operator':
+                  echo "Operator List";
+                break;
+                case 'potential':
+                  echo "Status  /  Potential";
+                break;
+                case 'follow_up':
+                  echo "Status  /  Follow Up";
+                break;
+                case 'interested':
+                  echo "Status  /  Interested";
+                break;
+                case 'not_interested':
+                  echo "Status  /  Not Interested";
+                break;
+                case 'no_answer':
+                  echo "Status  /  No Answer";
+                break;
+                case 'call_failed':
+                  echo "Status  /  Call Failed";
+                break;
+                case 'secretary':
+                  echo "Status  /  Secretary";
+                break;
+                case 'no_status':
+                  echo "Status /  No Status";
+                break;
+                default:
+                  # code...
+                break;
+              }
+           ?>
+        </li>
+      </ol>
+
+        </li>
 
         <li class="treeview <?php echo " ".$ac8." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=all'?>">
@@ -138,7 +207,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
         </li>
         <li class=" treeview ">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=no_status">
-  '?>          <i class="fa fa-comment-o"></i> <span>No Status</span>
+  '?>          <i class="fa fa-times"></i> <span>No Status</span>
           </a>
         </li>
 

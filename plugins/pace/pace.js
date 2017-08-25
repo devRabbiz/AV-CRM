@@ -15,21 +15,17 @@
     startOnPageLoad: true,
     restartOnPushState: true,
     restartOnRequestAfter: 500,
-    target: 'body',
+    target: 'content',
     elements: {
       checkInterval: 100,
-      selectors: ['body']
+      selectors: ['content']
     },
     eventLag: {
       minSamples: 10,
       sampleCount: 3,
       lagThreshold: 3
     },
-    ajax: {
-      trackMethods: ['GET'],
-      trackWebSockets: true,
-      ignoreURLs: []
-    }
+    ajax:false
   };
 
   now = function() {

@@ -1,5 +1,9 @@
 <?php
 include_once 'header.php';
+?>
+
+
+<?php 
 
  if (isset($_GET['login'])) { 
    $full_name=mysqli_query($con,"SELECT * FROM admins WHERE username='".$_SESSION['login_username']."'");
@@ -119,8 +123,9 @@ strong {
 </style>
 
 
-
 <?php }
+
+
 
 if (isset($_SESSION['login_username'])) {
 
@@ -367,23 +372,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 <div >
 
-
-  <table  style="background:url('/images/2.png');  margin-bottom: 0px !important;  background-repeat: round;" id="etab3" class="table  table-condensed " cellspacing="0" width="100%">
+<div class="box" style="background-color: #ffffff !important; margin-bottom: 0px">
+            <div class="inner">
+            
+ 
+  <table  style="  margin-bottom: 0px !important; " id="etab3" class="table  table-condensed " cellspacing="0" width="100%">
        <tr >
         <th >
-        <center>
-             <div class=" badge" data-count=
-            <?php
-
-            if (isset($_SESSION['login_username'])) {
-             $result=$get_total;
-            $data=mysqli_fetch_assoc($result);
-            ?> > <?php echo $data['total'];}?>
-            </div>
-
-
-            </div>
-        </center>
+     
 
       <td >
 
@@ -393,97 +389,24 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
              <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#manual-reg">Create New</button>
 
-<!-- Modal -->
-<div id="manual-reg" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">New Lead</h4>
-      </div>
-      <div class="modal-body">
-        <iframe   style="width:100%!important;height: 500px!important;" frameborder='0' src="manual_registration.php"></iframe>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div><
 
              <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
             </td>
+              <td>&nbsp;</td>     <td>&nbsp;</td>
+            <td >
 
-            <td  ><center>
+            
 
-
-            <div id="uploadmodal" class="modal fade" role="dialog">
-             <div class="modal-dialog">
-
-    <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Upload List</h4>
-                </div>
-                <div class="modal-body">
-                  
-          <?php if (isset($_GET['success'])) { ?>
-
-          <script type="text/javascript">
-             $('.modal-body').append("<div class='alert alert-success' role='alert' ><center >Your list has been imported</center></div>");
-            </script>
-
-           <?php  } ?> 
-          <?php if (isset($_GET['fail'])){ ?>
-          <script type="text/javascript">
-             $('.modal-body').append("<div class='alert alert-danger' role='alert' ><center >Select a list to upload</center></div>");
-            </script>
-
-          <?php } ?>
-          <form action="uploadData/upload.php" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
-            Choose your CSV file: <br /> 
-            <table border="1">
-              <tr>
-                <td>Full name</td>
-                <td>Email</td>
-                <td>Phone</td>
-                <td>Alt. Phone</td>
-              </tr>
-            </table>
-            <label class="btn btn-default btn-file">
-            <input name="csv" type="file" accept=".csv" id="csv" hidden required="" /> 
-           </label>
-
-            <input type="text" style="width: 298px !important" class="form-control" name="list_name" placeholder="List Name" required="">
-
-            <br>
-            <input type="submit" class="btn btn-primary" name="Submit" value="Submit" /> 
-          </form> 
-
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-
-  </div>
-</div>
-
-              <div class="btn-group">
-
-    <ul class="pager">
+    <ul class="pagination pagination-md no-margin pull-right">
     <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
     else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
     <li><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
 
     </ul>
 
-    </div>
+    
+
+    
 
 
     </center>
@@ -495,6 +418,10 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
           </tr>
 </table>
+
+</div>
+</div>
+
 <?php  
 
       
@@ -571,7 +498,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
             </script>
 
            </td>
-           <td  class="text-center" style="font-family: cursive; font-style: italic;font-weight: bold;">
+           <td  class="text-center" style="font-family: cursive; font-style: italic;font-weight: bold;float: left;">
           <a style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $row['phone_no'] ?>'" > <?php echo $row['phone_no'] ?></a>
            </td>
 
@@ -641,6 +568,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           <?php
         } }
         ?>
+       
 </tbody>
 
 <tfoot>
@@ -677,8 +605,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
        </td>
 
        </tr>
+
+
+
+
 </tfoot>
+
          </table>
+
 <script type="text/javascript">
   jQuery(document).ready(function($)
 {
@@ -886,6 +820,85 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
       <iframe style="width: 100%;height: 550px;" scrolling="no" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
         
      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<center>
+
+
+            <div id="uploadmodal" class="modal fade" role="dialog">
+             <div class="modal-dialog">
+
+    <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Upload List</h4>
+                </div>
+                <div class="modal-body">
+                  
+          <?php if (isset($_GET['success'])) { ?>
+
+          <script type="text/javascript">
+             $('.modal-body').append("<div class='alert alert-success' role='alert' ><center >Your list has been imported</center></div>");
+            </script>
+
+           <?php  } ?> 
+          <?php if (isset($_GET['fail'])){ ?>
+          <script type="text/javascript">
+             $('.modal-body').append("<div class='alert alert-danger' role='alert' ><center >Select a list to upload</center></div>");
+            </script>
+
+          <?php } ?>
+          <form action="uploadData/upload.php" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
+            Choose your CSV file: <br /> 
+            <table border="1">
+              <tr>
+                <td>Full name</td>
+                <td>Email</td>
+                <td>Phone</td>
+                <td>Alt. Phone</td>
+              </tr>
+            </table>
+            <label class="btn btn-default btn-file">
+            <input name="csv" type="file" accept=".csv" id="csv" hidden required="" /> 
+           </label>
+
+            <input type="text" style="width: 298px !important" class="form-control" name="list_name" placeholder="List Name" required="">
+
+            <br>
+            <input type="submit" class="btn btn-primary" name="Submit" value="Submit" /> 
+          </form> 
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+  </div>
+</div>
+</center>
+
+<!-- Modal -->
+<div id="manual-reg" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Lead</h4>
+      </div>
+      <div class="modal-body">
+        <iframe   style="width:100%!important;height: 500px!important;" frameborder='0' src="manual_registration.php"></iframe>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
