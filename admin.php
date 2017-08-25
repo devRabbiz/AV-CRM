@@ -52,10 +52,7 @@ if (!isset($_GET['pager'])) {
               include 'admin_load.php'; 
             break;
 
-            case 'not_interested':
-            $_GET['pager']='not_interested';
-              include 'admin_load.php'; 
-            break;
+            
 
             case 'op_leads':
             $_GET['pager']='op_leads';
@@ -81,7 +78,47 @@ if (!isset($_GET['pager'])) {
             $_GET['pager']='lists';
               include 'lists.php'; 
             break;
-           
+
+
+
+            case 'potential':
+            $_GET['pager']='potential';
+              include 'admin_load.php'; 
+            break;
+
+            case 'follow_up':
+            $_GET['pager']='follow_up';
+              include 'admin_load.php'; 
+             
+            break;
+
+            case 'interested':
+            $_GET['pager']='interested';
+              include 'admin_load.php'; 
+            break;
+
+            case 'not_interested':
+            $_GET['pager']='not_interested';
+              include 'admin_load.php'; 
+            break;
+             case 'no_answer':
+            $_GET['pager']='no_answer';
+              include 'admin_load.php'; 
+            break;
+
+            case 'call_failed':
+            $_GET['pager']='call_failed';
+              include 'admin_load.php'; 
+            break;
+               case 'secretary':
+            $_GET['pager']='secretary';
+              include 'admin_load.php'; 
+            break;
+              case 'no_status':
+            $_GET['pager']='no_status';
+              include 'admin_load.php'; 
+            break;
+
             
           default:
             

@@ -45,7 +45,7 @@ if ($res=$r22->num_rows ==0) {
 }else{
 
 		
-	$set_deposit_name=mysqli_query($con,"UPDATE user SET op_status='Non Interested' WHERE id='".$id."' ");
+	$set_op_status=mysqli_query($con,"UPDATE user SET op_status='Non Interested' WHERE id='".$id."' ");
 	$delete_from_op=mysqli_query($con,"DELETE FROM jobs WHERE id='".$id."'  AND operator='".$_SESSION['operator_username']."'");
 	$del_call_log=mysqli_query($con,"DELETE FROM last_call WHERE def='".$id."' AND admin='".$_SESSION['operator_username']."' ");
     //$del_notes=mysqli_query($con,"DELETE FROM note WHERE id='".$id."' AND admin='".$_SESSION['operator_username']."' ");

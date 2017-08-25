@@ -291,10 +291,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 $ac6="active";
           break;
 
-          case 'not_interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  sec='5' OR op_status='Non Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
-                $ac7="active";
-          break;
+
 
           case 'all':
                 $r=mysqli_query($con,"SELECT * FROM user  ORDER BY id DESC LIMIT $startrow, 30  ");
@@ -305,10 +302,43 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 $ac11="active";
             break;
 
-          default:
 
+
+          case 'potential':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE op_status='Potential'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
+          break;
+          case 'follow_up':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE op_status='Follow Up'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
+          break;
+          case 'interested':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE op_status='Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
+          break;
+          case 'not_interested':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE  sec='5' OR op_status='Non Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
+          break;
+          case 'no_answer':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE op_status='Non Answer'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
+          break;
+          case 'call_failed':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE op_status='Call Failed'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
+          break;
+          case 'secretary':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE op_status='Secretary'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
+          break;
+          case 'no_status':
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE op_status='No Status'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                
           break;
 
+
+          default:
 } ?> 
 
 

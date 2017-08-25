@@ -83,10 +83,72 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           </a>
         </li>
 
-        <li class="treeview <?php echo " ".$ac7." "; ?>">
+
+
+
+           <li class=" treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Operator Status</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+
+        <li class="treeview <?php echo " ".$ac1." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=potential">
+  '?>          <i class="fa fa-hand-o-right"></i> <span>Potential</span>
+          </a>
+        </li>
+
+
+        <li class="treeview">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=follow_up">
+  '?>          <i class="fa fa-thumbs-up"></i> <span>Follow Up</span>
+          </a>
+        </li>
+
+        <li class="treeview">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=interested">
+ '?>           <i class="fa fa-lightbulb-o"></i> <span>Interested</span>
+          </a>
+        </li>
+
+        <li class=" treeview">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=not_interested'?>">
             <i class="fa fa-exclamation"></i> <span>Not Interested</span>
           </a>
+        </li>
+
+        <li class=" treeview">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=no_answer">
+  '?>          <i class="fa fa-retweet"></i> <span>No Answer</span>
+          </a>
+        </li>
+
+        <li class=" treeview ">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=call_failed">
+'?>            <i class="fa fa-tty"></i> <span>Call Failed</span>
+          </a>
+        </li>
+        <li class=" treeview ">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=secretary">
+  '?>          <i class="fa fa-comment-o"></i> <span>Secretary</span>
+          </a>
+        </li>
+        <li class=" treeview ">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=no_status">
+  '?>          <i class="fa fa-comment-o"></i> <span>No Status</span>
+          </a>
+        </li>
+
+ 
+
+
+ 
+
+
+          </ul>
         </li>
 
 
