@@ -3,7 +3,7 @@ require_once 'db_connect.php';
 require_once 'session.php';
 include_once 'functions.php'
 ?>
- 
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -267,7 +267,7 @@ Leave a note:
 <?php
 
           
-          $result1 =op_user_notes($con,(int)$_GET['user_id'],$_SESSION['operator_username']);
+          $result1 =op_user_notes($con,(int)$_GET['user_id']);
     if(!$result1)
       die('Error: ' . mysqli_error());
     else{

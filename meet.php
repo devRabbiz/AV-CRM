@@ -28,6 +28,7 @@ if ($res=$r2->num_rows ==0) {
 
 		
 	$set_deposit_name=mysqli_query($con,"UPDATE user SET deposit_by='".$_SESSION['operator_username']."' WHERE id='".$id."' ");
+	$remove_sendto=mysqli_query($con,"UPDATE user SET sendto=NULL WHERE id='".$id."' ");//NOT CONFIRMED YET
 	$delete_from_op=mysqli_query($con,"DELETE FROM jobs WHERE id='".$id."'  AND operator='".$_SESSION['operator_username']."'");
 	$del_call_log=mysqli_query($con,"DELETE FROM last_call WHERE def='".$id."' AND admin='".$_SESSION['operator_username']."' ");
     //$del_notes=mysqli_query($con,"DELETE FROM note WHERE id='".$id."' AND admin='".$_SESSION['operator_username']."' ");

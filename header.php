@@ -9,6 +9,8 @@ include_once 'functions.php'
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="/manifest.json">
   <title>Admin| L`Avenir</title>
 
   <script type="text/javascript" src="/dist/js/jquery-3.1.1.min.js"></script>

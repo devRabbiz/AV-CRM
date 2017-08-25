@@ -1,0 +1,13 @@
+{
+  "short_name": "L`Avenir",
+  "name": "L`Avenir Admin",
+  "icons": [
+    {
+      "src": "images/hlogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/admin.php",
+  "display": "standalone"
+}

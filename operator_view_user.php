@@ -15,7 +15,7 @@ $(document).ready(function(){
 </script>
     <div class="container-fluid">
 
-      <div class="admin-outer jumbotron">
+      <div class="admin-outer jumbotron" >
 
         <?php
         if(isset($_SESSION['operator_username'])){
@@ -30,59 +30,47 @@ $(document).ready(function(){
             ?>
 
 <div class="row">
-<div  class="col-md-4" style="width: 600px;">
 
-          
+ <div class="col-md-7 ">
 
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title" style="color: black"><?php echo $array[8]?> </h3>
-
+<div class="panel panel-default">
+ 
+   <div class="panel-body">
+       
+    <div class="box box-primary">
+        
+            <div class="box-body">
+            
+            <div class="col-sm-6">
+            <h4 style="color:green;"><?php echo $array[8]?> </h4></span>
+              <span><p></p></span>            
             </div>
-            <div class="panel-body">
-              <div class="row">
+            <div class="clearfix"></div>
+            <hr style="margin:5px 0 5px 0;">
+    
+              
+<div class="col-sm-5 col-xs-6 tital " >Full Name:</div><div class="col-sm-7 col-xs-6 "><?php echo $array[8]?></div>
+     <div class="clearfix"></div>
+<div class="bot-border"></div>
+
+<div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7"> <?php echo $array[9]?></div>
+  <div class="clearfix"></div>
+<div class="bot-border"></div>
 
 
-               
+<div class="col-sm-5 col-xs-6 tital " >Registered:</div><div class="col-sm-7"><?php echo $array[11]?></div>
 
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Full Name:</td>
-                        <td><?php echo $array[8]?></td>
+  <div class="clearfix"></div>
+<div class="bot-border"></div>
 
-                      </tr>
-                      <tr>
-                        <td>Email:</td>
-                        <td><?php echo $array[9]?></td>
-                      </tr>
-                      <tr>
-                        <td>Registered:</td>
-                        <td><?php echo $array[11]?></td>
-                      </tr>
-
-                         <tr>
-                        <tr>
-                        <td>Phone Number:</td>
-                        <td><?php echo $array[10]; ?>
-                        <a id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[10]; ?>'" > <img src="/images/phone.png" height="30px">
+<div class="col-sm-5 col-xs-6 tital " >Phone Number:</div><div class="col-sm-7"><?php echo $array[10]?>
+  <a id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[10]; ?>'" > <img src="/images/phone.png" height="30px">
                         </a>
-                        </td>
-                      </tr>
-                     
-                   
-                      <tr><td>
-                        <td></td>
-                      </td></tr>
+</div>
 
-                    </tbody>
-                  </table>
+  <div class="clearfix"></div>
 
-
-                </div>
-              </div>
-            </div>
+<div class="bot-border"></div>
                  <div class="panel-footer">
                              <?php 
                                   $nextquery= "SELECT * FROM jobs WHERE operator='".$_SESSION['operator_username']."'AND  id < '".$_GET['user_id']."' ORDER BY id DESC LIMIT 1 "; 
@@ -107,12 +95,41 @@ $(document).ready(function(){
 
                     </div>
 
+
+
+            <!-- /.box-body -->
           </div>
+          <!-- /.box -->
+
+        </div>
+       
+            
+    </div> 
+    </div>
+</div>  
+    <script>
+              $(function() {
+    $('#profile-image1').on('click', function() {
+        $('#profile-image-upload').click();
+    });
+});       
+              </script> 
+       
+         <style type="text/css">
+                         input.hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+#profile-image1 {
+    cursor: pointer;
   
-
-
-</div>
-         
+     width: 100px;
+    height: 100px;
+  border:2px solid #03b1ce ;}
+  .tital{ font-size:16px; font-weight:500;}
+   .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0}  
+         </style>
  
 
 <div  class="col-md-4">
@@ -163,7 +180,7 @@ if (isset($row['meet'])){
   <div class="panel-body">
 <center>
 <form method="POST" action="meet.php" >
-<select id="status" name="status" required="" style="height: 34px;width: 298px;border: 1px solid #ccc;border-radius: 4px;color:#555">
+<select id="status" name="status" required="" style="height: 34px;border: 1px solid #ccc;border-radius: 4px;color:#555">
 <option  disabled="disabled" selected="selected" value="" >Select Status</option>
 <option value="Potential">Potential</option>
 <option value="Follow Up">Follow Up</option>
@@ -239,7 +256,7 @@ Leave a note:
 <?php
 
           
-          $result1 =op_user_notes($con,(int)$_GET['user_id'],$_SESSION['operator_username']);
+          $result1 =op_user_notes($con,(int)$_GET['user_id']);
     if(!$result1)
       die('Error: ' . mysqli_error());
     else{
@@ -292,6 +309,10 @@ Leave a note:
 
           </div>
 
+   <?php 
+      include 'menu_operator.php';
+      include 'footer.php'; 
+   ?>
 
 </body>
   
@@ -340,15 +361,14 @@ function removeNote(def){
       
     <style type="text/css">
       .main-footer{
-        bottom: 0px;
+        
        
          width: 100%;
 
       }
+      footer{
+        position: absolute;
+      }
      
     </style>
 </html>
-   <?php 
-      //include 'menu_operator.php';
-      include 'footer.php'; 
-   ?>

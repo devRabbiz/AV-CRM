@@ -37,9 +37,9 @@ function op_user_jobs($con,$user_id){
 	return $a=mysqli_query($con,"SELECT * from jobs  WHERE `id`='".$user_id."'");
 }
 //op user notes
-function op_user_notes($con,$user_id,$operator_username){
+function op_user_notes($con,$user_id){
 
-	return $a=mysqli_query($con,"SELECT * from note  WHERE `id`='".$user_id."' AND `admin`='".$operator_username."' ORDER BY `date` DESC");
+	return $a=mysqli_query($con,"SELECT * from note  WHERE `id`='".$user_id."'  ORDER BY `date` DESC");
 }
 if (isset($_SESSION['operator_username'])) {
 	$op1=opnotif($con,$_SESSION['operator_username']);
