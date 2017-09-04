@@ -120,6 +120,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." />
           <th>Call Failed</th>
           <th>Secretary</th>
           <th>New</th>
+          <th>Web</th>
           <th>Deposit</th>
       	</tr>
       </thead>
@@ -164,6 +165,13 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." />
                  $ptotal=mysqli_num_rows($stat);
                  echo $ptotal;?>
               </td>
+
+              <td> <?php $stat=mysqli_query($con,"SELECT *,user.id,user.web FROM jobs,user WHERE operator='".$row['username']."' AND status='New' ");
+                 $ptotal=mysqli_num_rows($stat);
+                 echo $ptotal;?>
+              </td>
+
+
               <td> <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$row['username']."' AND status='New' ");
                  $ptotal=mysqli_num_rows($stat);
                  echo $ptotal;?>

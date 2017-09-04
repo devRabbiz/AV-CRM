@@ -256,7 +256,8 @@ Leave a note:
 <?php
 
           
-          $result1 =op_user_notes($con,(int)$_GET['user_id']);
+         $query1 = "SELECT * from note  WHERE id='".(int)$_GET['user_id']."'  ORDER BY `date` DESC";
+          $result1 = mysqli_query($con,$query1);
     if(!$result1)
       die('Error: ' . mysqli_error());
     else{
@@ -269,7 +270,8 @@ Leave a note:
               <i class="fa fa-comments bg-yellow"></i>
 
               <div class="timeline-item">
-                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?><button class="rmNote" onclick="removeNote(<?php echo $row['def'] ;?>)">X</button></span>
+
+                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?><button class="rmNote" onclick="removeNote(<?php echo $row['def'] ;?>)">X</button><?php echo" ".$row['admin'] ?></span>
 
                 <style type="text/css">
                   .rmNote{
@@ -277,7 +279,7 @@ Leave a note:
                     margin-left: 5px;
                     border: 1px;
                   }
-                  .rmNote:hover{
+                  .rmNote:hover{ 
                     background: #dd4b39;
                     color: white;
                   }

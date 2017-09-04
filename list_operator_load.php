@@ -74,6 +74,7 @@ $data=mysqli_fetch_assoc($result2);
           <th>Non Answer</th>
           <th>Call Failed</th>
           <th>Secretary</th>
+          <th>Web</th>
           <th>New</th>
           <th>Deposit</th>
       	</tr>
@@ -119,6 +120,12 @@ $data=mysqli_fetch_assoc($result2);
                  $ptotal=mysqli_num_rows($stat);
                  echo $ptotal;?>
               </td>
+
+              <td> <?php $stat=mysqli_query($con,"SELECT *,user.id,user.web FROM jobs,user WHERE jobs.operator='".$row['username']."' AND user.web=0 AND user.id=jobs.id ");
+                 $ptotal=mysqli_num_rows($stat);
+                 echo $ptotal;?>
+              </td>
+
               <td> <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$row['username']."' AND status='New' ");
                  $ptotal=mysqli_num_rows($stat);
                  echo $ptotal;?>

@@ -266,8 +266,8 @@ Leave a note:
 <ul class="timeline">
 <?php
 
-          
-          $result1 =op_user_notes($con,(int)$_GET['user_id']);
+           $query1 = "SELECT * from note  WHERE id='".(int)$_GET['user_id']."'  ORDER BY `date` DESC";
+          $result1 = mysqli_query($con,$query1);
     if(!$result1)
       die('Error: ' . mysqli_error());
     else{
@@ -280,7 +280,7 @@ Leave a note:
               <i class="fa fa-comments bg-yellow"></i>
 
               <div class="timeline-item">
-                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?></span>
+                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?><?php echo" ".$row['admin'] ?></span>
 
                 <div class="timeline-body">
                    <?php echo $row['note'] ;?>
