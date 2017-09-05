@@ -255,10 +255,12 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           <?php  ?>
           <ul class="treeview-menu">
             <li><a href="#" data-toggle="modal" data-target="#uploadmodal"><i class="fa fa-list"></i>Create New</a></li>
-            
               <?php 
-                  $res=mysqli_query($con,"SELECT DISTINCT name FROM list_names ") or die("error");
-                   if (mysqli_num_rows($res)==0){
+                
+                  $res=mysqli_query($con,"SELECT * FROM list_names");
+    
+                  $numrow=mysqli_num_rows($res);
+                   if ($numrow==0){
 
         echo "No Lists";
 

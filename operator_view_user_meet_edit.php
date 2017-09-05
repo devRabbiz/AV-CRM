@@ -271,12 +271,12 @@ Leave a note:
 
 
 <div style="overflow-y: scroll;height: 400px;">
-</br>
+</br> 
 <ul class="timeline">
 <?php
 
           
-          $result1 =op_user_notes($con,(int)$_GET['user_id'],$_SESSION['operator_username']);
+          $query1 = "SELECT * from note  WHERE id='".(int)$_GET['user_id']."'  ORDER BY `date` DESC";
     if(!$result1)
       die('Error: ' . mysqli_error());
     else{
