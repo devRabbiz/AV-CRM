@@ -13,12 +13,11 @@ if (isset($_POST['admin-username'])) {
 
         if($array){
         	$_SESSION['login_username']=$_POST['admin-username'];
-          	header("Location:admin.php");
+          	header("Location:admin.php?login=true");
 
         }
         else
-          $_SESSION['admin-invalid'] = "Invalid Username or password for Admin";
-        	header("Location:admin.php?login=true");
+        	header("Location:login_admin.php?login=error");
       }
     }
 

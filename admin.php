@@ -1,6 +1,5 @@
 <?php 
 
-
 include_once 'header.php'; ?>
  
 
@@ -10,6 +9,8 @@ include_once 'header.php'; ?>
  
 
 <?php 
+
+
 if (isset($_SESSION['login_username'])) {
  
 
@@ -125,39 +126,24 @@ if (!isset($_GET['pager'])) {
             break;
         }
 
+
+
       }
 
-  else{
-      ?><center>
-         <div class='col-md-4 admin jumbotron' style="float: none;
-     margin-left: auto;
-     margin-right: auto;">
-           <h3>ADMIN LOGIN</h3>
-           <form role='form' action='login_check.php' method='post'>
-             <div class='form-group'>
-               <label id="lbl" for='name'>Username</label>
-               <input type='name' class='form-control' name='admin-username' id='admin-username' placeholder='Enter Username' autofocus>
-             </div>
-             <div class='form-group'>
-               <label id="lbl" for='password'>Password</label>
-               <input type='password' name='admin-pass' class='form-control' id='admin-pass' placeholder='Password'>
-             </div>
-             <input type='submit' value='Submit' class='btn btn-default'>
-           </form>
-         </div>
-         </center>
-       </div>
-     </div>
-     <?php
-    }
+
+  else{ 
+
+    echo "<script>location.href='login_admin.php';</script>";
+  }
+    
 ?>
               
  
     </section>
 
     <?php  
-
-    include_once('menu.php') ?>
+   include_once('menu.php') ;
+    ?>
     
   </div>
 

@@ -106,7 +106,7 @@ include_once 'functions.php'
       href="admin.php"
     <?php endif ?>
 
-    <?php if (!isset($_SESSION['login_username'])): ?>
+    <?php if (isset($_SESSION['operator_username'])): ?>
       href="operator.php"
     <?php endif ?>
 
