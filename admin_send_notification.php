@@ -53,11 +53,7 @@ if (!isset($sendNotification)) {
             <!-- /.box-header -->
             <div class="box-body">
               <form role="form">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>Title</label>
-                  <input type="text"  class="title form-control" placeholder="Enter ...">
-                </div>
+              
              
                 <!-- textarea -->
                 <div class="form-group">
@@ -160,13 +156,13 @@ if (!isset($sendNotification)) {
 	
 	function sendNotification () {
         
-        var title=$('.title').val();
+        var title="";
         console.log(title);
         var text=$('.text').val();
         console.log(text);
         var operator=$('#operator option:selected').attr('value');
         console.log(operator);
-        if (title.length!=0 && text.length!=0) {
+        if (text.length!=0) {
     
           $.post("admin_send_notification.php?sendNotification=true",{title:title,text:text,operator:operator},function(data){
           	//alert("Sent "+text+" to "+operator+" with "+title+" as title!");

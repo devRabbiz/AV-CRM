@@ -936,6 +936,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 function sendto () {
         var snd = [];
           var operator=$('#operator option:selected').attr('value');
+          console.log(operator);
         $('.send-to').each(function () {
           if($(this).is(':checked'))
             snd.push($(this).attr('id'));
