@@ -138,13 +138,7 @@ var data = JSON.parse(JSON.stringify(data));
        for (var i in data) 
             {
                 
-              
-    
-      document.title="New__Notification__";
-      (function titleMarquee() {
-    document.title = document.title.substring(1)+document.title.substring(0,1);
-    setTimeout(titleMarquee, 200);
-})();
+
      $('.container1').append("<section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> ")
 
            }
@@ -159,7 +153,7 @@ function removeNotification(id) {
   $.post("notifications.php",{id:id},function(data){
             
           });
-  document.title="Admin| L`Avenir";
+
   getNotifications();
 }
 
