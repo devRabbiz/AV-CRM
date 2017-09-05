@@ -119,7 +119,11 @@ strong {
 
 <?php } ?>
 <script type="text/javascript">
-   $(document).ready(getNotifications());
+
+$( document ).ready(function() {
+    setInterval(function() {getNotifications()},3000);
+});
+  
 
    function getNotifications() {
 
@@ -428,7 +432,7 @@ function clearmeet<?php echo $row1[2];?>() {
     clearInterval(check<?php echo $row1[2];?>);
     }
 
-    getNotifications();
+   
 
 
   }, 1000);

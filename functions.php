@@ -37,7 +37,10 @@ function op_user_jobs($con,$user_id){
 	return $a=mysqli_query($con,"SELECT * from jobs  WHERE `id`='".$user_id."'");
 }
 
- 
+ if (isset($_SESSION['operator_username'])) {
+	$op1=opnotif($con,$_SESSION['operator_username']);
+    $op2=op_user_table_all($con,$_SESSION['operator_username']);
+}
 ///////////////
 
 
