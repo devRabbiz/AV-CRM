@@ -567,7 +567,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
       if (mysqli_num_rows($r)==0){
 
         echo "<div class='well col-md-12'><p class='text-center'>No more records</p><ul class='pager'><li>";
-        echo '<a href="'.$_SERVER['PHP_SELF'].'?startrow=0">Go to start</a></li></ul></div>';
+        echo '<a href="'.$_SERVER['PHP_SELF'].'?pager='.$pager.'&startrow=0">Go to start</a></li></ul></div>';
 
       }
 
