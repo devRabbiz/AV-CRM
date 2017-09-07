@@ -256,9 +256,9 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           <ul class="treeview-menu">
             <li><a href="#" data-toggle="modal" data-target="#uploadmodal"><i class="fa fa-list"></i>Create New</a></li>
               <?php 
-                
+               // require_once('db_connect.php');
                   $res=mysqli_query($con,"SELECT * FROM list_names");
-    
+                 // print_r($res);
                   $numrow=mysqli_num_rows($res);
                    if ($numrow==0){
 

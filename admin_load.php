@@ -305,6 +305,37 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           case 'web':
                 $r=mysqli_query($con,"SELECT * FROM user where web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
                 $ac11="active";
+             
+                switch ($_GET['interval']) {
+                  case 'today':
+                    $r=mysqli_query($con,"SELECT * FROM user where web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
+
+                    break;
+                  case 'yesterday':
+                   // $r=mysqli_query($con,"SELECT * FROM user where web=0 AND DATE(`date`) = CURDATE()-1 ORDER BY id DESC  ");
+                   $r=mysqli_query($con,"SELECT * FROM user where web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND `date` < CURDATE() ORDER BY id DESC ");
+                    break;
+                  case 'lastweek':
+                    $r=mysqli_query($con,"SELECT * FROM user where web=0 AND  `date` >= DATE(NOW()) - INTERVAL 7 DAY ORDER BY id DESC ");
+                    break;
+                    case 'thismonth':
+                     $r=mysqli_query($con,"SELECT * FROM user where web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(CURDATE())-1 DAY) ORDER BY id DESC ");
+                     
+                      break;
+                      case 'custom':
+                      $date_range=urldecode($_GET['date_range']);
+                      $date_range=explode('-', $date_range);
+                      $dateF = date("Y-m-d", strtotime($date_range[0]));
+                      $dateT = date("Y-m-d", strtotime($date_range[1]));
+                      $r=mysqli_query($con,"SELECT * FROM user where web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
+                        break;
+                  //ktu
+                  default:
+                    # code...
+                    break;
+                }
+
+
             break;
 
 
@@ -378,10 +409,17 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
  
   <table  style="  margin-bottom: 0px !important; " id="etab3" class="table  table-condensed " cellspacing="0" width="100%">
        <tr >
+
         <th >
-     
+       <span class="label label-primary ">
+      <?php 
+      $numa=mysqli_num_rows($r);
+      print_r($numa);
+       ?>
+      </span>
 
       <td >
+
 
             <a href="export.php?export=all" class='btn btn-default btnf'>Download all</a>
 
@@ -391,6 +429,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
              <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
+
             </td>
               <td>&nbsp;</td>     <td>&nbsp;</td>
             <td >
@@ -398,9 +437,108 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
             
 
     <ul class="pagination pagination-md no-margin pull-right">
-    <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
+
+                  <?php 
+                  $s11=$s22=$s33=$s44=$s55=$s66="";
+              if ($pager=='web'){ 
+                  if (isset($_GET['interval']))  { ?>
+
+                    <script type="text/javascript">
+                    $( document ).ready(function() {
+                       $('#prev1,#next1').html("");
+                    });
+                     
+                    </script>
+
+                  <?php 
+                    switch ($_GET['interval']) {
+                      case 'today':
+                        $s22='selected';
+                        break;
+                        case 'yesterday':
+                          $s33='selected';
+                          break;
+                        case 'lastweek':
+                        $s44='selected';
+                        break;
+                        case 'thismonth':
+                          $s55='selected';
+                          break;
+                          case 'custom':
+                          $s66='selected';
+                            break;
+                      default:
+                        # code...
+                        break;
+                    }
+                  } else  ?> 
+                <div style="float: right;">
+              <select id="interval_select" class="btn btn-default">
+              <option <?php echo $s11 ?> >Lifetime</option>
+              <option <?php echo $s22 ?> >Today</option>
+              <option <?php echo $s33 ?> >Yesterday</option>
+              <option <?php echo $s44 ?> >Last Week</option>
+              <option <?php echo $s55 ?> >This Month</option>
+              <?php if ($_GET['interval']=='custom'){ ?>
+               <option <?php echo $s66 ?> id='custom_range' ><?php echo $dateF.' - '.$dateT ?></option> 
+              <?php }  else { ?>
+              <option <?php echo $s66 ?> id='custom_range' >Custom</option>
+              <?php } ?>
+              </select>
+              <div id="c_hidden" style="float: right;" class="form-group">
+
+              </div>
+              </div>
+
+                    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+                    <script type="text/javascript" src="plugins/daterangepicker/daterangepicker.js"></script>
+
+                   
+
+              <script type="text/javascript">
+                    
+                $('#interval_select').on('change', function() {
+                 switch(this.value){
+                  case "Lifetime":
+                  window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager; ?>";
+                  break;
+                  case "Today":
+                  window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=today"; ?>";
+                  break;
+                  case "Yesterday":
+                  window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=yesterday"; ?>";
+                  break;
+                  case "Last Week":
+                  window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=lastweek"; ?>";
+                  break;
+                  case "This Month":
+                  window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=thismonth"; ?>";
+                  break;
+                  case "Custom":
+                   $('#prev1,#next1').html("");
+
+                   
+
+                  $('#c_hidden').append("<label>Date range:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><form id='form_interval' method='GET' action='admin.php?pager=web&interval=custom'><input type='text' class='form-control pull-right' id='daterange'></form></div>");
+                 
+                  $('#daterange').daterangepicker().on('change', function(){
+                    window.location.href='<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=custom&date_range="?>'+$('#daterange').val();
+                  //$('#form_interval').submit();
+                  });
+
+                  //$(".applyBtn").click(function() {
+                     //window.location.href='<?php //echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=custom&date_range=" //?>'+encodeURI($('#daterange').val());
+                  // });
+                  break;
+                 }
+                });
+              </script>
+
+            <?php } ?>
+
+    <li id="prev1"><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
     else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
-    <li><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
+    <li id="next1"><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
 
     </ul>
 
