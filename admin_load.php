@@ -282,7 +282,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           break;
 
           case 'operator':
-            $r = mysqli_query($con,"SELECT * FROM user WHERE  lang='".$lang."' AND user.reg_by!='admin'  AND user.reg_by!='gabriele' AND user.reg_by!='adi'  AND user.reg_by!='cristianabate' AND user.reg_by!='list'  ORDER BY date DESC LIMIT $startrow, 30 ");
+            $r = mysqli_query($con,"SELECT * FROM user WHERE  lang='".$lang."' AND user.reg_by!='admin'  AND user.reg_by!='gabriele' AND user.reg_by!='adi'  AND user.reg_by!='it'  AND user.reg_by!='cristianabate' AND user.reg_by!='list'  ORDER BY date DESC LIMIT $startrow, 30 ");
             $ac4="active";
           break;
 
@@ -292,14 +292,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           break;
 
           case 'callback':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  sec='4'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE  sec='4' AND web=1   ORDER BY id DESC LIMIT $startrow, 30  ");
                 $ac6="active";
           break;
 
 
 
           case 'all':
-                $r=mysqli_query($con,"SELECT * FROM user  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user where  web=1   ORDER BY id DESC LIMIT $startrow, 30  ");
                 $ac8="active";
           break;
           case 'web':
@@ -491,7 +491,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                         break;
                     }
                   } else  ?> 
-                <div style="float: right;" <?php if ($interval=='custom'){ echo "onclick=window.location.href='".$_SERVER['HTTP_REFERER']."'"; } ?> >
+                <div style="float: right;height: 0px" <?php if ($interval=='custom'){ echo "onclick=window.location.href='".$_SERVER['HTTP_REFERER']."'"; } ?> >
               <select id="interval_select" class="btn btn-default">
               <option <?php echo $s11 ?> >Lifetime</option>
               <option <?php echo $s22 ?> >Today</option>
