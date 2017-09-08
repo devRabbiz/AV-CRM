@@ -491,7 +491,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                         break;
                     }
                   } else  ?> 
-                <div style="float: right;">
+                <div style="float: right;" <?php if ($interval=='custom'){ echo "onclick=window.location.href='".$_SERVER['HTTP_REFERER']."'"; } ?> >
               <select id="interval_select" class="btn btn-default">
               <option <?php echo $s11 ?> >Lifetime</option>
               <option <?php echo $s22 ?> >Today</option>
@@ -499,7 +499,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
               <option <?php echo $s44 ?> >Last Week</option>
               <option <?php echo $s55 ?> >This Month</option>
               <?php if ($interval=='custom'){ ?>
-               <option <?php echo $s66 ?> id='custom_range' ><?php echo $dateF.' - '.$dateT ?></option> 
+               <option <?php echo $s66 ?> id='custom_range'  ><?php echo $dateF.' - '.$dateT ?></option> 
               <?php }  else { ?>
               <option <?php echo $s66 ?> id='custom_range' >Custom</option>
               <?php } ?>
