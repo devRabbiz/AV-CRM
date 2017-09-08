@@ -303,10 +303,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 $ac8="active";
           break;
           case 'web':
-                $r=mysqli_query($con,"SELECT * FROM user where web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
-                $ac11="active";
              
-                switch ($_GET['interval']) {
+                $ac11="active";
+                  if (isset($_GET['interval'])) {
+                    $interval=$_GET['interval'];
+                  } else {
+                    $interval='today';
+                  }
+                switch ($interval) {
                   case 'today':
                     $r=mysqli_query($con,"SELECT * FROM user where web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
 
@@ -329,6 +333,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                       $dateT = date("Y-m-d", strtotime($date_range[1]));
                       $r=mysqli_query($con,"SELECT * FROM user where web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
                         break;
+                        case 'lifetime':
+                             $r=mysqli_query($con,"SELECT * FROM user where web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
+                          break;
                   //ktu
                   default:
                     # code...
@@ -441,7 +448,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                   <?php 
                   $s11=$s22=$s33=$s44=$s55=$s66="";
               if ($pager=='web'){ 
-                  if (isset($_GET['interval']))  { ?>
+                  if (isset($interval) and $interval!='lifetime')  { ?>
 
                     <script type="text/javascript">
                     $( document ).ready(function() {
@@ -451,7 +458,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                     </script>
 
                   <?php 
-                    switch ($_GET['interval']) {
+                    switch ($interval) {
                       case 'today':
                         $s22='selected';
                         break;
@@ -467,6 +474,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                           case 'custom':
                           $s66='selected';
                             break;
+                          case 'lifetime':
+                          $s11='selected';
+                              break;
                       default:
                         # code...
                         break;
@@ -479,7 +489,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
               <option <?php echo $s33 ?> >Yesterday</option>
               <option <?php echo $s44 ?> >Last Week</option>
               <option <?php echo $s55 ?> >This Month</option>
-              <?php if ($_GET['interval']=='custom'){ ?>
+              <?php if ($interval=='custom'){ ?>
                <option <?php echo $s66 ?> id='custom_range' ><?php echo $dateF.' - '.$dateT ?></option> 
               <?php }  else { ?>
               <option <?php echo $s66 ?> id='custom_range' >Custom</option>
@@ -500,7 +510,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 $('#interval_select').on('change', function() {
                  switch(this.value){
                   case "Lifetime":
-                  window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager; ?>";
+                  window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=lifetime";  ?>";
                   break;
                   case "Today":
                   window.location.href="<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=today"; ?>";
@@ -536,9 +546,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
             <?php } ?>
 
-    <li id="prev1"><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
+    <li id="prev1"><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
     else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
-    <li id="next1"><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
+    <li id="next1"><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
 
     </ul>
 
