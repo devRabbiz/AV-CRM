@@ -335,6 +335,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                         break;
                         case 'lifetime':
                              $r=mysqli_query($con,"SELECT * FROM user where web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
+                              $r2=mysqli_query($con,"SELECT * FROM user where web=0  ORDER BY id DESC  ");
                           break;
                   //ktu
                   default:
@@ -420,8 +421,16 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
         <th >
        <span class="label label-primary ">
       <?php 
-      $numa=mysqli_num_rows($r);
-      print_r($numa);
+
+      if ($interval=='lifetime') {
+        $numa=mysqli_num_rows($r2);
+        print_r($numa);
+      } else {
+
+         $numa=mysqli_num_rows($r);
+            print_r($numa);
+      
+      }
        ?>
       </span>
 
