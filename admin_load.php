@@ -999,19 +999,40 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
                 </div>
                 <div class="modal-body">
                   
-          <?php if (isset($_GET['success'])) { ?>
+          <?php if (isset($_GET['file_upload']) AND $_GET['file_upload']=='success') { ?>
 
           <script type="text/javascript">
-             $('.modal-body').append("<div class='alert alert-success' role='alert' ><center >Your list has been imported</center></div>");
+             $('.modal-body').append("<div class='alert alert-success' role='alert' ><center >Your list has been uploaded</center></div>");
             </script>
 
            <?php  } ?> 
-          <?php if (isset($_GET['fail'])){ ?>
+        <?php if (isset($_GET['file_upload']) AND $_GET['file_upload']=='fail') { ?>
           <script type="text/javascript">
              $('.modal-body').append("<div class='alert alert-danger' role='alert' ><center >Select a list to upload</center></div>");
             </script>
 
           <?php } ?>
+          <style type="text/css">
+            label {
+   cursor: pointer;
+   /* Style as you please, it will become the visible UI component. */
+}
+
+#csv {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+          </style>
+
+         <script type="text/javascript">
+  $(function() {
+     $(".file_sel").change(function (){
+       $('.selected_file').text($('#csv')[0].files[0].name);
+     });
+  });
+</script>
+
           <form action="uploadData/upload.php" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
             Choose your CSV file: <br /> 
             <table border="1">
@@ -1022,8 +1043,8 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
                 <td>Alt. Phone</td>
               </tr>
             </table>
-            <label class="btn btn-default btn-file">
-            <input name="csv" type="file" accept=".csv" id="csv" hidden required="" /> 
+            <label for="csv" class="btn btn-default selected_file">Browse...
+            <input name="csv" type="file" accept=".csv" id="csv" class="file_sel" hidden required="" /> 
            </label>
 
             <input type="text" style="width: 298px !important" class="form-control" name="list_name" placeholder="List Name" required="">
@@ -1127,31 +1148,22 @@ function sendto () {
 
 
  
-<?php if (isset($_GET['fail'])){ ?>
+<?php if (isset($_GET['file_upload'])){ ?>
 <script type="text/javascript">
-    $(window).load(function(){
-        $('#uploadmodal').modal('show');
+      $(window).on('load', function(){
+        $('#uploadmodal').modal('show');    
     });
 </script>
+<?php }  ?>
 
-<?php }
-
-if (isset($_GET['success'])){ ?>
-
-<script type="text/javascript">
-    $(window).load(function(){
-        $('#uploadmodal').modal('show');
-    });
-</script>
 
 <?php 
-} 
-
 if (isset($_GET['upload'])){ ?>
 
 <script type="text/javascript">
-    $(window).load(function(){
-        $('#uploadmodal').modal('show');
+
+      $(window).on('load', function(){
+        $('#uploadmodal').modal('show');    
     });
 </script>
 
