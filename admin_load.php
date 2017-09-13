@@ -445,6 +445,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
              <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
+             <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
 
             </td>
               <td>&nbsp;</td>     <td>&nbsp;</td>
@@ -879,28 +880,6 @@ $("#select_all").click(function(){
 </style>
 
 
-<div id="verifyall" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Caution</h4>
-      </div>
-      <div class="modal-body">
-        <p>Ju do ti verifikoni te gjithe klientet me kete veprim.</p>
-        <p>Deshironi te vazhdoni?</p>
-      </div>
-      <div class="modal-footer">
-      <a class="btn btn-primary btn-success " href="action.php?verify=all">Verify All</a>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 
 <div id="dropmodal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -909,7 +888,7 @@ $("#select_all").click(function(){
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Caution</h4>
+        <h4 class="modal-title">Send to</h4>
       </div>
       <div class="modal-body">
      <select id="operator" name="operator">
@@ -943,7 +922,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Caution</h4>
+        <h4 class="modal-title">Move to</h4>
       </div>
       <div class="modal-body">
      <select id="movein" name="movein">
@@ -965,7 +944,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
   </div>
 </div>
 
-<div id="showprofile" class="modal fade" role="dialog">
+<div id="showprofile" class="modal fade" role="dialog" >
   <div style="width:90%;" class="modal-dialog">
 
     <!-- Modal content-->
@@ -974,7 +953,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-      <iframe style="width: 100%;height: 550px;" scrolling="no" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
+      <iframe style="width: 100%;height: 600px;" scrolling="yes" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
         
      </div>
       <div class="modal-footer">
@@ -1086,7 +1065,49 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 </div>
 
 
+<div id="monitor_calls" class="modal fade" role="dialog">
+  <div  class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Monitor</h4>
+      </div>
+      <div class="modal-body" width="300px">
+        <iframe id="monitor_calls_frame"   style="width:100% !important;height: 400px!important;" frameborder='0' src="extra/monitor_calls.php"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <script type="text/javascript">
+
+
+        $(document).on('show.bs.modal', '.modal', function (event) {
+            var zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+        });
+
+function  refreshmonitor() {
+       document.getElementById('monitor_calls_frame').contentWindow.location.reload();
+    }
+$( "#monitor_calls" ).on('shown.bs.modal', function(){
+    refreshmonitor() ;
+    refreshm=setInterval(refreshmonitor, 10000);
+ 
+});
+$('#monitor_calls').on('hidden.bs.modal', function () {
+  clearInterval(refreshm);
+});
 
       function show_profile(id){
         var linku="view_user_modal.php?user_id="+id;

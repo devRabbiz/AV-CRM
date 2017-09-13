@@ -552,7 +552,42 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     </div>
 <div class="container" style="width: auto !important ;">
 <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info " data-toggle="modal" data-target="#manual-reg">Create New</button>
+<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#manual-reg">Create New</button>
+<button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
+
+<div id="monitor_calls" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Monitor</h4>
+      </div>
+      <div class="modal-body">
+        <iframe id="monitor_calls_frame"   style="width:100%!important;height: 500px!important;" frameborder='0' src="extra/monitor_calls.php"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+function  refreshmonitor() {
+       document.getElementById('monitor_calls_frame').contentWindow.location.reload();
+    }
+$( "#monitor_calls" ).on('shown.bs.modal', function(){
+  refreshmonitor();
+    refreshm=setInterval(refreshmonitor, 10000);
+ 
+});
+$('#monitor_calls').on('hidden.bs.modal', function () {
+  clearInterval(refreshm);
+});
+</script>
 
 <!-- Modal -->
 <div id="manual-reg" class="modal fade" role="dialog">

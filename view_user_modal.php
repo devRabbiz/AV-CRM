@@ -184,7 +184,7 @@ function sendto () {
                   <div id='pp' class="col-md-3 col-lg-3 " align="center"> <img  alt="User Pic" src="<?php echo 'uploads/'.$_GET['user_id'] ?>" style="max-width: 100px" class="img-circle img-responsive"></div>
 
               <?php   } else { ?>
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="/images/user-icon.img" class="img-circle img-responsive"> </div>
+               
                 <?php }  ?>
 
                 <div class=" col-md-9 col-lg-9 "> 
