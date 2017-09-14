@@ -20,7 +20,7 @@
         function getNetdataCommitId(force, callback) {
 
             $.ajax({
-                url: 'version.txt',
+                url: '.././.git/refs/heads/master',
                 async: true,
                 cache: false,
                 xhrFields: { withCredentials: true } // required for the cookie
