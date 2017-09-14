@@ -135,11 +135,16 @@ $.ajax({
 
    $('.container1').html("");
 var data = JSON.parse(JSON.stringify(data));
+
        for (var i in data) 
             {
-                
+              if (i==0) {
+     $('.container1').append("<section onclick='removeNotificationAll()' class='notif'>  <a class='aa'>Dismiss All</a></section><section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> "); 
+   }  else {
 
-     $('.container1').append("<section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> ")
+     $('.container1').append("<section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> ");
+   }
+
 
            }
   },
@@ -148,6 +153,42 @@ var data = JSON.parse(JSON.stringify(data));
   }
 });
 }
+
+      function removeNotificationAll() {
+
+$.ajax({
+  type: 'GET',
+  url: 'notifications.php',
+  dataType: 'json',
+  success: function(data) {
+
+   $('.container1').html("");
+var data = JSON.parse(JSON.stringify(data));
+       for (var i in data) 
+            {
+                
+
+  $.post("notifications.php",{id:data[i].id},function(data){
+            
+          });
+
+
+
+           }
+  },
+  error: function() {
+    
+  }
+});
+
+
+
+
+
+
+  getNotifications();
+}
+
 
 function removeNotification(id) {
   $.post("notifications.php",{id:id},function(data){
