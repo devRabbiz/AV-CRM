@@ -405,6 +405,60 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     position: fixed;
     width: 100%;
     }
+
+.send-to, .move_sec, #select_all{
+  height: 20px;
+  width: 20px;
+ position: relative;
+}
+
+.send-to:after, .move_sec:after, #select_all:after{
+  content: '\00D7';
+  display: block;
+  background: #a4acb6;
+  background-image: url('https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-21-32.png');
+  pointer-events: none;
+  font-size: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  color: transparent;
+  transition: .25s all ease-in-out;
+  border-radius: 3px;
+  line-height: 15px;
+  background-position: 0 15px;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+
+.send-to:checked:after{
+  background-color: #5cb85c;
+  background-position: 0 0;
+}
+.send-to:hover:after{
+  border-color: #5cb85c;
+}
+#select_all:checked:after{
+  background-color: #93d993;
+  background-position: 0 0;
+}
+#select_all:hover:after{
+  border-color: white;
+}
+ .move_sec:checked:after {
+  background-color: #f0ad4e;
+  background-position: 0 0;
+}
+ .move_sec:hover:after{
+  border-color: #f0ad4e;
+}
+
 </style>
 
 
