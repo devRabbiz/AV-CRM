@@ -1,7 +1,23 @@
-Introduction
-============
 
-**AV-crm** -- is a fully responsive call center usage CRM. Based on **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework and **[AdminLTE](https://almsaeedstudio.com)** template. Easy  to use and fits many screen resolutions from small mobile devices to large desktops. Check out the live preview now and see for yourself.
+# Features!
 
 
-Not finished yet
+  - Send leads to operators
+  - Send notifications
+  - Set meetings
+  - View by time interval
+  - Monitor Calls -Asterisk
+  - Notes
+  - View by Operator Status
+  - Categories
+  - Download leads
+  - Search leads 
+  - Move leads
+  - Import leads by list
+  - One Page
+  - AutoCopy Email
+  - Edit/Delete Leads 
+  - Picture Upload
+  - Operator Stats
+  - Dedicated Web Category
+

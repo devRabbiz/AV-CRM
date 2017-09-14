@@ -21,6 +21,8 @@ include_once('../session.php');
     -webkit-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
        -moz-box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
             box-shadow: 0 5px 8px -6px rgba(0,0,0,.2);
+            width: 50%;
+    float: left;
 }
 .notice-sm {
     padding: 10px;
@@ -167,7 +169,7 @@ $stmt="select DISTINCT user_id,full_name from vicidial_users where phone_login='
 										</script>
 
 											
-										<a style="cursor:pointer;float: right;" onclick="top.show_profile(<?php echo $get['id'] ?>)" class="text-muted"><p> <?php echo $get['name'] ?></p></a>
+										<font style="cursor:pointer;float: right;" onclick="top.show_profile(<?php echo $get['id'] ?>)" class="text-muted"> <?php echo $get['name'] ?></font>
 
 
 									<?php 	} else { 
