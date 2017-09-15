@@ -595,6 +595,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 <!-- Trigger the modal with a button -->
 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#manual-reg">Create New</button>
 <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
+<button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#trading_chart">Trading Chart</button>
 
 <div id="monitor_calls" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -650,6 +651,46 @@ $('#monitor_calls').on('hidden.bs.modal', function () {
 
   </div>
 </div>
+<div id="trading_chart" class="modal fade" role="dialog">
+  <div  class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Trading Chart</h4>
+      </div>
+      <div class="modal-body" style="padding:0px !important;">
+<!-- TradingView Widget BEGIN -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+new TradingView.widget({
+  "width": 600,
+  "height": 610,
+  "symbol": "FX:EURUSD",
+  "interval": "D",
+  "timezone": "Europe/Berlin",
+  "theme": "Dark",
+  "style": "1",
+  "locale": "en",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "allow_symbol_change": true,
+  "hideideas": true
+});
+</script>
+<!-- TradingView Widget END -->
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
      <ul class="pager" style="float: right;">
         <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
