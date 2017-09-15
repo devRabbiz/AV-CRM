@@ -651,13 +651,16 @@ $('#monitor_calls').on('hidden.bs.modal', function () {
 
   </div>
 </div>
+
+
 <div id="trading_chart" class="modal fade" role="dialog">
-  <div  class="modal-dialog">
+  <div style="width:96%;height: 600px"   class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <div class="modal-content" style="background: grey !important">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button style="float: right;" type="button" class="btn  btn-info" data-toggle="modal" data-target="#trading_chart2">Market Overview</button>
+     
         <h4 class="modal-title">Trading Chart</h4>
       </div>
       <div class="modal-body" style="padding:0px !important;">
@@ -665,8 +668,8 @@ $('#monitor_calls').on('hidden.bs.modal', function () {
 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script type="text/javascript">
 new TradingView.widget({
-  "width": 600,
-  "height": 610,
+  "height":600,
+  "width":'100%',
   "symbol": "FX:EURUSD",
   "interval": "D",
   "timezone": "Europe/Berlin",
@@ -690,6 +693,150 @@ new TradingView.widget({
 
   </div>
 </div>
+
+<div id="trading_chart2" class="modal fade" role="dialog">
+  <div  class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Market Overview</h4>
+
+      </div>
+      <div class="modal-body" style="padding:0px !important;">
+        <!-- TradingView Widget BEGIN -->
+<!-- TradingView Widget BEGIN -->
+
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js">{
+  "width": "600",
+  "height": "600",
+  "locale": "en",
+  "symbolsGroups": [
+    {
+      "symbols": [
+        {
+          "displayName": "S&P 500",
+          "name": "INDEX:SPX"
+        },
+        {
+          "displayName": "Nasdaq 100",
+          "name": "INDEX:IUXX"
+        },
+        {
+          "displayName": "Dow 30",
+          "name": "INDEX:DOWI"
+        },
+        {
+          "displayName": "Nikkei 225",
+          "name": "INDEX:NKY"
+        },
+        {
+          "displayName": "Apple",
+          "name": "NASDAQ:AAPL"
+        },
+        {
+          "displayName": "Google",
+          "name": "NASDAQ:GOOG"
+        }
+      ],
+      "name": "Equities"
+    },
+    {
+      "symbols": [
+        {
+          "displayName": "E-Mini S&P",
+          "name": "CME_MINI:ES1!"
+        },
+        {
+          "displayName": "Euro",
+          "name": "CME:E61!"
+        },
+        {
+          "displayName": "Gold",
+          "name": "COMEX:GC1!"
+        },
+        {
+          "displayName": "Crude Oil",
+          "name": "NYMEX:CL1!"
+        },
+        {
+          "displayName": "Natural Gas",
+          "name": "NYMEX:NG1!"
+        },
+        {
+          "displayName": "Corn",
+          "name": "CBOT:ZC1!"
+        }
+      ],
+      "name": "Commodities"
+    },
+    {
+      "symbols": [
+        {
+          "displayName": "Eurodollar",
+          "name": "CME:GE1!"
+        },
+        {
+          "displayName": "T-Bond",
+          "name": "CBOT:ZB1!"
+        },
+        {
+          "displayName": "Ultra T-Bond",
+          "name": "CBOT:UD1!"
+        },
+        {
+          "displayName": "Euro Bund",
+          "name": "EUREX:GG1!"
+        },
+        {
+          "displayName": "Euro BTP",
+          "name": "EUREX:II1!"
+        },
+        {
+          "displayName": "Euro BOBL",
+          "name": "EUREX:HR1!"
+        }
+      ],
+      "name": "Bonds"
+    },
+    {
+      "symbols": [
+        {
+          "name": "FX:EURUSD"
+        },
+        {
+          "name": "FX:GBPUSD"
+        },
+        {
+          "name": "FX:USDJPY"
+        },
+        {
+          "name": "FX:USDCHF"
+        },
+        {
+          "name": "FX:AUDUSD"
+        },
+        {
+          "name": "FX:USDCAD"
+        }
+      ],
+      "name": "Forex"
+    }
+  ]
+}</script>
+<!-- TradingView Widget END -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 
      <ul class="pager" style="float: right;">

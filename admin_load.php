@@ -406,13 +406,13 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     width: 100%;
     }
 
-.send-to, .move_sec, #select_all{
+.doA , #select_all{
   height: 20px;
   width: 20px;
  position: relative;
 }
 
-.send-to:after, .move_sec:after, #select_all:after{
+.doA:after, #select_all:after{
   content: '\00D7';
   display: block;
   background: #a4acb6;
@@ -437,27 +437,21 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 }
 
 
-.send-to:checked:after{
-  background-color: #5cb85c;
+.doA:checked:after{
+  background-color: #3c8dbc;
   background-position: 0 0;
 }
-.send-to:hover:after{
-  border-color: #5cb85c;
+.doA:hover:after{
+  border-color: #1a4964;
 }
 #select_all:checked:after{
-  background-color: #93d993;
+  background-color: #3c8dbc;
   background-position: 0 0;
 }
 #select_all:hover:after{
   border-color: white;
 }
- .move_sec:checked:after {
-  background-color: #f0ad4e;
-  background-position: 0 0;
-}
- .move_sec:hover:after{
-  border-color: #f0ad4e;
-}
+
 
 </style>
 
@@ -500,7 +494,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
              <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
              <button type="button" class="btn  btn-info" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
-             <button type="button" class="btn  btn-info" data-toggle="modal" data-target="#trading_chart">Trading Chart</button>
+             <button type="button" class="btn  btn-info" onclick="main_chart()">Trading Chart</button>
+
+
 
             </td>
               <td>&nbsp;</td>     <td>&nbsp;</td>
@@ -656,15 +652,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
  <table id="etab1" class="table table-striped table-hover"  width="100%">
 
           <tr >
-            <th><center><strong>ID</strong></center></th>
-            <th><strong>Name</strong></th>
+            <th style="width: 0px;position: absolute;"><center><input  style="vertical-align: middle; margin: 0 0 0 2px !important;" type="checkbox" id="select_all" /></center></th>
+            <th ><strong>Name</strong></th>
             <th><strong>Email</strong></th>
             <th><strong>Phone</strong></th>
             <th><strong>Meeting</strong></th>
             <th><center><strong>Action</strong></center></th>
-            <th style="background: #5cb85c;color: white"><center><strong>Send_to</strong><input  style="vertical-align: middle;    margin: 0 0 0 2px !important;" type="checkbox" id="select_all" /></center></th>
-            
-            <th style="background: #f0ad4e;width: 1px;color: white"><center><strong>Move</strong></center></th>
+            <th ><center><strong>Operator</strong></center></th>
+
             <th style="width: 1px;color: black"><center><strong>Status</strong></center></th>
             <?php if ($pager=='operator') { ?>
             <th>Reg.By</th>
@@ -691,14 +686,11 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
            <td >
 
 
-           <center><?php echo $row['id'] ?></center></td>
+           <center><input  class="doA" onclick="show_buttons()" type='checkbox' name='doA' id='<?php echo $row['id']?>'></center></td>
 
-           <td>
-              
+           <td >
+
               <a id="atitle" onclick='show_profile(<?php echo $row['id'] ?>)'><?php echo $row['name'] ?></a>
-
-
-
 
            </td>
            <td style="color:#d9534f;">
@@ -716,7 +708,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
            </td>
 
 
-           <td style="text-align: justify;width: 150px;"><center>
+           <td style="text-align: justify;"><center>
 
 <?php
 
@@ -751,12 +743,12 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
            </td>
            <td>
             <?php if(is_null($row['sendto'] )){?>
-            <center>
-           <input  class="send-to" onclick="show_buttons()" type='checkbox' name='send-to' id='<?php echo $row['id']?>'></center>
-           </center>
-            <?php } else{ echo $row['sendto']; ?> 
+          
+            <?php } else{  ?> 
+            
 
-            <form action="unsend.php" method="POST" style="float: right;">
+            <form  action="unsend.php" method="POST" style="float: right;">
+              <font > <?php echo $row['sendto']; ?> </font>
               <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
               <input type="hidden" name="op_name" value="<?php echo $row['sendto'] ?>">
               <input type="submit" title="Unsend" class=" btn-danger" value="X">
@@ -766,11 +758,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           </td>
           
           
-           <td>
-            <center>
-           <input class="move_sec" onclick="show_buttons()" type='checkbox' name='move_sec' id='<?php echo $row['id']?>'></center>
-           </center>
-           </td>
+        
            <td><?php echo $row['op_status'] ?></td>
             <?php if ($pager=='operator') { ?>
             <td><?php echo $row['reg_by']; ?></td>
@@ -798,22 +786,8 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
                   <td  ><center>
-      <button type="button" class="btn  btn-primary btn-success" data-toggle="modal" data-target="#dropmodal">Send To</button>
-      <!--
-        <div class="btn-group">
-       <input class="btn  btn-info" type='button' value='Verify' onclick='admin_checked_data(); return false;'>
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><center><button type="button" class="btn  btn-primary btn-info" data-toggle="modal" data-target="#verifyall">Verify All</button></center></li>
-
-        </ul>
-      </div>
-      -->
-        
-        <button type="button" class="btn  btn-warning" data-toggle="modal" data-target="#moveto">Move To</button>
+      <button type="button" class="btn  btn-primary " data-toggle="modal" data-target="#send_tooo">Send To</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moveto">Move To</button>
        </center>
        </td>
 
@@ -839,7 +813,7 @@ $('#etab1').tableScroll({containerClass:'tablescroll'});
    <script type="text/javascript">
 $("#select_all").click(function(){
 
-    $('.send-to').not(this).prop('checked', this.checked);
+    $('.doA').not(this).prop('checked', this.checked);
      show_buttons();
 });
    </script>
@@ -863,7 +837,7 @@ $("#select_all").click(function(){
   //check show hide buttons
   function show_buttons() {
   
-  var st_checked = $('.send-to:checked').length + $('.move_sec:checked').length;
+  var st_checked = $('.doA:checked').length + $('.doA:checked').length;
   if (st_checked > 0) {
     $('.h_buttons').fadeIn('slow');
   }
@@ -936,7 +910,7 @@ $("#select_all").click(function(){
 
 
 
-<div id="dropmodal" class="modal fade" role="dialog">
+<div id="send_tooo" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -1124,8 +1098,9 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
   <div  class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <div class="modal-content" >
       <div class="modal-header">
+
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Monitor</h4>
       </div>
@@ -1139,35 +1114,20 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 
   </div>
 </div>
+
 <div id="trading_chart" class="modal fade" role="dialog">
-  <div  class="modal-dialog">
+  <div style="width:96%;height: 600px"   class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <div class="modal-content" style="background: grey !important">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Trading Chart</h4>
+                <button style="float: right;" type="button" class="btn  btn-info" onclick="overview_chart()" ">Market Overview</button>
+     
+        <h4 class="modal-title" style="color: white">L`Avenir</h4>
       </div>
-      <div class="modal-body" style="padding:0px !important;">
-<!-- TradingView Widget BEGIN -->
-<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<script type="text/javascript">
-new TradingView.widget({
-  "width": 600,
-  "height": 610,
-  "symbol": "FX:EURUSD",
-  "interval": "D",
-  "timezone": "Europe/Berlin",
-  "theme": "Dark",
-  "style": "1",
-  "locale": "en",
-  "toolbar_bg": "#f1f3f6",
-  "enable_publishing": false,
-  "allow_symbol_change": true,
-  "hideideas": true
-});
-</script>
-<!-- TradingView Widget END -->
+      <div class="modal-body" style="padding:0px !important;height: 600px !important">
+
+        <iframe scrolling="no" id="trading_chart_frame" width="100%" height="100%" src=""></iframe>
 
 
       </div>
@@ -1178,6 +1138,31 @@ new TradingView.widget({
 
   </div>
 </div>
+
+<div id="trading_chart2" class="modal fade" role="dialog">
+  <div style="height: 610px" class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" >
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Market Overview</h4>
+
+      </div>
+      <div class="modal-body" style="padding:0px !important;height:610px !important">
+
+     <iframe  scrolling="no" id="trading_chart_frame2" width="100%"  height="100%" src=""></iframe>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 
 <script type="text/javascript">
@@ -1191,6 +1176,30 @@ new TradingView.widget({
             }, 0);
         });
 
+
+function main_chart(){
+
+      //charts functions
+        var linku="trade/main_chart.html";
+      $("#trading_chart_frame").attr("src",linku);
+
+        $('#trading_chart').modal('toggle');
+      }
+
+      function overview_chart(){
+        var linku="trade/overview_chart.html";
+      $("#trading_chart_frame2").attr("src",linku);
+
+        $('#trading_chart2').modal('toggle');
+      }
+      $('#trading_chart').on('hidden.bs.modal', function () {
+         $("#trading_chart_frame").attr("src","");
+      });
+      $('#trading_chart2').on('hidden.bs.modal', function () {
+         $("#trading_chart_frame2").attr("src","");
+      });
+
+///////////////////////////////////////////////
 function  refreshmonitor() {
        document.getElementById('monitor_calls_frame').contentWindow.location.reload();
     }
@@ -1230,13 +1239,14 @@ function sendto () {
         var snd = [];
           var operator=$('#operator option:selected').attr('value');
           console.log(operator);
-        $('.send-to').each(function () {
+        $('.doA').each(function () {
           if($(this).is(':checked'))
             snd.push($(this).attr('id'));
         });
         if(snd){
           snd = JSON.stringify(snd);
           $.post("sendto.php",{snd:snd,operator:operator},function(data){
+            console.log(data);
             window.location.reload();
           });
         }
@@ -1246,7 +1256,7 @@ function sendto () {
       function move_sec () {
         var mv = [];
          var movein=$('#movein option:selected').attr('value');
-        $('.move_sec').each(function () {
+        $('.doA').each(function () {
           if($(this).is(':checked'))
             mv.push($(this).attr('id'));
         });

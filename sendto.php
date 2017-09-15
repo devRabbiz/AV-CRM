@@ -13,7 +13,15 @@
 		if(!$result)
 			die('Error: ' . mysqli_error());
 		else
-			echo "success";
+			//echo "success";
+			//check if is alredy send
+			$check=mysqli_query($con,"SELECT COUNT(*) as `total` FROM jobs WHERE id='".(int)$value."' ");
+			$nr=mysqli_num_rows($check);
+				echo $nr;
+			if ($nr>0) {
+				$deljob=mysqli_query($con,"DELETE FROM jobs WHERE id='".(int)$value."' ");
+				//echo $data['total'];
+			};
 			//insert into operator db
 			$query1="INSERT INTO jobs (`operator`,`id`,`status`) VALUES ('".$_POST['operator']."','".(int)$value."','new')";
 			$result1 = mysqli_query($con,$query1);
