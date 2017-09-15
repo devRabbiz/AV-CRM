@@ -7,62 +7,10 @@
       
     $result=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."' ");
 ?>
- <div class="container-fluid" id="home">
-      <div class="row admin-outer">
+ 
 
-<center>
-<div style="margin-right: 12px;">
-
-
-          <table  style="background:url('/images/2.png');  margin-bottom: 0px !important;  background-repeat: round;" id="etab1" class="table  table-condensed " cellspacing="0" width="100%" height='83px'>
-          <tr >
-          <th ><center>
- <div class=" badge" data-count=
-<?php
-
-if (isset($_SESSION['login_username'])) {
- $result2=$get_total;
-$data=mysqli_fetch_assoc($result2);
-?> > <?php echo $data['total'];}?>
-</div>
-
-
- </div>
- </center>
-
-<td >
-
-
-
-
-            <a href="export.php?export=all" class='btn btn-default btnf'>Download all</a>
-
-            <a href="export.php?export=new" class='btn btn-default btnf'>Download Newest</a>
-
-             <a href="manual_registration.php" class="btn btn-default btnf">Create New</a>
-            </td>
-
-            <td  ><center>
-              <div class="btn-group">
-
-
-
-    </div>
-
-
-    </center>
-
-            </td>
-
-
-          </th>
-
-          </tr>
-</table>
-
-<div class="well col-md-12">
-<table id="tabb" class="table-hover table-bordered" style="width: 100%" data-sort="table">
-      <thead>
+<table id="tabb" class="table table-striped table-hover" style="width: 100%;margin-bottom: 0px" data-sort="table">
+      <thead> 
       	<tr>
       		<th>Operator:</th>
           <th>Total </th>
@@ -143,7 +91,6 @@ $data=mysqli_fetch_assoc($result2);
 </table>
 
 
-</center>
 
 <script type="text/javascript">
   $(document).ready(init);
@@ -172,29 +119,14 @@ function initTableSorter() {
 }
 
 </script>
+<style type="text/css">
+  .wrapper{
+    overflow-y: hidden !important;
+  }
+</style>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-</div>
-
-</div></div>
 
 
 

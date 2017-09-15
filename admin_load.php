@@ -495,11 +495,12 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
             <a href="export.php?export=new" class='btn btn-default btnf'>Download Newest</a>
 
-             <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#manual-reg">Create New</button>
+             <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create New</button>
 
 
-             <button type="button" class="btn btn-default btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
-             <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
+             <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
+             <button type="button" class="btn  btn-info" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
+             <button type="button" class="btn  btn-info" data-toggle="modal" data-target="#trading_chart">Trading Chart</button>
 
             </td>
               <td>&nbsp;</td>     <td>&nbsp;</td>
@@ -742,7 +743,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           <?php }  ?>
 
            <td><center>
-            <form method = "post" action="admin_user_edit.php?user_id=<?php echo $row['id'];?>"><input type="submit" value="Edit" class="btn btn-warning">
+            <form method = "post" action="admin_user_edit.php?user_id=<?php echo $row['id'];?>"><input type="submit" value="Edit" style="background: #a4acb6 !important;border-color: #ecf0f5 !important;" class="btn btn-warning">
             </form>
       
  
@@ -1130,6 +1131,45 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
       </div>
       <div class="modal-body" width="300px">
         <iframe id="monitor_calls_frame"   style="width:100% !important;height: 400px!important;" frameborder='0' src="extra/monitor_calls.php"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="trading_chart" class="modal fade" role="dialog">
+  <div  class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Trading Chart</h4>
+      </div>
+      <div class="modal-body" style="padding:0px !important;">
+<!-- TradingView Widget BEGIN -->
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript">
+new TradingView.widget({
+  "width": 600,
+  "height": 610,
+  "symbol": "FX:EURUSD",
+  "interval": "D",
+  "timezone": "Europe/Berlin",
+  "theme": "Dark",
+  "style": "1",
+  "locale": "en",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "allow_symbol_change": true,
+  "hideideas": true
+});
+</script>
+<!-- TradingView Widget END -->
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

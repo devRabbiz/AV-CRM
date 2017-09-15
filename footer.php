@@ -13,8 +13,15 @@
 
 
 
-    <strong>Copyright &copy; 2017 <a href="#">Adalen VLADI</a>.</strong> All rights
+   <div class="col-md-4" style="width: auto !important"> <strong>Copyright &copy; 2017 <a href="#">Adalen VLADI</a>.</strong> All rights
     reserved.
+    </div>
+    <?php if (isset($_SESSION['login_username'])): ?>
+      <div class="col-md-8">
+          <iframe class="_cfd_content_features_b_" style="width: 99.9%;position: absolute;" src="https://www.lockwoodinv.com/trade.php/trader/widgets/flux" width="100%" height="25px;" frameborder="0" marginheight="20" scrolling="no" __idm_frm__="516" __idm_id__="1039523841"></iframe>
+        </div>
+    <?php endif ?>
+
 
   
 <!-- 
