@@ -590,7 +590,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
                    
 
-                  $('#c_hidden').append("<label>Date range:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><form id='form_interval' method='GET' action='admin.php?pager=web&interval=custom'><input type='text' class='form-control pull-right' id='daterange'></form></div>");
+                  $('#c_hidden').append("<div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><form id='form_interval' method='GET' action='admin.php?pager=web&interval=custom'><input type='text' class='form-control pull-right' id='daterange'></form></div>");
                  
                   $('#daterange').daterangepicker().on('change', function(){
                     window.location.href='<?php echo $_SERVER['PHP_SELF']."?pager=".$pager."&interval=custom&date_range="?>'+$('#daterange').val();
@@ -1104,8 +1104,9 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Monitor</h4>
       </div>
-      <div class="modal-body" width="300px">
-        <iframe id="monitor_calls_frame"   style="width:100% !important;height: 400px!important;" frameborder='0' src="extra/monitor_calls.php"></iframe>
+      <div class="modal-body" width="300px" >
+        <div id="monitor_callsid"></div>
+       
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -1116,7 +1117,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 </div>
 
 <div id="trading_chart" class="modal fade" role="dialog">
-  <div style="width:96%;height: 600px"   class="modal-dialog">
+  <div style="width:96%;height: 610px"   class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content" style="background: grey !important">
@@ -1125,7 +1126,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
      
         <h4 class="modal-title" style="color: white">L`Avenir</h4>
       </div>
-      <div class="modal-body" style="padding:0px !important;height: 600px !important">
+      <div class="modal-body" style="padding:0px !important;height: 610px !important">
 
         <iframe scrolling="no" id="trading_chart_frame" width="100%" height="100%" src=""></iframe>
 
@@ -1167,6 +1168,18 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 
 <script type="text/javascript">
 
+  $(window).scroll(function() {
+
+    if ($(this).scrollTop()>0)
+     {
+        $('#select_all').fadeOut();
+     }
+    else
+     {
+      $('#select_all').fadeIn();
+     }
+ });
+
 
         $(document).on('show.bs.modal', '.modal', function (event) {
             var zIndex = 1040 + (10 * $('.modal:visible').length);
@@ -1180,15 +1193,15 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 function main_chart(){
 
       //charts functions
-        var linku="trade/main_chart.html";
-      $("#trading_chart_frame").attr("src",linku);
+        var linku1="trade/main_chart.html";
+      $("#trading_chart_frame").attr("src",linku1);
 
         $('#trading_chart').modal('toggle');
       }
 
       function overview_chart(){
-        var linku="trade/overview_chart.html";
-      $("#trading_chart_frame2").attr("src",linku);
+        var linku1="trade/overview_chart.html";
+      $("#trading_chart_frame2").attr("src",linku1);
 
         $('#trading_chart2').modal('toggle');
       }
@@ -1201,11 +1214,11 @@ function main_chart(){
 
 ///////////////////////////////////////////////
 function  refreshmonitor() {
-       document.getElementById('monitor_calls_frame').contentWindow.location.reload();
+      $('#monitor_callsid').load("extra/monitor_calls.php");
     }
 $( "#monitor_calls" ).on('shown.bs.modal', function(){
     refreshmonitor() ;
-    refreshm=setInterval(refreshmonitor, 10000);
+    refreshm=setInterval(refreshmonitor, 2000);
  
 });
 $('#monitor_calls').on('hidden.bs.modal', function () {

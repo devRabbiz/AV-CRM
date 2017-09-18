@@ -8,9 +8,7 @@ include_once('../session.php');
   <title>CRM</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <style>
 .notice {
@@ -61,31 +59,9 @@ include_once('../session.php');
   background-color: #ddd;
 }
 
-#myBar {
-  width: 1%;
-  height: 20px;
-  background-color: #4CAF50;
-  margin-bottom: 15px;
 </style>
 <body>
-<div id="myProgress">
-  <div id="myBar"></div>
-</div>
 
-<script type="text/javascript">
-  var elem = document.getElementById("myBar");   
-  var width = 1;
-  var id = setInterval(frame, 1000);
-  function frame() {
-    if (width >= 1000) {
-      clearInterval(id);
-    } else {
-      width+=10; 
-      elem.style.width = width + '%'; 
-    }
-  }
-
-</script>
 <center>
 
 
