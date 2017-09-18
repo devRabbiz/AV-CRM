@@ -1,1 +1,0 @@
-This skin will be used in old browsers, like IE6, IE7
