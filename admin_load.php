@@ -911,7 +911,7 @@ $("#select_all").click(function(){
 
 
 <div id="send_tooo" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -920,7 +920,8 @@ $("#select_all").click(function(){
         <h4 class="modal-title">Send to</h4>
       </div>
       <div class="modal-body">
-     <select id="operator" name="operator">
+        <center>
+     <select id="operator" name="operator" class="btn btn-default">
     <?php
     
 $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
@@ -934,10 +935,13 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 
 <?php } mysqli_close($con);?>
 </select>
+</center>
       </div>
       <div class="modal-footer">
-      <input class="btn  btn-info" type='button' value='Send' onclick='sendto(); return false;'>
+        <center>
+        <input class="btn  btn-info" type='button' value='Send' onclick='sendto(); return false;'>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </center>
       </div>
     </div>
 
@@ -945,7 +949,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 </div>
 
 <div id="moveto" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -954,19 +958,23 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
         <h4 class="modal-title">Move to</h4>
       </div>
       <div class="modal-body">
-     <select id="movein" name="movein">
+        <center>
+     <select id="movein" name="movein" class="btn btn-default">
 
   <option value="1">Trader </option>
   <option value="0">Finish</option>
    <option value="3">FTD</option>
    <option value="4">Callback</option>
    <option value="5">Not Interested</option>
+   </center>
 
 </select>
      </div>
       <div class="modal-footer">
-      <input class="btn  btn-warning" type='button' value='Move' onclick='move_sec(); return false;'>
+        <center>
+        <input class="btn  btn-warning" type='button' value='Move' onclick='move_sec(); return false;'>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </center>
       </div>
     </div>
 

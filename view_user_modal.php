@@ -71,7 +71,7 @@ include_once 'functions.php'
     
 
         <div id="dropmodal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -80,7 +80,8 @@ include_once 'functions.php'
         <h4 class="modal-title">Caution</h4>
       </div>
       <div class="modal-body">
-     <select id="operator" name="operator">
+        <center>
+     <select id="operator" name="operator" class="btn btn-default">
     <?php
     
 $results3=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
@@ -94,6 +95,7 @@ $results3=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 
 <?php } ?>
 </select>
+</center>
       </div>
       <div class="modal-footer">
       <input class="btn  btn-info" type='button' value='Send' onclick='sendto(); return false;'>
@@ -105,7 +107,7 @@ $results3=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 </div>
 
 <div id="moveto" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -114,19 +116,21 @@ $results3=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
         <h4 class="modal-title">Caution</h4>
       </div>
       <div class="modal-body">
-     <select id="movein" name="movein">
-
-  <option value="1">Trader </option>
-  <option value="0">Finish</option>
+        <center>
+     <select id="movein" name="movein" class="btn btn-default">
+   <option value="1">Trader </option>
+   <option value="0">Finish</option>
    <option value="3">FTD</option>
    <option value="4">Callback</option>
    <option value="5">Not Interested</option>
-
 </select>
+</center>
      </div>
       <div class="modal-footer">
-      <input class="btn  btn-warning" type='button' value='Move' onclick='move_sec(); return false;'>
+        <center>
+        <input class="btn  btn-warning" type='button' value='Move' onclick='move_sec(); return false;'>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </center>
       </div>
     </div>
 
