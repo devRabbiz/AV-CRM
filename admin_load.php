@@ -299,7 +299,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
           case 'all':
-                $r=mysqli_query($con,"SELECT * FROM user where  web=1   ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user where  web=1 and sec!=3   ORDER BY id DESC LIMIT $startrow, 30  ");//all but web and ftd
                 $ac8="active";
           break;
           case 'web':
@@ -1125,7 +1125,15 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 </div>
 
 <div id="trading_chart" class="modal fade" role="dialog">
-  <div style="width:96%;height: 610px"   class="modal-dialog">
+  <div style="  
+    width: 100%;
+    /* height: 610px; */
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    padding: 0;
+    margin: 0;"   class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content" style="background: grey !important">

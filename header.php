@@ -44,9 +44,6 @@ include_once 'functions.php'
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="plugins/pace/pace.css">
-<script src="plugins/pace/pace.js"></script>
-
 <!-- 
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
