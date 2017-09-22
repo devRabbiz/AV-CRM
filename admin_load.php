@@ -416,7 +416,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   content: '\00D7';
   display: block;
   background: #a4acb6;
-  background-image: url('https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-21-32.png');
+  background-image: url('images/basics-21-32.png');
   pointer-events: none;
   font-size: 15px;
   position: absolute;
