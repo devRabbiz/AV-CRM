@@ -13,7 +13,7 @@
 
 
 
-   <div class="col-md-4" style="width: auto !important"> <strong>Copyright &copy; 2017 <a href="http://github.com/adalenv">Adalen VLADI</a>.</strong> All rights
+   <div class="col-md-4" style="width: auto !important"> <strong>Copyright &copy; 2017 <a target="_blank" href="http://github.com/adalenv">Adalen VLADI</a>.</strong> All rights
     reserved.
     </div>
   

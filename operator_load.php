@@ -496,7 +496,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
     </div>
-<div class="container" style="width: auto !important ;">
+<div class="" style="width: auto !important ;">
 <!-- Trigger the modal with a button -->
 <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#manual-reg">Create New</button>
 <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
