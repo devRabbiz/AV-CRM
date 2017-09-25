@@ -343,15 +343,6 @@ body{
 }
 </style>
 
- <script type="text/javascript">
-   function callb(num) {
-      $('.chat').animate({
-        height: 450
-    }, 500);
-      
-     top.wphone.webphone_api.call(num);
-   }
- </script>
 
 <script type="text/javascript">
   var originalLeave = $.fn.popover.Constructor.prototype.leave;
@@ -458,9 +449,9 @@ function clearmeet<?php echo $row1[2];?>() {
 
       notifyMe<?php echo $row1[2];?>();
       if(confirm('<?php echo $row1[8] ?>'))
-        window.location='operator_view_user.php?user_id=<?php echo $row1[2] ?>';
+         show_profile(<?php echo $row1[2] ?>);
       else
-        window.location='operator_view_user.php?user_id=<?php echo $row1[2] ?>';
+        show_profile(<?php echo $row1[2] ?>);
        
       //alert("<?php echo $row1[1] ?>");
       clearmeet<?php echo $row1[2];?>();
@@ -729,7 +720,7 @@ function main_chart(){
 </script>
 
 
-     <ul class="pager" style="float: right;">
+     <ul class="pagination pagination-md no-margin pull-right" style="float: right;">
         <li><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
         else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
         <li><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
@@ -738,7 +729,7 @@ function main_chart(){
 
 <script src="dist/js/jquery.tablescroll.js"></script>
 
- <table id="etab1" class="table table-striped table-hover"  width="100%">
+ <table id="etab1" class="table table-striped table-hover table-bordered "  width="100%">
  <tr>
             <th><strong>ID</strong></th>
             <th><strong>Name</strong></th>
@@ -759,7 +750,7 @@ function main_chart(){
 
 <tr>
             <td><?php echo $row['id'] ?></td>
-           <td><a href="operator_view_user.php?user_id=<?php echo $row['id'] ?>"  data-popover="true"  data-html=true data-content="<iframe name='hoverprofile' class='iframe' scrolling='yes' frameborder='0' marginwidth='0' marginheight='0' src='operator_view_user_hover.php?user_id=<?php echo $row['id'] ?>' />"><?php echo $row['name'] ?></a></td>
+           <td> <a style="cursor: pointer;" id="atitle" onclick='show_profile(<?php echo $row['id'] ?>)'><?php echo $row['name'] ?></a></td>
           <td><?php echo $row['status'] ?></td>
            <td width="30%"><?php
 
@@ -837,6 +828,25 @@ function main_chart(){
 
 </div>
 
+<div id="showprofile" class="modal fade" role="dialog" >
+  <div style="width:90%;" class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+      <iframe style="width: 100%;height: 500px;" scrolling="yes" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
+        
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 
@@ -847,6 +857,17 @@ function main_chart(){
 
 $('#etab1').tableScroll({containerClass:'tablescroll'});
 });
+
+
+        function show_profile(id){
+        var linku="operator_view_user_modal.php?user_id="+id;
+      $("#shprofile").attr("src",linku);
+
+        $('#showprofile').modal('toggle');
+      }
+
+
+
 </script>
 
 <script type="text/javascript">
@@ -902,7 +923,16 @@ $('#etab1').tableScroll({containerClass:'tablescroll'});
 
 
 
-
+<style type="text/css">
+  .main-footer{
+    bottom: 0px;
+    position: fixed;
+    width: 100%;
+  }
+  .main-sidebar{
+    position: fixed;
+  }
+</style>
 
 
 

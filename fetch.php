@@ -25,7 +25,7 @@ if(isset($query)){
             // Close result set
             mysqli_free_result($result);
         } else{
-            echo "<p>No client found : <b>$query</b></p>";
+            echo "<p style='color:white'>No client found : <b>$query</b></p>";
         }
     } else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);

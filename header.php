@@ -11,7 +11,13 @@ include_once 'functions.php'
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="/manifest.json">
-  <title>Admin| L`Avenir</title>
+  <?php if (isset($_SESSION['login_username'])): ?>
+     <title>Admin| L`Avenir</title>
+  <?php endif ?>
+  <?php if (isset($_SESSION['operator_username'])): ?>
+     <title>Operator| L`Avenir</title>
+  <?php endif ?>
+ 
 
   <script type="text/javascript" src="/dist/js/jquery-3.1.1.min.js"></script>
 
@@ -90,9 +96,7 @@ include_once 'functions.php'
 
 
 
-<body class="hold-transition skin-blue-light sidebar-mini <?php if (!isset($_SESSION['login_username'])): ?>
-  sidebar-collapse
-<?php endif ?>">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -161,6 +165,28 @@ include_once 'functions.php'
        <div style="color:white;text-align: center;">
        <?php if (isset($_SESSION['login_username'])): ?>
        <a class="btn btn-primary" data-toggle="modal" data-target="#sendNotification">Send Notification</a>
+        <div id="sendNotification" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width: 900px !important">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Notifications</h4>
+            </div>
+            <div class="modal-body">
+              <iframe src="admin_send_notification.php" width="880px" height="500px"></iframe>
+            </div>
+            <div class="modal-footer">
+          
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
        <?php endif ?>
        <a class="btn btn-default"  href="logout.php">Logout</a>
 
@@ -176,23 +202,3 @@ include_once 'functions.php'
   </aside>
   <!-- /.control-sidebar -->
 
-<div id="sendNotification" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="width: 900px !important">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Notifications</h4>
-      </div>
-      <div class="modal-body">
-        <iframe src="admin_send_notification.php" width="880px" height="500px"></iframe>
-      </div>
-      <div class="modal-footer">
-    
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>

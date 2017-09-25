@@ -48,7 +48,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header"><center>Operator</center></li>
 
         <li class=" treeview <?php echo " ".$ac0." "; ?>" >
           <a href="operator.php?pager=home">

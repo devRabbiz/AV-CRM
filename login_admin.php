@@ -1,4 +1,4 @@
-
+<title>Admin Login | L`Avenir</title>
  <style type="text/css">
    @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 * {

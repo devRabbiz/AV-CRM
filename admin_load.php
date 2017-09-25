@@ -990,7 +990,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-      <iframe style="width: 100%;height: 600px;" scrolling="yes" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
+      <iframe style="width: 100%;height: 500px;" scrolling="yes" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
         
      </div>
       <div class="modal-footer">
