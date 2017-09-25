@@ -7,6 +7,7 @@ include_once 'functions.php'
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="mobile-web-app-capable" content="yes">

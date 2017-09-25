@@ -120,123 +120,24 @@ strong {
   }
 
 }
+
 </style>
 
 
-<?php }
+<?php } ?>
+<div id=meet_notification></div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#meet_notification').load('meet_notification.php');
 
+    setInterval(function(){
+    $('#meet_notification').html('');
+    $('#meet_notification').load('meet_notification.php');
 
-
-if (isset($_SESSION['login_username'])) {
-
-
- 
-    if($result =$admin1){
-        if(mysqli_num_rows($result) > 0){
-            while($row1 = mysqli_fetch_array($result)){
-
-            if (is_null($row1[2]))
-              echo "";
-            else{
-
-             ?>
-
-<audio id="myAudio">
-  <source src="/files/notif.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-           <script type="text/javascript">
-  var prove<?php echo $row1[1];?>="<?php echo $row1[2]; ?>";
-  console.log(prove<?php echo $row1[1];?>);
-  console.log("<?php echo $row1[4] ?>");
-  // Split timestamp into [ Y, M, D, h, m, s ]
-var t<?php echo $row1[1];?> = prove<?php echo $row1[1];?>.split(/[- :]/);
-
-// Apply each element to the Date function
-var d<?php echo $row1[1];?> = new Date(Date.UTC(t<?php echo $row1[1];?>[0], t<?php echo $row1[1];?>[1]-1, t<?php echo $row1[1];?>[2], t<?php echo $row1[1];?>[3]-2, t<?php echo $row1[1];?>[4], t<?php echo $row1[1];?>[5]));
-
-var x<?php echo $row1[1];?>=parseInt((d<?php echo $row1[1];?>.getTime()-d<?php echo $row1[1];?>.getMilliseconds())/1000);
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  if (!Notification) {
-    alert('Desktop notifications not available in your browser. Try Chromium.'); 
-    return;
-  }
-
-  if (Notification.permission !== "granted")
-    Notification.requestPermission();
-});
-
-function notifyMe<?php echo $row1[1];?>() {
-  if (Notification.permission !== "granted")
-    Notification.requestPermission();
-  else {
-    var notification = new Notification('You have a meeting now', {
-      icon: 'images/meet.ico',
-      body: "<?php echo $row1[4] ?>",
-    });
-
-    Notification.onclick = function () {
-      window.open("view_user.php?user_id=<?php echo $row1[1] ?>");
-    };
-
-  }
-
-}
-function clearmeet<?php echo $row1[1];?>() {
-
-            var admin='<?php echo $_SESSION['login_username']; ?>';
-          $.post("clearmeet_admin.php",{id:<?php echo $row1[1]; ?>,admin:admin},function(data){
-            //window.location.reload();
-          });
-        };
-
-  var check<?php echo $row1[1];?>=setInterval(function() {
-      var a<?php echo $row1[1];?> =new Date();
-     var z<?php echo $row1[1];?>=parseInt((a<?php echo $row1[1];?>.getTime()-a<?php echo $row1[1];?>.getMilliseconds())/1000);
-     console.log(z<?php echo $row1[1];?>);
-     console.log("--------");
-     console.log(x<?php echo $row1[1];?>);
-    if (z<?php echo $row1[1];?>>x<?php echo $row1[1];?>){
-      var notif<?php echo $row1[1];?> = document.getElementById("myAudio"); 
-        notif<?php echo $row1[1];?>.play(); 
-
-
-      notifyMe<?php echo $row1[1];?>();
-      if(confirm('<?php echo $row1[4] ?>'))
-        show_profile(<?php echo $row1[1] ?>);
-      else
-         show_profile(<?php echo $row1[1] ?>);
-
-      //alert("<?php echo $row1[1] ?>");
-      clearmeet<?php echo $row1[1];?>();
-    clearInterval(check<?php echo $row1[1];?>);
-    }
-
-
-
-
-  }, 1000);
-
-
-$(document).ready(function() {
-  setTimeout(function(){
-   window.location.reload(1);
-}, 300000)
-
-});
-
-
-
+     }, 90000);
+  });
 </script>
-<?php   }
-
-          }
-        }
-      }
-       }  
+<?php   
 
      if(isset($_SESSION['admin-logout'])){?>
       <div class='alert alert-danger alert-dissmissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><?php echo $_SESSION['admin-logout']?></div>

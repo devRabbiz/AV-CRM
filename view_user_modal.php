@@ -1,7 +1,7 @@
 <?php
 require_once 'db_connect.php';
 require_once 'session.php';
-include_once 'functions.php'
+include_once 'functions.php';
 ?>
  
 <!DOCTYPE html>

@@ -54,7 +54,7 @@ if ($res=$r22->num_rows ==0) {
 
 
 }
-header('Location: operator_view_user.php?user_id='.$id );
+header('Location: operator_view_user_modal.php?user_id='.$id );
 mysqli_close($con);
 
 
