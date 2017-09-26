@@ -138,7 +138,7 @@ $(document).ready(function(){
                                   }
                              ?>
                              
-                             <a  class="btn btn-danger" href="operator.php">close</a>
+
                              <a class="btn btn-primary"   href="operator_view_user.php?user_id=<?php echo $nextid;?>">next</a> 
                               <span class="pull-right">
 

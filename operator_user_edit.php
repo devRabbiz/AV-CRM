@@ -1,8 +1,52 @@
 <?php
-  include 'header.php';
+  require_once 'db_connect.php';
+require_once 'session.php';
+include_once 'functions.php'
 ?>
+ 
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="/manifest.json">
+
+  <script type="text/javascript" src="/dist/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
+  <link rel="stylesheet" href="dist/css/bootstrap-datetimepicker.min.css" />
+
+
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+ 
+  <script src="dist/js/moment.js"></script>
+  <script src="dist/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <div class="container-fluid">
-      <div class="row admin-outer jumbotron">
+      <div class="row admin-outer jumbotron" style="padding-top: 0px !important;
+    padding-bottom: 0px !important;">
       	<?php
         if(isset($_SESSION['operator_username'])){
       	if(isset($_GET['user_id'])){
@@ -20,8 +64,6 @@
                #form1{width: 400px !important}
              </style>
             
-
-<div class="col-md-6">
     <form role="form" id="form1">
 
      <div class="form-group">
@@ -70,7 +112,7 @@
 
           <td>
            
-            </div>
+
           </td>
         </tr>
       </table>
