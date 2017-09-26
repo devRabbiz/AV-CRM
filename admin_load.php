@@ -137,6 +137,53 @@ strong {
      }, 90000);
   });
 </script>
+
+<script type="text/javascript">
+        var reload5sec;
+
+        function reload5(){
+         reload5sec=setTimeout(function() {
+         window.location.reload();
+          }, 5000);
+       }
+       function remove5(){
+        clearTimeout(reload5sec);
+       }
+        
+  ////////    refresh on tab close 5 sec
+  $(document).ready(function() {
+  var hidden, visibilityState, visibilityChange;
+
+  if (typeof document.hidden !== "undefined") {
+    hidden = "hidden", visibilityChange = "visibilitychange", visibilityState = "visibilityState";
+  } else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden", visibilityChange = "msvisibilitychange", visibilityState = "msVisibilityState";
+  }
+
+  var document_hidden = document[hidden];
+
+  document.addEventListener(visibilityChange, function() {
+    if(document_hidden != document[hidden]) {
+      if(document[hidden]) {
+
+        //close
+        console.log('close');
+
+        reload5();
+
+      } else {
+        // open
+        console.log('open');
+
+          remove5();
+
+      }
+
+      document_hidden = document[hidden];
+    }
+  });
+});
+</script>
 <?php   
 
      if(isset($_SESSION['admin-logout'])){?>
@@ -200,7 +247,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
           case 'all':
-                $r=mysqli_query($con,"SELECT * FROM user where  web=1 and sec!=3   ORDER BY id DESC LIMIT $startrow, 30  ");//all but web and ftd
+                $r=mysqli_query($con,"SELECT * FROM user where  (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, 30  ");//all but web and ftd
                 $ac8="active";
           break;
           case 'web':

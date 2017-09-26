@@ -64,7 +64,8 @@ function notifyMe<?php echo $row1[1];?>() {
     });
 
     Notification.onclick = function () {
-      window.open("view_user.php?user_id=<?php echo $row1[1] ?>");
+           show_profile(<?php echo $row1[1]; ?>);
+
     };
 
   }
@@ -188,7 +189,7 @@ function notifyMe<?php echo $row1[2];?>() {
     });
 
     notification.onclick = function () {
-      window.open("operator.php");
+      show_profile(<?php echo $row1[2]; ?>);
     };
 
   }
@@ -214,11 +215,7 @@ function clearmeet<?php echo $row1[2];?>() {
 
       notifyMe<?php echo $row1[2];?>();
       if(confirm("<?php echo $row1[8] ?>"))
-
          show_profile(<?php echo $row1[2] ?>);
-      else
-        show_profile(<?php echo $row1[2] ?>);
-       
       //alert("<?php echo $row1[1] ?>");
       clearmeet<?php echo $row1[2];?>();
     clearInterval(check<?php echo $row1[2];?>);

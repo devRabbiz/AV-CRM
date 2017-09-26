@@ -475,6 +475,52 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 <head>
 	
 
+<script type="text/javascript">
+        var reload5sec;
+
+        function reload5(){
+         reload5sec=setTimeout(function() {
+         window.location.reload();
+          }, 5000);
+       }
+       function remove5(){
+        clearTimeout(reload5sec);
+       }
+        
+  ////////    refresh on tab close 5 sec
+  $(document).ready(function() {
+  var hidden, visibilityState, visibilityChange;
+
+  if (typeof document.hidden !== "undefined") {
+    hidden = "hidden", visibilityChange = "visibilitychange", visibilityState = "visibilityState";
+  } else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden", visibilityChange = "msvisibilitychange", visibilityState = "msVisibilityState";
+  }
+
+  var document_hidden = document[hidden];
+
+  document.addEventListener(visibilityChange, function() {
+    if(document_hidden != document[hidden]) {
+      if(document[hidden]) {
+
+        //close
+        console.log('close');
+
+        reload5();
+
+      } else {
+        // open
+        console.log('open');
+
+          remove5();
+
+      }
+
+      document_hidden = document[hidden];
+    }
+  });
+});
+</script>
 
 </head>
 
