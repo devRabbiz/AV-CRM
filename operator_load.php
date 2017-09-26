@@ -502,11 +502,17 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   document.addEventListener(visibilityChange, function() {
     if(document_hidden != document[hidden]) {
       if(document[hidden]) {
+      		if (!$('#showprofile').is(':visible')) {
 
-        //close
-        console.log('close');
+      				   //close
+        console.log('close.modal not visible');
 
         reload5();
+
+      		} else{
+
+        			console.log('close.modal  visible');
+ 			}
 
       } else {
         // open
