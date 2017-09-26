@@ -15,7 +15,7 @@
     }
     else
     {
-      header('Location: admin.php' );
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
     mysqli_close($con);
   }
