@@ -1,6 +1,7 @@
 <?php
  $con=mysqli_connect("127.0.0.1","root","","reg_db");
  //$conn= new mysqli_connect("127.0.0.1","root","","reg_db");
+ $connectionN = new mysqli("127.0.0.1","root","","reg_db");
 $bd=$con;
 $host = 'localhost';
 $username = 'root';

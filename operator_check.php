@@ -11,9 +11,19 @@ session_start();
         $array=mysqli_fetch_array($result);
 
         if($array){
-        	$_SESSION['operator_username']=$_POST['operator-username'];
-          	header("Location:operator.php?login=true");
+        	$_SESSION['operator_username']=$_POST['operator-username']; 
+          	//header("Location:operator.php?login=true");
+          ?>
 
+              <form action="operator.php" id="loginform" method="POST">
+                  <input type="hidden" value="true" name="login">
+              </form>
+            
+              <script type="text/javascript">
+                document.getElementById("loginform").submit();
+              </script>
+
+    <?php 
 
         }
         else{

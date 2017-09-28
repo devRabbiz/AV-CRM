@@ -1,6 +1,8 @@
-<?php if (isset($_GET['login'])) { 
-	 $full_name=mysqli_query($con,"SELECT * FROM operator WHERE username='".$_SESSION['operator_username']."'");
+<?php if (isset($_POST['login']) && $_POST['login']=='true') { 
+   $full_name=mysqli_query($con,"SELECT * FROM operator WHERE username='".$_SESSION['operator_username']."'");
       $full_name=$full_name->fetch_assoc();
+      $_POST['login']='done';
+     
 
  ?>
 <div class="back">
@@ -9,21 +11,21 @@
 </div>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		setTimeout(hid,6000);
-		setTimeout(playname,1500);
-	});
+  $(document).ready(function(){
+    setTimeout(hid,6000);
+    setTimeout(playname,1500);
+  });
 
 function playname(){
-	var audion = new Audio("dist/audio_name/<?php echo $full_name['username'];?>.mp3");
-		audion.play();
+  var audion = new Audio("dist/audio_name/<?php echo $full_name['username'];?>.mp3");
+    audion.play();
 }
 function hid(){
-	$('.back').remove();
+  $('.back').remove();
 }
 </script>
-<style type="text/css">
 
+<style type="text/css">
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700|Dosis:200,400,600);
 
   .back {
@@ -118,6 +120,124 @@ strong {
 
 
 <?php } ?>
+
+
+
+
+
+<script type="text/javascript">
+
+  document.addEventListener('DOMContentLoaded', function () {
+  if (!Notification) {
+    alert('Desktop notifications not available in your browser. Try Chromium.'); 
+    return;
+  }
+
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+});
+
+function notifyMe(user_id,name) {
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var notification = new Notification('You have a meeting now', {
+      icon: 'images/meet.ico',
+      body: name,
+    });
+
+    Notification.onclick = function () {
+           show_profile(user_id);
+
+    };
+
+  }
+
+};
+    function clearmeet(user_id) {
+
+          $.post("clearmeet.php",{id:user_id},function(data){
+            //window.location.reload();
+            console.log('clearmeet exec');
+          });
+        };
+
+  $(document).ready(function(){
+        window.getMeet= function getMeet() {
+
+        $.ajax({
+          type: 'GET',
+          url: 'meet_notifications.php',
+          dataType: 'json',
+          success: function(data) {
+            //console.log(data);
+            //success
+            //console.log("----------------------------------------------------");
+         var d = new Date();
+          date=(
+               d.getFullYear() + " " + 
+              ("00" + (d.getMonth() + 1)).slice(-2) + "-" + 
+              ("00" + d.getDate()).slice(-2) + " " + 
+           
+              ("00" + d.getHours()).slice(-2) + ":" + 
+              ("00" + d.getMinutes()).slice(-2) + ":" + 
+              ("00" + d.getSeconds()).slice(-2)
+          );
+
+ 
+            datenow = Date.parse(date);
+            //console.log(unixtimeOne);
+            //console.log(unixtimeTwo);
+
+         for (var i in data) {
+            //console.log(data[i].name);
+            //console.log(data[i].meet);
+           // console.log(date);
+            datemeet = Date.parse(data[i].meet);
+            
+            if(datemeet<datenow){
+
+                  console.log("time out");
+
+                  notifyMe(data[i].user_id,data[i].name);
+                       y = window.top.outerHeight / 2 + window.top.screenY - ( 600 / 2);
+               x = window.top.outerWidth / 2 + window.top.screenX - ( 900 / 2);
+
+              view_user_win=new Array;
+
+              view_user_win[data[i].user_id]='view_user_win'+[data[i].user_id];
+                      view_user_win[data[i].user_id] = window.open("operator_view_user_modal.php?user_id="+data[i].user_id, view_user_win[data[i].user_id] , "width=900,height=600,top="+y+",left="+x+"");
+
+                      view_user_win[data[i].user_id].window.onbeforeunload = clearmeet(data[i].user_id);
+             
+              view_user_win[data[i].user_id].focus();
+                  
+                }else{
+                  
+                  console.log(data.length+' waiting');
+                };
+            }
+            //console.log("----------------------------------------------------");
+        },
+          error: function() {
+           //eeror 
+           console.log('error');
+          }
+        });
+
+        }
+
+        getMeet();
+
+  });
+</script>
+
+
+
+
+
+
+
 <script type="text/javascript">
 
 $( document ).ready(function() {
@@ -126,6 +246,7 @@ $( document ).ready(function() {
   
 
    function getNotifications() {
+    getMeet();
 
 $.ajax({
   type: 'GET',
@@ -369,17 +490,6 @@ $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placemen
 
 
 <div id=meet_notification></div>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#meet_notification').load('meet_notification.php');
-
-    setInterval(function(){
-    $('#meet_notification').html('');
-    $('#meet_notification').load('meet_notification.php');
-
-     }, 90000);
-  });
-</script>
 
 
 
@@ -473,14 +583,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 ?>
 <head>
-	
+  
 
 <script type="text/javascript">
         var reload5sec;
 
         function reload5(){
          reload5sec=setTimeout(function() {
-         window.location.reload();
+         window.location= window.location.href;
           }, 5000);
        }
        function remove5(){
@@ -502,17 +612,17 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   document.addEventListener(visibilityChange, function() {
     if(document_hidden != document[hidden]) {
       if(document[hidden]) {
-      		if (!$('.modal').is(':visible')) {
+          if (!$('.modal').is(':visible')) {
 
-      				   //close
+                 //close
         console.log('close.modal not visible');
 
         reload5();
 
-      		} else{
+          } else{
 
-        			console.log('close.modal  visible');
- 			}
+              console.log('close.modal  visible');
+      }
 
       } else {
         // open

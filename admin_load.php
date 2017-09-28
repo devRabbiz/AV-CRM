@@ -5,9 +5,10 @@ include_once 'header.php';
 
 <?php 
 
- if (isset($_GET['login'])) { 
+if (isset($_POST['login']) && $_POST['login']=='true') { 
    $full_name=mysqli_query($con,"SELECT * FROM admins WHERE username='".$_SESSION['login_username']."'");
       $full_name=$full_name->fetch_assoc();
+      $_POST['login']='done';
 
  ?>
 <div class="back">
@@ -143,7 +144,7 @@ strong {
 
         function reload5(){
          reload5sec=setTimeout(function() {
-         window.location.reload();
+         window.location= window.location.href;
           }, 5000);
        }
        function remove5(){

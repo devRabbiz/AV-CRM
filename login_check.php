@@ -13,7 +13,18 @@ if (isset($_POST['admin-username'])) {
 
         if($array){
         	$_SESSION['login_username']=$_POST['admin-username'];
-          	header("Location:admin.php?login=true");
+          //	header("Location:admin.php?login=true");
+                   ?>
+
+              <form action="admin.php" id="loginform" method="POST">
+                  <input type="hidden" value="true" name="login">
+              </form>
+            
+              <script type="text/javascript">
+                document.getElementById("loginform").submit();
+              </script>
+
+      <?php 
 
         }
         else

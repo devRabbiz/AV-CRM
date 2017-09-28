@@ -1,21 +1,7 @@
 <?php
 include_once 'session.php';
-//address of the server where db is installed
-$servername = "localhost";
-
-//username to connect to the db
-//the default value is root
-$username = "root";
-
-//password to connect to the db
-//this is the value you would have specified during installation of WAMP stack
-$password = "";
-
-//name of the db under which the table is created
-$dbName = "reg_db";
-
-//establishing the connection to the db.
-$conn = new mysqli($servername, $username, $password, $dbName);
+include_once 'db_connect.php';
+$conn = $connectionN;
 
 //checking if there were any error during the last connection attempt
 if ($conn->connect_error) {
