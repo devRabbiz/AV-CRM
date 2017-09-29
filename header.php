@@ -69,6 +69,14 @@ include_once 'functions.php';
    #etab1{
      margin-top: 10px;
    }
+   .modal.fade .modal-dialog {
+ 
+    -webkit-transition: all 0.0s;
+    -moz-transition: all 0.0s;
+    transition: all 0.0s;
+}
+
+
   
  </style>
  

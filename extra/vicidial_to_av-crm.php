@@ -1,10 +1,10 @@
-<?php
-require_once 'db_connect.php';
+<?php 
 
-   $lang_check=mysqli_query($con,"SELECT lang FROM operator WHERE username='".$_SESSION['operator_username']."'");
-      $lang=$lang_check->fetch_assoc();
-      $lang=mysqli_escape_string($con,$lang['lang']);
-   
+
+	require_once('../db_connect.php');
+	////use vicidial server as origin
+header("Access-Control-Allow-Origin: http://192.168.1.80");
+
 
 $phone_no=mysqli_escape_string($con,$_POST['phone_no']);
 $name=mysqli_escape_string($con,$_POST['name']);
@@ -27,7 +27,7 @@ if (!$result)
 	  		
 	  		$sql="INSERT INTO user (name,email,phone_no,alt_phone,company,reg_by,sendto,lang)
 	  		VALUES
-			('".$name."','".$email."','".$phone_no."','".$alt_phone."','".$company."','".$reg_by."','".$reg_by."','".$lang."')";
+			('".$name."','".$email."','".$phone_no."','".$alt_phone."','".$company."','".$reg_by."','".$reg_by."','it')";
 
 			if (!mysqli_query($con,$sql))
 			  {

@@ -15,7 +15,8 @@
     }
     else
     {
-      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      //header('Location: ' . $_SERVER['HTTP_REFERER']);
+      echo '<script>window.history.go(-2);</script>'; exit();
     }
     mysqli_close($con);
   }
