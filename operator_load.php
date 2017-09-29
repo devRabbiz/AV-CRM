@@ -193,24 +193,33 @@ function notifyMe(user_id,name) {
             //console.log(data[i].name);
             //console.log(data[i].meet);
            // console.log(date);
+         
             datemeet = Date.parse(data[i].meet);
-            
+
+
+       			 dt = $.trim( $('.meet'+data[i].user_id).text() );
+
+				if ( dt === '' ){
+
+					 $('.meet'+data[i].user_id).html(data[i].meet);
+            	}
+             
+
             if(datemeet<datenow){
 
-                  console.log("time out");
+                 console.log("time out");
+                 $('.meet'+data[i].user_id).html('');
 
-                  notifyMe(data[i].user_id,data[i].name);
-                       y = window.top.outerHeight / 2 + window.top.screenY - ( 600 / 2);
-               x = window.top.outerWidth / 2 + window.top.screenX - ( 900 / 2);
+                notifyMe(data[i].user_id,data[i].name);
+                y = window.top.outerHeight / 2 + window.top.screenY - ( 600 / 2);
+               	x = window.top.outerWidth / 2 + window.top.screenX - ( 900 / 2);
 
-              view_user_win=new Array;
+            	view_user_win=new Array;
+				view_user_win[data[i].user_id]='view_user_win'+[data[i].user_id];
+                view_user_win[data[i].user_id] = window.open("operator_view_user_modal.php?user_id="+data[i].user_id, view_user_win[data[i].user_id] , "width=900,height=600,top="+y+",left="+x+"");
 
-              view_user_win[data[i].user_id]='view_user_win'+[data[i].user_id];
-                      view_user_win[data[i].user_id] = window.open("operator_view_user_modal.php?user_id="+data[i].user_id, view_user_win[data[i].user_id] , "width=900,height=600,top="+y+",left="+x+"");
-
-                      view_user_win[data[i].user_id].window.onbeforeunload = clearmeet(data[i].user_id);
-             
-              view_user_win[data[i].user_id].focus();
+                view_user_win[data[i].user_id].window.onbeforeunload = clearmeet(data[i].user_id);
+             	view_user_win[data[i].user_id].focus();
                   
                 }else{
                   
@@ -260,7 +269,7 @@ var data = JSON.parse(JSON.stringify(data));
        for (var i in data) 
             {
               if (i==0) {
-     $('.container1').append("<section onclick='removeNotificationAll()' class='notif'>  <a class='aa'>Dismiss All</a></section><section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> "); 
+     $('.container1').append("<section onclick='removeNotificationAll()' class='notif'>  <a class='aa' >Dismiss All</a></section><section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> "); 
    }  else {
 
      $('.container1').append("<section onclick='removeNotification("+data[i].id+")' class='notif notif-notice'> <h6 class='notif-title'>"+data[i].title+"</h6>  <p>"+data[i].text+"</p>  <a class='aa'>Click to dismiss</a></section> ");
@@ -464,29 +473,6 @@ body{
 }
 </style>
 
-
-<script type="text/javascript">
-  var originalLeave = $.fn.popover.Constructor.prototype.leave;
-$.fn.popover.Constructor.prototype.leave = function(obj){
-  var self = obj instanceof this.constructor ?
-    obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
-  var container, timeout;
-  originalLeave.call(this, obj);
-  if(obj.currentTarget) {
-    container = $(obj.currentTarget).siblings('.popover')
-    timeout = self.timeout;
-    container.one('mouseenter', function(){
-      //We entered the actual popover – call off the dogs
-      clearTimeout(timeout);
-      //Let's monitor popover content instead
-      container.one('mouseleave', function(){
-        $.fn.popover.Constructor.prototype.leave.call(self, self);
-      });
-    })
-  }
-};
-$('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'right', delay: {show: 10, hide: 10}});
-</script>
 
 
 <div id=meet_notification></div>
@@ -827,6 +813,7 @@ function main_chart(){
 <tr>
             <td><?php echo $row['id'] ?></td>
            <td> <a style="cursor: pointer;" id="atitle" onclick='show_profile(<?php echo $row['id'] ?>)'><?php echo $row['name'] ?></a></td>
+
           <td><?php echo $row['status'] ?></td>
            <td width="30%"><?php
 
@@ -867,8 +854,8 @@ function main_chart(){
             </td>
             <?php } }  } ?>
 
-           <td>  
-            <center>
+           <td >  
+            <center class="meet<?php echo $row['id'] ?>">
             <?php  
             if (isset($row['meet'])) {
               
@@ -935,61 +922,17 @@ $('#etab1').tableScroll({containerClass:'tablescroll'});
 });
 
 
-        function show_profile(id){
-        var linku="operator_view_user_modal.php?user_id="+id;
-      $("#shprofile").attr("src",linku);
+function show_profile(id){
+   var linku="operator_view_user_modal.php?user_id="+id;
+    $("#shprofile").attr("src",linku);
 
-        $('#showprofile').modal('toggle');
-      }
+    $('#showprofile').modal('toggle');
+}
 
 
 
 </script>
 
-<script type="text/javascript">
-      function done1 () {
-        var arr = [];
-        $('.done1').each(function () {
-          if($(this).is(':checked'))
-            arr.push($(this).attr('id'));
-        });
-        if(arr){
-          arr = JSON.stringify(arr);
-          $.post("done1.php",{arr:arr},function(data){
-            window.location.reload();
-          });
-        }
-
-      }
-         function notdone1 () {
-        var arr = [];
-        $('.notdone1').each(function () {
-          if($(this).is(':checked'))
-            arr.push($(this).attr('id'));
-        });
-        if(arr){
-          arr = JSON.stringify(arr);
-          $.post("notdone1.php",{arr:arr},function(data){
-            window.location.reload();
-          });
-        }
-
-      }
-          function nointeres1() {
-        var arr = [];
-        $('.nointeres1').each(function () {
-          if($(this).is(':checked'))
-            arr.push($(this).attr('id'));
-        });
-        if(arr){
-          arr = JSON.stringify(arr);
-          $.post("nointeres1.php",{arr:arr},function(data){
-            window.location.reload();
-          });
-        }
-
-      }
-      </script>
 
 
 

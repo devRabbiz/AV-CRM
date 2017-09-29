@@ -31,7 +31,7 @@
 			$leadName=mysqli_query($con,"SELECT name FROM user WHERE id='".(int)$value."'");
 			$leadName=mysqli_fetch_assoc($leadName);
 			
-			$string1="<a href=operator_view_user.php?user_id=".(int)$value.">".$leadName['name']."</a>";
+			$string1="<a href=operator_view_user_modal.php?user_id=".(int)$value.">".$leadName['name']."</a>";
 			$sendNotification=mysqli_query($con,"INSERT INTO notifications (`title`,`text`,`admin`) VALUES ('".$string1."','Lead Recived','".$_POST['operator']."')") or die(mysqli_error());
 
 
