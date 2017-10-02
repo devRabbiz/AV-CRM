@@ -93,7 +93,7 @@ include_once('../session.php');
 				$display = explode('-',$exp[1]); #cc390-00024989 explode me '-'
 				$kanali = $exp[1];					
 				$channel = $display[0];
-
+//phone login field as number
 $stmt="select DISTINCT user_id,full_name from vicidial_users where phone_login='".$channel."'";
 	if(!$rslt=mysqli_query($dbconfig,$stmt)){
 		echo "error:$stmt".mysqli_error();
@@ -103,67 +103,68 @@ $stmt="select DISTINCT user_id,full_name from vicidial_users where phone_login='
 		$user=strtolower($rows['user']);
 		$full_name=$rows['full_name'];
 
-		$custom_one=$rows['custom_one'];
+		//$custom_one=$rows['custom_one'];
 	
 //if($custom_one[''.$channel] != 'retention'){
 
-									if (isset($_SESSION['login_username']) && $row['dialed'][0]!='*') {
-										if ($row['dialed'][0]==8) {
+
+									if (isset($_SESSION['login_username']) && $row['dialed'][0]!='*') { // if is not monitoring and admin login
+										if ($row['dialed'][0]==8) { //vicidial session
 											echo '<div class="notice notice-warning">';
 											echo '<strong><a href="sip:*222'.$kanali.'@192.168.1.80">'.$full_name.'</a></strong>';
-										} else {
-									echo '<div class="notice notice-info">';
-									echo '<strong><a href="sip:*222'.$kanali.'@192.168.1.80">'.$full_name.'</a></strong>';
-								}
-							} elseif (isset($_SESSION['operator_username']) && $row['dialed'][0]!='*') {
-								echo '<div class="notice notice-info">';
-								echo '<strong><a href="sip:*222'.$kanali.'@192.168.1.80">'.$full_name.'</a></strong>';
-							}
+										} else { //direct number
+											echo '<div class="notice notice-info">';
+											echo '<strong><a href="sip:*222'.$kanali.'@192.168.1.80">'.$full_name.'</a></strong>';
+											}
+										} elseif (isset($_SESSION['operator_username']) && $row['dialed'][0]!='*') { // if is not monitoring and operATOR login
+											echo '<div class="notice notice-info">';
+											echo '<strong><a href="sip:*222'.$kanali.'@192.168.1.80">'.$full_name.'</a></strong>';
+										}
 				
 
 					
-								if (isset($_SESSION['login_username']) && $row['dialed'][0]!='*') {
-										if ($row['dialed'][0]==8) {
-											echo '<font style="cursor:initial;float: right;" class="text-muted"><span>Vicidial</span></font>';
-										} else {
-									echo '<font style="float:right" id="nr'.$kanali.'" class="text-muted"><span>'.$row['dialed'].'</span></font>';
-								}
-
-									
-								
-									
-								$dname=mysqli_query($con,"select * from user where phone_no='".$row['dialed']."' ");
-									while ($get=mysqli_fetch_assoc($dname)){
-										if (isset($get['id'])) {
-                                         //print_r("name");
-										 ?>
-										<script type="text/javascript">
-											
-											$( document ).ready(function() {
-											    $('#nr<?php echo $kanali ?>').remove();
-											});
-										</script>
+								if (isset($_SESSION['login_username']) && $row['dialed'][0]!='*') { //admin login
+												if ($row['dialed'][0]==8) {//vicidial
+													echo '<font style="cursor:initial;float: right;" class="text-muted"><span>Vicidial</span></font>';
+												} else {//number
+												echo '<font style="float:right" id="nr'.$kanali.'" class="text-muted"><span>'.$row['dialed'].'</span></font>';
+												}
 
 											
-										<font style="cursor:pointer;float: right;" onclick="top.show_profile(<?php echo $get['id'] ?>)" class="text-muted"> <?php echo $get['name'] ?></font>
+										
+											
+										$dname=mysqli_query($con,"select * from user where phone_no='".$row['dialed']."' ");//crm lead if exist
+											while ($get=mysqli_fetch_assoc($dname)){
+												if (isset($get['id'])) {
+		                                         //print_r("name");
+													 ?>
+													<script type="text/javascript">
+														
+															$( document ).ready(function() {
+														   		 $('#nr<?php echo $kanali ?>').remove();
+															});
+													</script>
+
+														
+													<font style="cursor:pointer;float: right;" onclick="top.show_profile(<?php echo $get['id'] ?>)" class="text-muted"> <?php echo $get['name'] ?></font>
 
 
-									<?php 	} else { 
-											//print_r("number");
-										?>
+											<?php 	} else { 
+													//print_r("number");
+												?>
 
-											<p class="text-muted"><span>'.$row['dialed'].'</span></p>
+													<p class="text-muted"><span>'.$row['dialed'].'</span></p>
 
-											<?php 
+													<?php 
 
-										}
-									}
-							} ?>
+												}
+											}
+								} 
+
+								?>
+
+
 								    </div>
-
-
-
-
 
 
 

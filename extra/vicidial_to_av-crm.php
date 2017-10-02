@@ -45,6 +45,12 @@ if (!$result)
 			  $array=mysqli_fetch_array($result);
 			  if($array)
 				  {
+
+							//send notificatiion
+							$sendNotification=mysqli_query($con,"INSERT INTO notifications (`title`,`text`,`admin`) VALUES ('".$company."','".$name."','".$reg_by."')") or die(mysqli_error());
+
+
+
 				  	$post_data = array('id' => $array[1],'presence'=>0);
 		  			 echo json_encode($post_data);
 		  			 $sql="INSERT INTO jobs (id,operator)
