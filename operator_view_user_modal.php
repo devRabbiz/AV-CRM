@@ -9,7 +9,7 @@ include_once 'functions.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin| L`Avenir</title>
+  <title>Operator| L`Avenir</title>
 
   <script type="text/javascript" src="/dist/js/jquery-3.1.1.min.js"></script>
 
@@ -55,7 +55,7 @@ $(document).ready(function(){
 </script>
     <div class="container-fluid">
 
-      <div class="admin-outer jumbotron" >
+      <div class="admin-outer jumbotron" style="padding-bottom: 0px;" >
 
         <?php
         if(isset($_SESSION['operator_username'])){
@@ -291,7 +291,7 @@ Leave a note:
 </div>
 
 
-<div style="overflow-y: scroll;height: 400px;">
+<div style="overflow-y: scroll;height: 200px;overflow-x: hidden;">
 </br>
 <ul class="timeline">
 <?php
@@ -312,7 +312,14 @@ Leave a note:
 
               <div class="timeline-item">
 
-                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?><button class="rmNote" onclick="removeNote(<?php echo $row['def'] ;?>)">X</button><?php echo" ".$row['admin'] ?></span>
+                <span class="time"><i class="fa fa-clock-o"></i> <?php echo $row['date'] ;?>
+                  <?php if ($_SESSION['operator_username']==$row['admin']): ?>
+                    <button class="rmNote" onclick="removeNote(<?php echo $row['def'] ;?>)">X</button>
+                  <?php endif ?>
+                  
+
+
+                  <?php echo" ".$row['admin'] ?></span>
 
                 <style type="text/css">
                   .rmNote{

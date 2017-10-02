@@ -42,11 +42,11 @@ include_once 'functions.php';
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
+<body >
 
     <div class="container-fluid">
 
-        <div class="admin-outer jumbotron">
+        <div class="admin-outer jumbotron" style="padding-bottom: 0px; ">
 
         <?php
         if(isset($_SESSION['login_username'])){
@@ -288,11 +288,6 @@ function sendto () {
 
 </div>
 
-<div  class="col-md-4">
-
-
-
-</div>
 
 <div class="col-md-4" >
 <?php 
@@ -380,7 +375,7 @@ Leave a note:
 </form>
 </div>
 
-<div style="overflow-y: scroll;height: 400px;">
+<div style="overflow-y: scroll;height: 200px;overflow-x: hidden;">
 
 <table width="100%">
 <?php
