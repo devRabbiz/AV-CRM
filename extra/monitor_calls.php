@@ -79,7 +79,7 @@ include_once('../session.php');
 	
   while($row = mysqli_fetch_assoc($result)){	
 
-  			$ext_match="/^([a-z]{7}[2])/"; //match abisnet2 for direct only use &&
+  			$ext_match="/^([a-z]{7})/"; //match abisnet2 or abisnet for direct only use &&
 
 			$match = "/^([A-Z]{3}?\/[0-9]{4}?\-[0-9a-z]{8})$/";
 			$match1="/^([A-Z]{3}?\/[0-9]{3}?\-[0-9a-z]{8})$/";
