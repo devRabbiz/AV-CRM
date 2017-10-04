@@ -1,3 +1,21 @@
+<!--
+
+alter dialed -> live_sip_channels; 
+User phone_login;
+
+/etc/asterisk/extensions.conf [general]:
+	;Channel spy config
+	exten => _*222XX!.,1,NoCDR
+	exten => _*222XX!.,n,Wait(1)
+	exten => _*222XX!.,n,ChanSpy(SIP/${EXTEN:4},q)
+	exten => _*222XX!.,n,Hangup
+
+/usr/share/AST_update.pl:
+	:898 $dialed
+	:965 or :991 dialed $dialed
+	
+-->
+
 <?php
 include_once('../db_connect.php');
 include_once('../session.php');
