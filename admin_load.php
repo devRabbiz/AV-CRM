@@ -461,7 +461,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
     <ul class="pagination pagination-md no-margin pull-right">
 
-                  <?php 
+    <?php 
                   $s11=$s22=$s33=$s44=$s55=$s66="";
               if ($pager=='web'){ 
                   if (isset($interval) and $interval!='lifetime')  { ?>
@@ -498,7 +498,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                         break;
                     }
                   } else  ?> 
-                <div style="float: right;height: 0px" <?php if ($interval=='custom'){ echo "onclick=window.location.href='".$_SERVER['HTTP_REFERER']."'"; } ?> >
+                <div  <?php if ($interval=='custom'){ echo "onclick=window.location.href='".$_SERVER['HTTP_REFERER']."'"; } ?> >
               <select id="interval_select" class="btn btn-default">
               <option <?php echo $s11 ?> >Lifetime</option>
               <option <?php echo $s22 ?> >Today</option>
