@@ -83,29 +83,29 @@ $(document).ready(function(){
             <div class="box-body">
             
             <div class="col-sm-6">
-            <h4 style="color:green;"><?php echo $array[8]?> </h4></span>
+            <h4 style="color:green;"><?php echo $array[9]?> </h4></span>
               <span><p></p></span>            
             </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
     
               
-<div class="col-sm-5 col-xs-6 tital " >Full Name:</div><div class="col-sm-7 col-xs-6 "><?php echo $array[8]?></div>
+<div class="col-sm-5 col-xs-6 tital " >Full Name:</div><div class="col-sm-7 col-xs-6 "><?php echo $array[9]?></div>
      <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7"> <?php echo $array[9]?></div>
+<div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7"> <?php echo $array[10]?></div>
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
 
-<div class="col-sm-5 col-xs-6 tital " >Registered:</div><div class="col-sm-7"><?php echo $array[11]?></div>
+<div class="col-sm-5 col-xs-6 tital " >Registered:</div><div class="col-sm-7"><?php echo $array[12]?></div>
 
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Phone Number:</div><div class="col-sm-7"><?php echo $array[10]?>
-  <a id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[10]; ?>'" > <img src="/images/phone.png" height="30px">
+<div class="col-sm-5 col-xs-6 tital " >Phone Number:</div><div class="col-sm-7"><?php echo $array[11]?>
+  <a id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[11]; ?>'" > <img src="/images/phone.png" height="30px">
                         </a>
 </div>
 
