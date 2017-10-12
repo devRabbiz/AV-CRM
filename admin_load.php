@@ -714,7 +714,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           
           
         
-           <td><?php echo $row['op_status'] ?></td>
+           <td style="font-stretch: condensed; "><?php echo $row['op_status'] ?></td>
             <?php if ($pager=='operator') { ?>
             <td><?php echo $row['reg_by']; ?></td>
             <?php } ?>
