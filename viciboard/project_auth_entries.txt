@@ -1,0 +1,2 @@
+ADMIN|FAIL|2017-09-20 18:52:20||BAD|192.168.1.30|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36|
+ADMIN|FAIL|2017-09-20 18:52:27||BAD|192.168.1.30|Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36|
