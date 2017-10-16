@@ -607,7 +607,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
  <table id="etab1" class="table table-striped table-hover"  width="100%">
 
           <tr >
-            <th style="width: 0px;position: absolute;"><center><input  style="vertical-align: middle; margin: 0 0 0 2px !important;" type="checkbox" id="select_all" /></center></th>
+            <th><center><input  style="vertical-align: middle; margin: 0 0 0 2px !important;" type="checkbox" id="select_all" /></center></th>
             <th ><strong>Name</strong></th>
             <th><strong>Email</strong></th>
             <th><strong>Phone</strong></th>
