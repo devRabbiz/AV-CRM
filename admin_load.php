@@ -444,12 +444,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
             <a href="export.php?export=new" class='btn btn-default btnf'>Download Newest</a>
 
-             <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create New</button>
+             <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create Lead</button>
 
 
              <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
+             <button type="button" class="btn  btn-warning" data-toggle="modal" data-target="#createUser">Create User</button>
              <button type="button" class="btn  btn-info" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
              <button type="button" class="btn  btn-info" onclick="main_chart()">Trading Chart</button>
+
 
 
 
@@ -946,6 +948,25 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
       </div>
       <div class="modal-body">
       <iframe style="width: 100%;height: 500px;" scrolling="yes" frameborder='0' id='shprofile' src="view_user_modal.php?user_id="></iframe>
+        
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="createUser" class="modal fade" role="dialog" >
+  <div  class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+      <iframe  frameborder='0' style="width: 100%;height: 290px;"   src="create_users.php"></iframe>
         
      </div>
       <div class="modal-footer">
