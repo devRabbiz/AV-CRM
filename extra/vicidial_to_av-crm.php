@@ -8,7 +8,7 @@ header("Access-Control-Allow-Origin: http://192.168.1.80");
 $phone_check=mysqli_escape_string($con,$_POST['phone_no']);
 $phone_no='39'.mysqli_escape_string($con,$_POST['phone_no']);
 $name=mysqli_escape_string($con,$_POST['name']);
-if (if (strlen(trim($name)) == 0)) {
+if (strlen(trim($name)) == 0) {
 	$name='No Name';
 }
 $email=mysqli_escape_string($con,$_POST['email']);
