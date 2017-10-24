@@ -6,13 +6,13 @@
 header("Access-Control-Allow-Origin: http://192.168.1.80");
 
 $phone_check=mysqli_escape_string($con,$_POST['phone_no']);
-$phone_no='39'.mysqli_escape_string($con,$_POST['phone_no']);
+$phone_no=mysqli_escape_string($con,$_POST['phone_no']);
 $name=mysqli_escape_string($con,$_POST['name']);
 if (strlen(trim($name)) == 0) {
 	$name='No Name';
 }
 $email=mysqli_escape_string($con,$_POST['email']);
-$alt_phone='39'.mysqli_escape_string($con,$_POST['alt_phone']);
+$alt_phone=mysqli_escape_string($con,$_POST['alt_phone']);
 $company=mysqli_escape_string($con,$_POST['company']);
 $reg_by=mysqli_escape_string($con,$_POST['reg_by']);
 
@@ -84,5 +84,3 @@ if (!$result)
   	}
 mysqli_close($con);
 ?>
-
-
