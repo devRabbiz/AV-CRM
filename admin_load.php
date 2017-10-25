@@ -1017,14 +1017,6 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
 }
           </style>
 
-         <script type="text/javascript">
-  $(function() {
-     $(".file_sel").change(function (){
-       $('.selected_file').text($('#csv')[0].files[0].name);
-     });
-  });
-</script>
-
           <form action="uploadData/upload.php" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
             Choose your CSV file: <br /> 
             <table border="1">
