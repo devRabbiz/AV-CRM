@@ -699,7 +699,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
            </td>
            <td>
-            <?php if(is_null($row['sendto'] )){?>
+            <?php if(is_null($row['sendto'] ) or $row['sendto']=='' ){?>
           
             <?php } else{  ?> 
             

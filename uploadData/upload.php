@@ -22,7 +22,7 @@ if ($_FILES[csv][size] > 0) {
     do { 
 
          
-          $q=mysqli_query($con,"SELECT count(*) as total1 FROM user WHERE phone_no ='39".$data[2]."'  ");
+          $q=mysqli_query($con,"SELECT count(*) as total1 FROM user WHERE phone_no ='".$data[2]."'  ");
            $data1=mysqli_fetch_assoc($q);      
                   
 
@@ -43,7 +43,7 @@ if ($_FILES[csv][size] > 0) {
                 ( 
                     '".addslashes($data[0])."', 
                     '".addslashes($data[1])."', 
-                    '39".addslashes($data[2])."',
+                    '".addslashes($data[2])."',
                     '".addslashes($data[3])."',
                     'list',
                     '".$lang."',
