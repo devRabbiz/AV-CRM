@@ -245,37 +245,20 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           </a>
         </li>
 
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-list"></i> <span>Lists</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <?php  ?>
-          <ul class="treeview-menu">
-            <li><a href="#" data-toggle="modal" data-target="#uploadmodal"><i class="fa fa-list"></i>Create New</a></li>
-              <?php 
-               // require_once('db_connect.php');
-                  $res=mysqli_query($con,"SELECT * FROM list_names");
-                 // print_r($res);
-                  $numrow=mysqli_num_rows($res);
-                   if ($numrow==0){
-
-        echo "No Lists";
-
-
-      } else {
-
-      while($rowr = $res->fetch_assoc()){ ?>
-            
-                <li><a href="view_list.php?list_name=<?php echo $rowr['name']; ?>"><i class="fa fa-list-alt"></i> <?php echo $rowr['name']; ?></a></li>
-
-              <?php } } ?>
-               <li><a href="lists.php"><i class="fa  fa-table"></i>View Details</a></li>
-           
-          </ul>
-        </li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-list"></i> <span>Lists</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <?php  ?>
+                <ul class="treeview-menu">
+                  <li><a href="#" data-toggle="modal" data-target="#uploadmodal"><i class="fa fa-list"></i>Create New</a></li>
+                  <li><a href="<?php echo $_SERVER['PHP_SELF'].'?pager=lists'?>"><i class="fa  fa-table"></i>View Details</a></li>
+                 
+                </ul>
+              </li>
 
         
             </li>

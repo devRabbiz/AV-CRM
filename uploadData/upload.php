@@ -30,7 +30,7 @@ if ($_FILES[csv][size] > 0) {
             $data2=mysqli_fetch_assoc($q2); 
             
             if($data2['total2']==0) {
-                    mysqli_query($con,"REPLACE INTO list_names(name) VALUES('".$list_name."') ");
+                    mysqli_query($con,"REPLACE INTO list_names(name,lang) VALUES('".$list_name."','".$lang."') ");
             }          
                     
         if ($data[0]) {

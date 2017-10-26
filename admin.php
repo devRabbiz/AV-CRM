@@ -80,8 +80,6 @@ if (!isset($_GET['pager'])) {
               include 'lists.php'; 
             break;
 
-
-
             case 'potential':
             $_GET['pager']='potential';
               include 'admin_load.php'; 
@@ -119,7 +117,10 @@ if (!isset($_GET['pager'])) {
             $_GET['pager']='no_status';
               include 'admin_load.php'; 
             break;
-
+            case 'view_list':
+            $_GET['pager']='view_list';
+              include 'view_list.php'; 
+            break;
             
           default:
             
