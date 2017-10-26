@@ -53,10 +53,9 @@ function admin_notifications($con,$login_username){
 
 
 
-
 //get total 
 function get_total($con){
-	return $a=mysqli_query($con,"SELECT count(*) as total from user");
+	return $a=mysqli_query($con,"SELECT count(*) as total from user where lang='".$lang."'");
 }
 
 //admin jobs

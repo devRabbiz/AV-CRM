@@ -216,22 +216,27 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
         } else{
           $pager=$_GET['pager'];
         }
-  $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8=$ac9=$ac10=$ac11="";
+  $ac1=$ac2=$ac3=$ac4=$ac5=$ac6=$ac7=$ac0=$ac8=$ac9=$ac10=$ac11=$ac12="";
         
         switch ($pager) {
 
           case 'home': 
-           $r = mysqli_query($con,"SELECT * FROM user  WHERE  (lang='".$lang."') AND  (sendto IS NULL or sendto='' AND sec='1' AND web!=0)  ORDER BY id DESC LIMIT $startrow, 30  ");
+
+           $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND (sendto IS NULL or sendto='' AND sec='1' AND web!=0)  ORDER BY id DESC LIMIT $startrow, 30  ");
+
            $ac1="active";
             break;
 
           case 'sec':
-          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND  (sec='0' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+
+          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND (sec='0' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+
           $ac2="active";
           break;
 
           case 'ftd':
-          $r =mysqli_query($con,"SELECT u.* FROM user AS u LEFT JOIN admin_jobs AS at ON u.id = at.def WHERE (u.lang='".$lang."') AND (u.sec='3' OR u.op_status='Deposit')   ORDER BY(at.meet) ,at.meet ASC,u.date DESC LIMIT $startrow, 30  ");
+
+          $r =mysqli_query($con,"SELECT u.* FROM user AS u LEFT JOIN admin_jobs AS at ON u.id = at.def WHERE (u.lang='".$lang."') AND ( u.sec='3' OR u.op_status='Deposit') ORDER BY(at.meet) ,at.meet ASC,u.date DESC LIMIT $startrow, 30  ");
 
           $ac3="active";
           break;
@@ -247,16 +252,22 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           break;
 
           case 'callback':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND   sec='4' AND web=1   ORDER BY id DESC LIMIT $startrow, 30  ");
+
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND ( sec='4' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+
                 $ac6="active";
           break;
 
-
-
           case 'all':
-                $r=mysqli_query($con,"SELECT * FROM user where  lang='".$lang."' AND   (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, 30  ");//all but web and ftd
+
+                $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."') AND  (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, 30  ");//all but web and ftd
+
                 $ac8="active";
           break;
+          case 'view_list':
+          		$r=mysqli_query($con,"SELECT * FROM user WHERE list_name='".$_GET['list_name']."' ORDER BY id DESC LIMIT $startrow, 30  ");
+          		$ac12='active';
+          	break;
           case 'web':
              
                 $ac11="active";
@@ -267,18 +278,19 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                   }
                 switch ($interval) {
                   case 'today':
-                    $r=mysqli_query($con,"SELECT * FROM user where  lang='".$lang."' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
+
+                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
 
                     break;
                   case 'yesterday':
-                   // $r=mysqli_query($con,"SELECT * FROM user where web=0 AND DATE(`date`) = CURDATE()-1 ORDER BY id DESC  ");
-                   $r=mysqli_query($con,"SELECT * FROM user where  lang='".$lang."' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND `date` < CURDATE() ORDER BY id DESC ");
+                   $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND `date` < CURDATE() ORDER BY id DESC ");
                     break;
                   case 'lastweek':
-                    $r=mysqli_query($con,"SELECT * FROM user where  lang='".$lang."' AND web=0 AND  `date` >= DATE(NOW()) - INTERVAL 7 DAY ORDER BY id DESC ");
+                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND  `date` >= DATE(NOW()) - INTERVAL 7 DAY ORDER BY id DESC ");
                     break;
                     case 'thismonth':
-                     $r=mysqli_query($con,"SELECT * FROM user where  lang='".$lang."' AND web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(CURDATE())-1 DAY) ORDER BY id DESC ");
+                     $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(CURDATE())-1 DAY) ORDER BY id DESC ");
+
                      
                       break;
                       case 'custom':
@@ -286,11 +298,13 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                       $date_range=explode('-', $date_range);
                       $dateF = date("Y-m-d", strtotime($date_range[0]));
                       $dateT = date("Y-m-d", strtotime($date_range[1]));
-                      $r=mysqli_query($con,"SELECT * FROM user where  lang='".$lang."' AND  web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
+
+                      $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
                         break;
                         case 'lifetime':
-                             $r=mysqli_query($con,"SELECT * FROM user where  lang='".$lang."' AND web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
-                              $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0  ORDER BY id DESC  ");
+                             $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
+                              $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0  ORDER BY id DESC  ");
+
                           break;
                   //ktu
                   default:
@@ -302,37 +316,38 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
             break;
 
 
-
           case 'potential':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND op_status='Potential'  ORDER BY id DESC LIMIT $startrow, 30  ");
+
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Potential'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'follow_up':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND op_status='Follow Up'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Follow Up'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND op_status='Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'not_interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE   lang='".$lang."' AND sec='5' OR op_status='Non Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND  sec='5' OR op_status='Non Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'no_answer':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND op_status='Non Answer'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Non Answer'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'call_failed':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND op_status='Call Failed'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Call Failed'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'secretary':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND op_status='Secretary'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Secretary'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'no_status':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE  lang='".$lang."' AND op_status='No Status'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='No Status'  ORDER BY id DESC LIMIT $startrow, 30  ");
+
                 
           break;
 
@@ -564,9 +579,30 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
             <?php } ?>
 
-    <li id="prev1"><?php $prev = $startrow - 30; if ($prev >= 0)echo '<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>'; 
-    else echo '<a href="#"class="previous disabled btnf">Previous</a>'?> </li>
-    <li id="next1"><?php echo '<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';     ?></li>
+    <li id="prev1">
+    	<?php $prev = $startrow - 30; if ($prev >= 0) { 	
+    	if (isset($_GET['list_name'])) {
+    		$href='<a  href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
+    		} else{
+    			    $href='<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
+    		}
+    		echo $href;
+    	} else{ 
+
+    	echo '<a href="#"class="previous disabled btnf">Previous</a>';
+    }
+
+    	?> </li>
+
+    <li id="next1"><?php 
+    	if (isset($_GET['list_name'])) {
+    	   	$href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+    	   } else{
+    	   	    $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+    	   }
+    	echo $href2;   
+
+    ?></li>
 
     </ul>
 

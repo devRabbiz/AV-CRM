@@ -1,10 +1,16 @@
 <?php 
-if (isset($_SESSION['login_username'])) { 
-  $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
-  $lang=$lang_check->fetch_assoc();
-  $lang=$lang['lang'];
-  $result=mysqli_query($con,"SELECT DISTINCT name FROM list_names where lang='".$lang."' ");
+
+
+    if (isset($_SESSION['login_username'])) { 
+    $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
+      $lang=$lang_check->fetch_assoc();
+      $lang=$lang['lang'];
+      
+    $result=mysqli_query($con,"SELECT * FROM list_names where lang='".$lang."' ");
+    $ac12='active';
 ?>
+
+
 
 
     <div class="well col-md-12">
