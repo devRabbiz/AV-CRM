@@ -110,7 +110,7 @@ $(document).ready(function(){
 <div class="bot-border"></div>
 
 <div class="col-sm-5 col-xs-6 tital " >Phone Number:</div><div class="col-sm-7 callbtns"><?php// echo $array[11]?>
-  <a id="callbtn" class="callbtn1" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $prefix.$array[11]; ?>'" >  <img class="imgbtn" src="/images/phone.png" height="30px"> </a>
+  <a id="callbtn" class="callbtn1" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:*123<?php echo(base64_encode($prefix.$array[11])); ?>'" >  <img class="imgbtn" src="/images/phone.png" height="30px"> </a>
 
 </div>
 
