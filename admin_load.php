@@ -455,9 +455,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
       <td >
 
 
-            <a href="export.php?export=all" class='btn btn-default btnf'>Download all</a>
+            <a href="export.php?exportall" class='btn btn-default btnf'>Download all</a>
 
-            <a href="export.php?export=new" class='btn btn-default btnf'>Download Newest</a>
+            <a href="export.php?exportnew" class='btn btn-default btnf'>Download Newest</a>
 
              <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create Lead</button>
 
