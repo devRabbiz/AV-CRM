@@ -248,7 +248,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           
         <li class=" treeview <?php echo " ".$ac12." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=lists'?>">
-            <i class="fa fa-list"></i> <span>Lists</span>
+            <i class="fa fa-th-list"></i> <span>Lists</span>
           </a>
         </li>
         <?php endif ?>
@@ -256,7 +256,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           
             <li class=" treeview <?php echo " ".$ac12." "; ?>" >
             <a href="#" onclick="window.location.href='?pager=lists'">
-              <i class="fa fa-dashboard"></i> <span>Lista</span>
+              <i class="fa fa-th-list"></i> <span>Lists</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

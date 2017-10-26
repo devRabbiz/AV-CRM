@@ -128,11 +128,6 @@ if (!isset($_GET['pager'])) {
               case 'view_list':
             $_GET['pager']='view_list';
               include 'admin_load.php'; 
-
-            case 'view_list':
-            $_GET['pager']='view_list';
-              include 'view_list.php'; 
-
             break;
             
           default:

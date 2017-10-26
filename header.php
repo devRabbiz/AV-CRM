@@ -173,6 +173,23 @@ include_once 'functions.php';
        <div style="color:white;text-align: center;">
        <?php if (isset($_SESSION['login_username'])): ?>
        <a class="btn btn-primary" data-toggle="modal" data-target="#sendNotification">Send Notification</a>
+       <?php endif ?>
+       <a class="btn btn-default"  href="logout.php">Logout</a>
+
+       </div>
+        
+        <!-- /.control-sidebar-menu -->
+
+<?php } ?>
+      </div>
+    
+    </div>
+
+  </aside>
+  <!-- /.control-sidebar -->
+
+       <?php if (isset($_SESSION['login_username'])): ?>
+  
         <div id="sendNotification" class="modal fade" role="dialog">
   <div class="modal-dialog" style="width: 900px !important">
 
@@ -196,17 +213,3 @@ include_once 'functions.php';
 
 
        <?php endif ?>
-       <a class="btn btn-default"  href="logout.php">Logout</a>
-
-       </div>
-        
-        <!-- /.control-sidebar-menu -->
-
-<?php } ?>
-      </div>
-    
-    </div>
-
-  </aside>
-  <!-- /.control-sidebar -->
-
