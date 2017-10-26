@@ -244,15 +244,35 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
             <i class="fa fa-users"></i> <span>Operators</span>
           </a>
         </li>
-
+        <?php if (!isset($_GET['list_name'])): ?>
+          
         <li class=" treeview <?php echo " ".$ac12." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=lists'?>">
             <i class="fa fa-list"></i> <span>Lists</span>
           </a>
         </li>
+        <?php endif ?>
+        <?php if (isset($_GET['list_name'])): ?>
+          
+            <li class=" treeview <?php echo " ".$ac12." "; ?>" >
+            <a href="#" onclick="window.location.href='?pager=lists'">
+              <i class="fa fa-dashboard"></i> <span>Lista</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+
+          <li class=" treeview <?php echo " ".$ac12." "; ?>">
+            <a >
+              <i class="fa fa-list"></i> <span><?php echo $_GET['list_name']; ?></span>
+            </a>
+                </li>
 
 
-
+            </ul>
+        </li>
+         <?php endif ?>
         
             </li>
             
