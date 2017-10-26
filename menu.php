@@ -244,11 +244,13 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
             <i class="fa fa-users"></i> <span>Operators</span>
           </a>
         </li>
+
         <li class=" treeview <?php echo " ".$ac12." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=lists'?>">
             <i class="fa fa-list"></i> <span>Lists</span>
           </a>
         </li>
+
 
 
         

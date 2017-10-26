@@ -1,57 +1,8 @@
 <?php
-include_once 'include/header.php';
-
-?> 
-
-
-
-
-
-
-
-
-<div>
-    <div class="container-fluid" id="home">
-      <div class="row admin-outer">
- 
-
-
-
-
-        <?php if(isset($_SESSION['admin-logout'])){?>
-      <div class='alert alert-danger alert-dissmissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><?php echo $_SESSION['admin-logout']?></div>
-      <?php unset($_SESSION['admin-logout']);}?>
-      <?php if(isset($_SESSION['admin-invalid'])){?>
-      <div class='alert alert-danger alert-dissmissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><?php echo $_SESSION['admin-invalid']?></div>
-      <?php unset($_SESSION['admin-invalid']);}?>
-        <?php
     if (isset($_SESSION['login_username'])) { 
       $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
       $lang=$lang_check->fetch_assoc();
       $lang=$lang['lang'];
-  
-      ?>
-
-
-
-<ul class="nav nav-tabs nav-justified" style=" width: 1px;">
-  <li role="presentation"  ><a style="color: #05147e;font-weight: bold;float: left;"  href="admin.php?pager=home">Trader</a></li>
-  <li role="presentation" ><a style="color: #05147e;font-weight: bold;float: left;" href="admin.php?pager=sec">Finish</a></li>
-    <li role="presentation" ><a style="color: #05147e;font-weight: bold;float: left;" href="admin.php?pager=ftd">FTD</a></li>
-    <li role="presentation" ><a style="color: #05147e;font-weight: bold;float: left;" href="admin.php?pager=op_leads">Op.Leads</a></li>
-  <li role="presentation" ><a style="color: #05147e;font-weight: bold;float: left" href="admin_meet.php">Meeting</a></li>
-      <li role="presentation" ><a style="color: #05147e;font-weight: bold;float: left;" href="admin.php?pager=operator">Reg.Operators</a></li>
-  <li role="presentation" ><a style="color: #05147e;font-weight: bold;float: left;" href="list_operator.php">Operators</a></li>
-  <li role="presentation" class="active"><a style="color: #05147e;font-weight: bold;float: left;" href="lists.php">Lists</a></li>
-</ul>
-
-
-
-
-
-
-
-<?php
 
 
 if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
@@ -68,8 +19,6 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
          $r=mysqli_query($con,"SELECT * FROM user WHERE list_name='".$_GET['list_name']."' ORDER BY id DESC LIMIT $startrow, 30  ");
 }
  ?> 
-
-
 
 
 
@@ -648,7 +597,7 @@ if (isset($_GET['success'])){ ?>
 <?php 
 } 
 
-  include 'include/footer.php';
+
 ?>
 
 

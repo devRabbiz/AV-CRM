@@ -52,6 +52,7 @@ function admin_notifications($con,$login_username){
 }
 
 
+
 //get total 
 function get_total($con){
 	return $a=mysqli_query($con,"SELECT count(*) as total from user where lang='".$lang."'");
@@ -65,7 +66,7 @@ function admin_jobs($con,$id,$login_username){
 //select operator_modal
 function select_op_modal($con){
 
-	return $a=mysqli_query($con,"SELECT * FROM operator");
+	return $a=mysqli_query($con,"SELECT * FROM operator where lang='".$lang."'");
 }
 
 

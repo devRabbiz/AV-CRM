@@ -73,6 +73,13 @@ if (!isset($_GET['pager'])) {
               include 'list_operator_load.php'; 
             break;
 
+
+            case 'lists':
+            $_GET['pager']='lists';
+              include 'lists.php'; 
+            break;
+
+
             case 'potential':
             $_GET['pager']='potential';
               include 'admin_load.php'; 
@@ -113,6 +120,7 @@ if (!isset($_GET['pager'])) {
               include 'admin_load.php'; 
             break;
 
+
               case 'lists':
             $_GET['pager']='lists';
               include 'lists.php'; 
@@ -120,6 +128,11 @@ if (!isset($_GET['pager'])) {
               case 'view_list':
             $_GET['pager']='view_list';
               include 'admin_load.php'; 
+
+            case 'view_list':
+            $_GET['pager']='view_list';
+              include 'view_list.php'; 
+
             break;
             
           default:

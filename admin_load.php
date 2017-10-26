@@ -204,7 +204,6 @@ strong {
       $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
       $lang=$lang_check->fetch_assoc();
       $lang=$lang['lang'];
-
 if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
   $startrow = 0;
@@ -222,17 +221,23 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
         switch ($pager) {
 
           case 'home': 
+
            $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND (sendto IS NULL or sendto='' AND sec='1' AND web!=0)  ORDER BY id DESC LIMIT $startrow, 30  ");
+
            $ac1="active";
             break;
 
           case 'sec':
+
           $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND (sec='0' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+
           $ac2="active";
           break;
 
           case 'ftd':
+
           $r =mysqli_query($con,"SELECT u.* FROM user AS u LEFT JOIN admin_jobs AS at ON u.id = at.def WHERE (u.lang='".$lang."') AND ( u.sec='3' OR u.op_status='Deposit') ORDER BY(at.meet) ,at.meet ASC,u.date DESC LIMIT $startrow, 30  ");
+
           $ac3="active";
           break;
 
@@ -247,12 +252,16 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           break;
 
           case 'callback':
+
                 $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND ( sec='4' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+
                 $ac6="active";
           break;
 
           case 'all':
+
                 $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."') AND  (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, 30  ");//all but web and ftd
+
                 $ac8="active";
           break;
           case 'view_list':
@@ -269,6 +278,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                   }
                 switch ($interval) {
                   case 'today':
+
                     $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
 
                     break;
@@ -280,6 +290,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                     break;
                     case 'thismonth':
                      $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(CURDATE())-1 DAY) ORDER BY id DESC ");
+
                      
                       break;
                       case 'custom':
@@ -287,11 +298,13 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                       $date_range=explode('-', $date_range);
                       $dateF = date("Y-m-d", strtotime($date_range[0]));
                       $dateT = date("Y-m-d", strtotime($date_range[1]));
+
                       $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
                         break;
                         case 'lifetime':
                              $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
                               $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0  ORDER BY id DESC  ");
+
                           break;
                   //ktu
                   default:
@@ -304,6 +317,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 
           case 'potential':
+
                 $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Potential'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
@@ -333,6 +347,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           break;
           case 'no_status':
                 $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='No Status'  ORDER BY id DESC LIMIT $startrow, 30  ");
+
                 
           break;
 

@@ -1,5 +1,6 @@
 <?php 
 
+
     if (isset($_SESSION['login_username'])) { 
     $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
       $lang=$lang_check->fetch_assoc();
