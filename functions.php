@@ -51,23 +51,10 @@ function admin_notifications($con,$login_username){
 	return $a=mysqli_query($con,"SELECT * FROM admin_jobs WHERE admin='".$login_username."'");
 }
 
-//case home
-function admin_case_home($con,$login_username,$startrow){
 
-	return $a=mysqli_query($con,"SELECT * FROM user  WHERE sendto IS NULL or sendto='' AND sec='1' AND web!=0  ORDER BY id DESC LIMIT $startrow, 30  ");
-}
-
-function admin_case_sec($con,$login_username,$startrow){
-
-	return $a=mysqli_query($con,"SELECT * FROM user  WHERE  sec='0' AND web=1   ORDER BY id DESC LIMIT $startrow, 30  ");
-}
-function admin_case_ftd($con,$login_username,$startrow){
-
-	return $a=mysqli_query($con,"SELECT u.* FROM user AS u LEFT JOIN admin_jobs AS at ON u.id = at.def WHERE u.sec='3' OR u.op_status='Deposit'   ORDER BY(at.meet) ,at.meet ASC,u.date DESC LIMIT $startrow, 30  ");
-}
 //get total 
 function get_total($con){
-	return $a=mysqli_query($con,"SELECT count(*) as total from user");
+	return $a=mysqli_query($con,"SELECT count(*) as total from user where lang='".$lang."'");
 }
 
 //admin jobs

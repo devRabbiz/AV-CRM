@@ -2,9 +2,16 @@
 require_once 'db_connect.php';
 require_once 'session.php';
 include_once 'functions.php';
+      $lang_check=mysqli_query($con,"SELECT lang FROM operator WHERE username='".$_SESSION['operator_username']."'");
+      $lang=$lang_check->fetch_assoc();
+      $lang=$lang['lang'];
+
+      $prefix_check=mysqli_query($con,"SELECT line_prefix FROM config WHERE lang='".$lang."'");
+      $prefix=$prefix_check->fetch_assoc();
+      $prefix=$prefix['line_prefix'];
 ?>
- 
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -39,10 +46,8 @@ include_once 'functions.php';
   <script src="dist/js/moment.js"></script>
   <script src="dist/js/clipboard.min.js"></script>
   <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
-        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
+  <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <script type="text/javascript">
@@ -104,9 +109,9 @@ $(document).ready(function(){
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Phone Number:</div><div class="col-sm-7"><?php echo $array[11]?>
-  <a id="callbtn" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $array[11]; ?>'" >  <img src="/images/phone.png" height="30px">
-                        </a>
+<div class="col-sm-5 col-xs-6 tital " >Phone Number:</div><div class="col-sm-7 callbtns"><?php// echo $array[11]?>
+  <a id="callbtn" class="callbtn1" style="color:black;text-decoration: none;cursor: pointer;" onclick="window.location.href='sip:<?php echo $prefix.$array[11]; ?>'" >  <img class="imgbtn" src="/images/phone.png" height="30px"> </a>
+
 </div>
 
   <div class="clearfix"></div>
@@ -156,8 +161,10 @@ $(document).ready(function(){
 });       
               </script> 
        
-         <style type="text/css">
-                         input.hidden {
+<style type="text/css">
+
+
+input.hidden {
     position: absolute;
     left: -9999px;
 }
@@ -370,17 +377,21 @@ Leave a note:
         ?>
 <script type="text/javascript">
 
-  $('#callbtn').click(function(){   
-      $.ajax({    
 
-          url : 'operator_count_calls.php',        
-          type : 'post',     
-
-            console.log(data);          
-          }           
-      });         
- });
-
+  $('#callbtn').click(function(){
+    $.ajax({
+        url : 'operator_count_calls.php', 
+        type : 'post',
+        data:{
+          id:"<?php echo (int)$_GET['user_id'] ?>",
+          admin:"<?php echo $_SESSION['operator_username'] ?>"
+          
+             },  
+        success : function(data){
+         // console.log(data);
+        }
+    });
+});
 
 
 function removeNote(def){
@@ -415,4 +426,6 @@ function removeNote(def){
       }
      
     </style>
+
+
 </html>
