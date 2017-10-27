@@ -212,7 +212,7 @@ if (isset($row['meet'])){
   <span class="alert alert-info"><?php echo $time; ?></span>
             <span class="alert alert-success"><?php echo $date ?></span>
              
- <a style='position:absolute;right:17px;' class="btn btn-warning" href="operator_view_user_meet_edit.php?user_id=<?php echo $_GET['user_id']; ?>">Edit</a>
+ <!--<a style='position:absolute;right:17px;' class="btn btn-warning" href="operator_view_user_meet_edit.php?user_id=<?php //echo $_GET['user_id']; ?>">Edit</a>-->
 
 </div>
 </center>
