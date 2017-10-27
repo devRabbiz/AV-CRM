@@ -20,4 +20,5 @@
   - Picture Upload
   - Operator Stats
   - Dedicated Web Category
+  - Multi language operators
 
