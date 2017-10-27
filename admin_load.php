@@ -222,54 +222,54 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
           case 'home': 
 
-           $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND (sendto IS NULL or sendto='' AND sec='1' AND web!=0)  ORDER BY id DESC LIMIT $startrow, 30  ");
+           $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sendto IS NULL or sendto='') AND (sec='1' AND web!=0  )   ORDER BY id DESC LIMIT $startrow, 30  ");
 
            $ac1="active";
             break;
 
           case 'sec':
 
-          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND (sec='0' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sec='0' AND web=1 )   ORDER BY id DESC LIMIT $startrow, 30  ");
 
           $ac2="active";
           break;
 
           case 'ftd':
 
-          $r =mysqli_query($con,"SELECT u.* FROM user AS u LEFT JOIN admin_jobs AS at ON u.id = at.def WHERE (u.lang='".$lang."') AND ( u.sec='3' OR u.op_status='Deposit') ORDER BY(at.meet) ,at.meet ASC,u.date DESC LIMIT $startrow, 30  ");
+          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND ( sec='3' OR op_status='Deposit') ORDER BY id DESC  LIMIT $startrow, 30  ");
 
           $ac3="active";
           break;
 
           case 'operator':
-            $r = mysqli_query($con,"SELECT * FROM user WHERE  lang='".$lang."' AND user.reg_by!='admin'  AND user.reg_by!='gabriele' AND user.reg_by!='adi'  AND user.reg_by!='it'  AND user.reg_by!='cristianabate' AND user.reg_by!='list' AND user.reg_by!='mariostein'  ORDER BY date DESC LIMIT $startrow, 30 ");
+            $r = mysqli_query($con,"SELECT * FROM user WHERE  lang='".$lang."'  AND op_status !='Deposit' AND user.reg_by!='admin'  AND user.reg_by!='gabriele' AND user.reg_by!='adi'  AND user.reg_by!='it'  AND user.reg_by!='cristianabate' AND user.reg_by!='list' AND user.reg_by!='mariostein'  ORDER BY date DESC LIMIT $startrow, 30 ");
             $ac4="active";
           break;
 
           case 'op_leads':
-             $r = mysqli_query($con,"SELECT * FROM user WHERE  sendto IS NOT NULL AND lang='".$lang."'  AND reg_by='".$_SESSION['login_username']."'   ORDER BY date DESC LIMIT $startrow, 30 ");
+             $r = mysqli_query($con,"SELECT * FROM user WHERE  sendto IS NOT NULL  AND op_status !='Deposit'   AND op_status !='Deposit' AND lang='".$lang."'  AND reg_by='".$_SESSION['login_username']."'   ORDER BY date DESC LIMIT $startrow, 30 ");
              $ac5="active";
           break;
 
           case 'callback':
 
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND ( sec='4' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."'  AND op_status !='Deposit') AND ( sec='4' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
 
                 $ac6="active";
           break;
 
           case 'all':
 
-                $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."') AND  (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, 30  ");//all but web and ftd
+                $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."'  AND op_status !='Deposit') AND  (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, 30  ");//all but web and ftd
 
                 $ac8="active";
           break;
           case 'view_list':
-          		$r=mysqli_query($con,"SELECT * FROM user WHERE list_name='".$_GET['list_name']."' ORDER BY id DESC LIMIT $startrow, 30  ");
+          		$r=mysqli_query($con,"SELECT * FROM user WHERE list_name='".$_GET['list_name']."'  AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30  ");
           		$ac12='active';
           	break;
           case 'view_operator':
-            $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."' ORDER BY id DESC LIMIT $startrow, 30  ");
+            $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30  ");
             break;
           case 'web':
              
@@ -282,17 +282,17 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 switch ($interval) {
                   case 'today':
 
-                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
+                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit'' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
 
                     break;
                   case 'yesterday':
-                   $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND `date` < CURDATE() ORDER BY id DESC ");
+                   $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND op_status !='Deposit' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND `date` < CURDATE() ORDER BY id DESC ");
                     break;
                   case 'lastweek':
-                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND  `date` >= DATE(NOW()) - INTERVAL 7 DAY ORDER BY id DESC ");
+                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND  web=0 AND  `date` >= DATE(NOW()) - INTERVAL 7 DAY ORDER BY id DESC ");
                     break;
                     case 'thismonth':
-                     $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(CURDATE())-1 DAY) ORDER BY id DESC ");
+                     $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL DAYOFMONTH(CURDATE())-1 DAY) ORDER BY id DESC ");
 
                      
                       break;
@@ -302,11 +302,11 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                       $dateF = date("Y-m-d", strtotime($date_range[0]));
                       $dateT = date("Y-m-d", strtotime($date_range[1]));
 
-                      $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
+                      $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit'' AND web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
                         break;
                         case 'lifetime':
-                             $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
-                              $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND web=0  ORDER BY id DESC  ");
+                             $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
+                              $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC  ");
 
                           break;
                   //ktu
@@ -321,35 +321,35 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
           case 'potential':
 
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Potential'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Potential'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'follow_up':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Follow Up'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Follow Up'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'not_interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND  (sec='5' OR op_status='Non Interested')  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND  (sec='5' OR op_status='Non Interested')  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'no_answer':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Non Answer'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Non Answer'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'call_failed':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Call Failed'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Call Failed'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'secretary':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='Secretary'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Secretary'  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'no_status':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status='No Status'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='No Status'  ORDER BY id DESC LIMIT $startrow, 30  ");
 
                 
           break;
