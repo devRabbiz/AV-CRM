@@ -99,6 +99,10 @@ $(document).ready(function (e) {
         <label for="name">Email address</label>
         <input type="email" class="form-control" id="email" placeholder="Enter email"  return false;" value="<?php echo $array[3]?>">
       </div>
+       <div class="form-group">
+        <label for="name">Country</label>
+        <input type="country" class="form-control" id="country" placeholder="Enter country"  return false;" value="<?php echo $array[21]?>">
+      </div>
 
       <div class="form-group">
         <label for="phone_no">Phone Number</label>
@@ -159,7 +163,7 @@ $(document).ready(function (e) {
 
     function submit_form(){
      
-        $.post("update.php",{name:$("#name").val(),email:$("#email").val(),phone_no:$("#phone").val(),alt_phone:$("#alt_phone").val(),id:<?php echo $_GET['user_id'];?>,job:$('#job').val(),company:$("#company").val()}, function(data){
+        $.post("update.php",{name:$("#name").val(),email:$("#email").val(),phone_no:$("#phone").val(),alt_phone:$("#alt_phone").val(),id:<?php echo $_GET['user_id'];?>,job:$('#job').val(),company:$("#company").val(),country:$("#country").val()}, function(data){
       console.log(data);
              alert("User Updated");
             window.history.back();

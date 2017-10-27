@@ -1,6 +1,6 @@
 <?php
 include 'db_connect.php';
-$query = "UPDATE user SET name='".$_POST['name']."',email='".$_POST['email']."',phone_no='".$_POST['phone_no']."',alt_phone='".$_POST['alt_phone']."',work='".$_POST['job']."',company='".$_POST['company']."' WHERE id='".$_POST['id']."' ";
+$query = "UPDATE user SET name='".$_POST['name']."',email='".$_POST['email']."',phone_no='".$_POST['phone_no']."',alt_phone='".$_POST['alt_phone']."',work='".$_POST['job']."',company='".$_POST['company']."',country='".$_POST['country']."' WHERE id='".$_POST['id']."' ";
 $result = mysqli_query($con,$query);
 
 if (!$result)

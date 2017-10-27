@@ -102,6 +102,9 @@ $(document).ready(function(){
 <div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7"> <?php echo $array[10]?></div>
   <div class="clearfix"></div>
 <div class="bot-border"></div>
+<div class="col-sm-5 col-xs-6 tital " >County:</div><div class="col-sm-7"> <?php echo $array[13]?></div>
+  <div class="clearfix"></div>
+<div class="bot-border"></div>
 
 
 <div class="col-sm-5 col-xs-6 tital " >Registered:</div><div class="col-sm-7"><?php echo $array[12]?></div>

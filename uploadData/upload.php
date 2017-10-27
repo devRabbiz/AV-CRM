@@ -39,7 +39,7 @@ if ($_FILES[csv][size] > 0) {
          
             
         
-            mysqli_query($con,"REPLACE INTO user (name, email, phone_no, alt_phone,reg_by, lang, list_name) VALUES 
+            mysqli_query($con,"REPLACE INTO user (name, email, phone_no, alt_phone,reg_by, lang, list_name,country) VALUES 
                 ( 
                     '".addslashes($data[0])."', 
                     '".addslashes($data[1])."', 
@@ -47,7 +47,8 @@ if ($_FILES[csv][size] > 0) {
                     '".addslashes($data[3])."',
                     'list',
                     '".$lang."',
-                    '".$list_name."'
+                    '".$list_name."',
+                    '".addslashes($data[4])."'
                 )
             ");
          }

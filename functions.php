@@ -29,7 +29,7 @@ function op_last_call($con,$row,$operator_username){
 //operator view_user functions
 function op_view_user($con,$user_id,$operator_username){
 
-	return $a=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no,user.date FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$operator_username."' AND jobs.id='".$user_id."'");
+	return $a=mysqli_query($con,"SELECT jobs.*,user.id,user.name,user.email,user.phone_no,user.date,user.country FROM jobs,user WHERE user.id=jobs.id AND jobs.operator='".$operator_username."' AND jobs.id='".$user_id."'");
 }
 //user jobs
 function op_user_jobs($con,$user_id){

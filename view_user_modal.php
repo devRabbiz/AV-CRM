@@ -204,6 +204,10 @@ function sendto () {
                         <td><?php echo $array[3]?></td>
                       </tr>
                       <tr>
+                        <td>Country:</td>
+                        <td><?php echo $array[21]?></td>
+                      </tr>
+                      <tr>
                         <td>Registered:</td>
                         <td><?php echo $array[6]?></td>
                       </tr>
