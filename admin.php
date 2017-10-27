@@ -129,6 +129,10 @@ if (!isset($_GET['pager'])) {
             $_GET['pager']='view_list';
               include 'admin_load.php'; 
             break;
+            case 'view_operator':
+            $_GET['admin_load.php'];
+              include 'admin_load.php'; 
+              break;
             
           default:
             

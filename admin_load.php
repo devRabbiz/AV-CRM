@@ -268,6 +268,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           		$r=mysqli_query($con,"SELECT * FROM user WHERE list_name='".$_GET['list_name']."' ORDER BY id DESC LIMIT $startrow, 30  ");
           		$ac12='active';
           	break;
+          case 'view_operator':
+            $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."' ORDER BY id DESC LIMIT $startrow, 30  ");
+            break;
           case 'web':
              
                 $ac11="active";
@@ -330,7 +333,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 
           break;
           case 'not_interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND  sec='5' OR op_status='Non Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND  (sec='5' OR op_status='Non Interested')  ORDER BY id DESC LIMIT $startrow, 30  ");
                 
           break;
           case 'no_answer':
@@ -580,12 +583,19 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
             <?php } ?>
 
     <li id="prev1">
-    	<?php $prev = $startrow - 30; if ($prev >= 0) { 	
+    	<?php $prev = $startrow - 30; if ($prev >= 0) { 
+
     	if (isset($_GET['list_name'])) {
     		$href='<a  href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
     		} else{
     			    $href='<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
     		}
+      if (isset($_GET['op_name'])) {
+        $href='<a  href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
+        } else{
+              $href='<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
+        }
+
     		echo $href;
     	} else{ 
 
@@ -600,6 +610,12 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     	   } else{
     	   	    $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
     	   }
+
+         if (isset($_GET['op_name'])) {
+          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+         } else{
+              $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+         }
     	echo $href2;   
 
     ?></li>
