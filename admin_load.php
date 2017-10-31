@@ -485,8 +485,8 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
          		     	<?php if (!isset($_GET['by_operator']) || strlen($_GET['by_operator'])<1){ ?>
          		     	<option selected="" disabled="">Filter by Operator..</option>
          		     	<?php } else { ?>
-         		     	<option selected=""  value="<?php echo $_GET['by_operator'] ?>"><?php echo $_GET['by_operator'] ?></option>
-                  <option value="">Remove Filter</option>
+         		     	<option class="btn-warning" selected=""  value="<?php echo $_GET['by_operator'] ?>"><?php echo $_GET['by_operator'] ?></option>
+                  <option class="btn-danger" value="">Remove Filter</option>
 
 					    <?php
 					     }
@@ -503,8 +503,8 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
              		<?php if (!isset($_GET['by_status']) || strlen($_GET['by_status'])<1){ ?>
          		     	<option selected="" disabled="">Filter by Status..</option>
          		    <?php } else { ?>
-         		     	<option selected=""  value="<?php echo $_GET['by_status'] ?>" ><?php echo $_GET['by_status'] ?></option>
-                   <option value="">Remove Filter</option>
+         		     	<option class="btn-warning" selected=""  value="<?php echo $_GET['by_status'] ?>" ><?php echo $_GET['by_status'] ?></option>
+                   <option class="btn-danger" value="">Remove Filter</option>
 
 
 					<?php } ?>
