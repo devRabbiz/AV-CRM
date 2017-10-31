@@ -78,6 +78,10 @@ if (!isset($_GET['pager'])) {
             $_GET['pager']='lists';
               include 'lists.php'; 
             break;
+            case 'filtered':
+            $_GET['pager']='filtered';
+              include 'admin_load.php'; 
+            break;
 
 
             case 'potential':

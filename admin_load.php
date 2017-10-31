@@ -271,6 +271,16 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           case 'view_operator':
             $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30  ");
             break;
+           case 'filtered':
+           	if (isset($_GET['by_operator']) && isset($_GET['by_status'])) {
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto like '%".$_GET['by_operator']."%' and op_status like '%".$_GET['by_status']."%'  AND op_status !='Deposit' ORDER BY id DESC   ");
+           	}elseif (isset($_GET['by_operator'])) {
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto like '%".$_GET['by_operator']."%'   AND op_status !='Deposit' ORDER BY id DESC   ");
+           	} elseif (isset($_GET['by_status'])) {
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE op_status like '%".$_GET['by_status']."%'   AND op_status !='Deposit' ORDER BY id DESC   ");
+           	}
+           	 
+           	break;
           case 'web':
              
                 $ac11="active";
@@ -306,7 +316,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                         break;
                         case 'lifetime':
                              $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
-                              $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC  ");
+                            $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC  ");
 
                           break;
                   //ktu
@@ -458,18 +468,54 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
       <td >
 
 
-            <a href="export.php?exportall" class='btn btn-default btnf'>Download all</a>
+            <a style='float: left; margin-right: 3px' href="export.php?exportall" class='btn btn-default btnf'>Download all</a>
 
-            <a href="export.php?exportnew" class='btn btn-default btnf'>Download Newest</a>
+            <a style='float: left; margin-right: 3px' href="export.php?exportnew" class='btn btn-default btnf'>Download Newest</a>
 
-             <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create Lead</button>
+             <button style='float: left; margin-right: 3px' type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create Lead</button>
 
 
-             <button type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
-             <button type="button" class="btn  btn-warning" data-toggle="modal" data-target="#createUser">Create User</button>
-             <button type="button" class="btn  btn-info" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
-             <button type="button" class="btn  btn-info" onclick="main_chart()">Trading Chart</button>
+             <button  style='float: left; margin-right: 3px' type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#uploadmodal">List</button>
+             <button style='float: left; margin-right: 3px' type="button" class="btn  btn-warning" data-toggle="modal" data-target="#createUser">Create User</button>
+             <button style='float: left; margin-right: 3px' type="button" class="btn  btn-info" data-toggle="modal" data-target="#monitor_calls">Monitor</button>
+             <button style='float: left; margin-right: 3px' type="button" class="btn  btn-info" onclick="main_chart()">Trading Chart</button>
+             
+         	<form style='float: left; margin-right: 3px; background: #00acd6;padding-left:2px;padding-right:2px;border-radius: 2px ' action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
+         		     <select  name="by_operator" class="btn btn-default">
+         		     	<?php if (!isset($_GET['by_operator'])){ ?>
+         		     	<option selected="" disabled="">Filter by Operator..</option>
+         		     	<?php } else { ?>
+         		     	<option selected="" disabled="" value="<?php echo $_GET['by_operator'] ?>"><?php echo $_GET['by_operator'] ?></option>
 
+					    <?php
+					     }
+						$results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
+
+					    while($row=mysqli_fetch_assoc($results)){?>
+
+					  <option value="<?php echo $row['username'] ?>"><?php echo $row['full_name'] ?></option>
+
+					<?php } mysqli_close($con);?>
+					</select>
+
+             	<select name="by_status" class="btn btn-default">
+             		<?php if (!isset($_GET['by_status'])){ ?>
+         		     	<option selected="" disabled="">Filter by Status..</option>
+         		    <?php } else { ?>
+         		     	<option selected="" disabled="" value="<?php echo $_GET['by_status'] ?>" ><?php echo $_GET['by_status'] ?></option>
+
+					<?php } ?>
+             		<option value="Potential">Potential</option>
+             		<option value="Follow Up">Follow Up</option>
+             		<option value="Interested">Interested</option>
+             		<option value="Non Answer">No Answer</option>
+             		<option value="Call Failed">Call Failed</option>
+             		<option value="Secretary">Secretary</option>
+             		<option value="No Status">No Status</option>
+             	</select>
+             	<input type="hidden" name="pager" value="filtered">
+             	<input type="submit" class="btn btn-default" value="GO">
+             </form>
 
 
 
