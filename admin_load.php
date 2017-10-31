@@ -272,12 +272,12 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
             $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30  ");
             break;
            case 'filtered':
-           	if (isset($_GET['by_operator']) && isset($_GET['by_status'])) {
-           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto like '%".$_GET['by_operator']."%' and op_status like '%".$_GET['by_status']."%'  AND op_status !='Deposit' ORDER BY id DESC   ");
-           	}elseif (isset($_GET['by_operator'])) {
-           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto like '%".$_GET['by_operator']."%'   AND op_status !='Deposit' ORDER BY id DESC   ");
-           	} elseif (isset($_GET['by_status'])) {
-           		$r=mysqli_query($con,"SELECT * FROM user WHERE op_status like '%".$_GET['by_status']."%'   AND op_status !='Deposit' ORDER BY id DESC   ");
+           	if (isset($_GET['by_operator']) && isset($_GET['by_status']) && strlen($_GET['by_operator'])>0 && strlen($_GET['by_status'])>0 ) {
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto ='".$_GET['by_operator']."' and op_status='".$_GET['by_status']."'  AND op_status !='Deposit' ORDER BY id DESC  LIMIT $startrow, 30   ");
+           	}elseif (isset($_GET['by_operator']) && strlen($_GET['by_operator'])>0) {
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['by_operator']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30   ");
+           	} elseif (isset($_GET['by_status']) && strlen($_GET['by_status'])>0) {
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE op_status='".$_GET['by_status']."'   AND op_status !='Deposit' ORDER BY id DESC  LIMIT $startrow, 30  ");
            	}
            	 
            	break;
@@ -482,10 +482,11 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
              
          	<form style='float: left; margin-right: 3px; background: #00acd6;padding-left:2px;padding-right:2px;border-radius: 2px ' action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
          		     <select  name="by_operator" class="btn btn-default">
-         		     	<?php if (!isset($_GET['by_operator'])){ ?>
+         		     	<?php if (!isset($_GET['by_operator']) || strlen($_GET['by_operator'])<1){ ?>
          		     	<option selected="" disabled="">Filter by Operator..</option>
          		     	<?php } else { ?>
-         		     	<option selected="" disabled="" value="<?php echo $_GET['by_operator'] ?>"><?php echo $_GET['by_operator'] ?></option>
+         		     	<option selected=""  value="<?php echo $_GET['by_operator'] ?>"><?php echo $_GET['by_operator'] ?></option>
+                  <option value="">Remove Filter</option>
 
 					    <?php
 					     }
@@ -495,19 +496,22 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
 					  <option value="<?php echo $row['username'] ?>"><?php echo $row['full_name'] ?></option>
 
-					<?php } mysqli_close($con);?>
+					<?php } ?>
 					</select>
 
              	<select name="by_status" class="btn btn-default">
-             		<?php if (!isset($_GET['by_status'])){ ?>
+             		<?php if (!isset($_GET['by_status']) || strlen($_GET['by_status'])<1){ ?>
          		     	<option selected="" disabled="">Filter by Status..</option>
          		    <?php } else { ?>
-         		     	<option selected="" disabled="" value="<?php echo $_GET['by_status'] ?>" ><?php echo $_GET['by_status'] ?></option>
+         		     	<option selected=""  value="<?php echo $_GET['by_status'] ?>" ><?php echo $_GET['by_status'] ?></option>
+                   <option value="">Remove Filter</option>
+
 
 					<?php } ?>
              		<option value="Potential">Potential</option>
              		<option value="Follow Up">Follow Up</option>
              		<option value="Interested">Interested</option>
+                <option value="Non Interested">Not Interested</option>
              		<option value="Non Answer">No Answer</option>
              		<option value="Call Failed">Call Failed</option>
              		<option value="Secretary">Secretary</option>
@@ -636,11 +640,21 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     		} else{
     			    $href='<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
     		}
+
+
       if (isset($_GET['op_name'])) {
         $href='<a  href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
         } else{
               $href='<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
         }
+
+      if (isset($_GET['pager']) && $_GET['pager']=='filtered') {
+        $href='<a  href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&by_status='.$_GET['by_status'].'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
+        } else{
+              $href='<a  href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.$prev.'&pager='.$pager.'#home"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
+        }
+
+
 
     		echo $href;
     	} else{ 
@@ -657,11 +671,23 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     	   	    $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
     	   }
 
+
+
          if (isset($_GET['op_name'])) {
           $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
          } else{
               $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
          }
+
+
+         if (isset($_GET['pager']) && $_GET['pager']=='filtered') {
+          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&by_status='.$_GET['by_status'].'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+         } else{
+              $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'#home">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+         }
+
+
+
     	echo $href2;   
 
     ?></li>
@@ -1123,6 +1149,7 @@ $results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
                 <td>Email</td>
                 <td>Phone</td>
                 <td>Alt. Phone</td>
+                <td>Country</td>
               </tr>
             </table>
             <label for="csv" class="btn btn-default selected_file">Browse...
