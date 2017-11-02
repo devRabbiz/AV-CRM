@@ -222,14 +222,14 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
           case 'home': 
 
-           $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sendto IS NULL or sendto='') AND (sec='1' AND web!=0  )   ORDER BY id DESC LIMIT $startrow, 30  ");
+           $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sendto IS NULL or sendto='') AND (sec='1') AND (web=1 or web is NULL  )   ORDER BY id DESC LIMIT $startrow, 30  ");
 
            $ac1="active";
             break;
 
           case 'sec':
 
-          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sec='0' AND web=1 )   ORDER BY id DESC LIMIT $startrow, 30  ");
+          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sec='0')  AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, 30  ");
 
           $ac2="active";
           break;
@@ -253,7 +253,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
           case 'callback':
 
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."'  AND op_status !='Deposit') AND ( sec='4' AND web=1)   ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."'  AND op_status !='Deposit') AND ( sec='4') AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, 30  ");
 
                 $ac6="active";
           break;
@@ -271,6 +271,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           case 'view_operator':
             $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30  ");
             break;
+            
            case 'filtered':
            	if (isset($_GET['by_operator']) && isset($_GET['by_status']) && strlen($_GET['by_operator'])>0 && strlen($_GET['by_status'])>0 ) {
            		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto ='".$_GET['by_operator']."' and op_status='".$_GET['by_status']."'  AND op_status !='Deposit' ORDER BY id DESC  LIMIT $startrow, 30   ");
@@ -518,7 +519,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
              		<option value="No Status">No Status</option>
              	</select>
              	<input type="hidden" name="pager" value="filtered">
-             	<input type="submit" class="btn btn-default" value="GO">
+             	<input type="submit" class="btn btn-default" style="margin-top: 2px;margin-bottom:2px; padding:4px 12px" value="GO">
              </form>
 
 
