@@ -52,7 +52,10 @@ if (!isset($_GET['pager'])) {
             $_GET['pager']='callback';
               include 'admin_load.php'; 
             break;
-
+            case 'no_number':
+            $_GET['pager']='no_number';
+              include 'admin_load.php'; 
+            break;
             case 'op_leads':
             $_GET['pager']='op_leads';
               include 'admin_load.php'; 

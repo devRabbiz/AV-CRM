@@ -6,6 +6,13 @@
 
 	foreach ($snd as $key => $value) {
 			//set sendto
+		if ($_POST['operator']=='UnSend') {
+
+			$sql="DELETE  FROM jobs WHERE id='".(int)$value."'  ";
+			$set_null_admin=mysqli_query($con,"UPDATE user SET sendto=NULL WHERE id='".(int)$value."'");
+			$set_op_status=mysqli_query($con,"UPDATE user SET op_status='No Status'  WHERE id='".(int)$value."'");
+			//$del_call_log=mysqli_query($con,"DELETE FROM last_call WHERE def='".(int)$value."' AND admin='".$op_name."' ");
+		} else {
 		$query = "UPDATE user SET sendto='".$_POST['operator']." '  WHERE id='".(int)$value."'";
 
 		$result = mysqli_query($con,$query);
@@ -33,7 +40,7 @@
 			
 			$string1="<a href=operator_view_user_modal.php?user_id=".(int)$value.">".$leadName['name']."</a>";
 			$sendNotification=mysqli_query($con,"INSERT INTO notifications (`title`,`text`,`admin`) VALUES ('".$string1."','Lead Recived','".$_POST['operator']."')") or die(mysqli_error());
-
+}
 
 
 

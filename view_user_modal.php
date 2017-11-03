@@ -123,6 +123,7 @@ $results3=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
    <option value="3">FTD</option>
    <option value="4">Callback</option>
    <option value="5">Not Interested</option>
+  <option value="6">No Number</option>
 </select>
 </center>
      </div>

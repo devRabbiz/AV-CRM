@@ -2,6 +2,9 @@
 include_once 'db_connect.php';
 include_once 'session.php';
 $link = $con;
+      $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
+      $lang=$lang_check->fetch_assoc();
+      $lang=$lang['lang'];
  
 // Check connection
 if($link === false){
@@ -14,7 +17,7 @@ $query = mysqli_real_escape_string($link, $_REQUEST['query']);
 if(isset($query)){
     // Attempt select query execution
 
-    $sql = "SELECT * FROM user WHERE  (name LIKE '" . $query . "%' OR email LIKE '" . $query . "%' OR phone_no LIKE '".$query."') LIMIT 10 ";
+    $sql = "SELECT * FROM user WHERE  (name LIKE '" . $query . "%' OR email LIKE '" . $query . "%' OR phone_no LIKE '".$query."') AND (lang='".$lang."') LIMIT 10 ";
     if($result = mysqli_query($link, $sql)){
         if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
@@ -30,6 +33,6 @@ if(isset($query)){
     }
 }
  
-// close connection
+// close connection 
 mysqli_close($link);
 ?>

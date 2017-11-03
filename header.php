@@ -50,6 +50,7 @@ include_once 'functions.php';
   <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="dist/js/jquery.slimscroll.min.js"></script>
 
 <!-- 
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -105,7 +106,7 @@ include_once 'functions.php';
 
 
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini  fixed ">
 <div class="wrapper">
 
   <header class="main-header">

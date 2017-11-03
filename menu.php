@@ -152,6 +152,11 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
           </a>
         </li>
 
+         <li class="treeview <?php echo " ".$ac13." "; ?>">
+          <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=no_number'?>">
+            <i class="fa fa-arrow-circle-o-down"></i> <span>No Number</span>
+          </a>
+        </li>
 
 
 
@@ -223,7 +228,7 @@ resultDropdown.empty();} }, 110);; " placeholder="Search client.." ></input>
 
         <li class="treeview <?php echo " ".$ac5." "; ?>">
           <a href="<?php echo $_SERVER['PHP_SELF'].'?pager=op_leads'?>">
-            <i class="fa fa-dashboard"></i> <span>Op_leads</span>
+            <i class="fa fa-tasks"></i> <span>Op_leads</span>
           </a>
         </li>
 
