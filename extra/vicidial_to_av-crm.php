@@ -54,7 +54,8 @@ if (!$result)
 				  {
 
 							//send notificatiion
-							$sendNotification=mysqli_query($con,"INSERT INTO notifications (`title`,`text`,`admin`) VALUES ('".$company."','".$name."','".$reg_by."')") or die(mysqli_error());
+				  			$text='<a onclick="show_profile('.$array[0].')" >'.$name.'</a>';
+							$sendNotification=mysqli_query($con,"INSERT INTO notifications (`title`,`text`,`admin`) VALUES ('".$company."','".$text."','".$reg_by."')") or die(mysqli_error());
 
 
 

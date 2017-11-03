@@ -483,7 +483,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
       </span>
 
       <td >  
-              <select style='float: left; margin-right: 3px;' type="text" class="_show btn btn-default" name="show">
+              <select style="margin-top: 2px;margin-bottom:2px; padding:4px 12px;float: left; margin-right: 3px"  type="text" class="_show btn btn-default" name="show">
                 <option <?php if ($_GET['show']==30){ echo 'selected=""';}; ?> value="30">30</option>
                 <option <?php if ($_GET['show']==50){ echo 'selected=""';}; ?> value="50">50</option>
                 <option <?php if ($_GET['show']==100){ echo 'selected=""';}; ?> value="100">100</option>
