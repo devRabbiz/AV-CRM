@@ -5,10 +5,6 @@
 	////use vicidial server as origin
 header("Access-Control-Allow-Origin: http://192.168.1.80");
 
-      $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
-      $lang=$lang_check->fetch_assoc();
-      $lang=$lang['lang'];
-
 $phone_check=mysqli_escape_string($con,$_POST['phone_no']);
 $phone_no=mysqli_escape_string($con,$_POST['phone_no']);
 $name=mysqli_escape_string($con,$_POST['name']);
@@ -19,6 +15,10 @@ $email=mysqli_escape_string($con,$_POST['email']);
 $alt_phone=mysqli_escape_string($con,$_POST['alt_phone']);
 $company=mysqli_escape_string($con,$_POST['company']);
 $reg_by=mysqli_escape_string($con,$_POST['reg_by']);
+
+      $lang_check=mysqli_query($con,"SELECT lang FROM operator WHERE username='".$reg_by."'");
+      $lang=$lang_check->fetch_assoc();
+      $lang=$lang['lang'];
 
 $query="SELECT * FROM user WHERE phone_no='".$phone_no."'";
 $result = mysqli_query($con,$query);

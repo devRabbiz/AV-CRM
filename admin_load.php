@@ -204,9 +204,19 @@ strong {
       $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
       $lang=$lang_check->fetch_assoc();
       $lang=$lang['lang'];
+
+if (!isset($_GET['show']) or !is_numeric($_GET['show'])) {
+  $show=30;
+  $pagination=30;
+}else{
+      $show = (int)$_GET['show'];
+      $pagination = (int)$_GET['show'];
+}
+
 if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
   $startrow = 0;
+
 
 } else {
   $startrow = (int)$_GET['startrow'];
@@ -222,69 +232,69 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
           case 'home': 
 
-           $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sendto IS NULL or sendto='') AND (sec='1') AND (web=1 or web is NULL  )   ORDER BY id DESC LIMIT $startrow, 30  ");
+           $r  =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sendto IS NULL or sendto='') AND (sec='1') AND (web=1 or web is NULL  )   ORDER BY id DESC LIMIT $startrow, $show  ");
 
            $ac1="active";
             break;
 
           case 'sec':
 
-          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sec='0')  AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, 30  ");
+          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND (sec='0')  AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, $show  ");
 
           $ac2="active";
           break;
 
           case 'ftd':
 
-          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND ( sec='3' OR op_status='Deposit') ORDER BY id DESC  LIMIT $startrow, 30  ");
+          $r =mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."') AND ( sec='3' OR op_status='Deposit') ORDER BY id DESC  LIMIT $startrow, $show  ");
 
           $ac3="active";
           break;
 
           case 'operator':
-            $r = mysqli_query($con,"SELECT * FROM user WHERE  lang='".$lang."'  AND op_status !='Deposit' AND user.reg_by!='admin'  AND user.reg_by!='gabriele' AND user.reg_by!='adi'  AND user.reg_by!='it'  AND user.reg_by!='cristianabate' AND user.reg_by!='list' AND user.reg_by!='mariostein'  ORDER BY date DESC LIMIT $startrow, 30 ");
+            $r = mysqli_query($con,"SELECT * FROM user WHERE  lang='".$lang."'  AND op_status !='Deposit' AND user.reg_by!='admin'  AND user.reg_by!='gabriele' AND user.reg_by!='adi'  AND user.reg_by!='it'  AND user.reg_by!='cristianabate' AND user.reg_by!='list' AND user.reg_by!='mariostein'  ORDER BY date DESC LIMIT $startrow, $show ");
             $ac4="active";
           break;
 
           case 'op_leads':
-             $r = mysqli_query($con,"SELECT * FROM user WHERE  sendto IS NOT NULL  AND op_status !='Deposit'   AND op_status !='Deposit' AND lang='".$lang."'  AND reg_by='".$_SESSION['login_username']."'   ORDER BY date DESC LIMIT $startrow, 30 ");
+             $r = mysqli_query($con,"SELECT * FROM user WHERE  sendto IS NOT NULL  AND op_status !='Deposit'   AND op_status !='Deposit' AND lang='".$lang."'  AND reg_by='".$_SESSION['login_username']."'   ORDER BY date DESC LIMIT $startrow, $show ");
              $ac5="active";
           break;
 
           case 'callback':
 
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."'  AND op_status !='Deposit') AND ( sec='4') AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."'  AND op_status !='Deposit') AND ( sec='4') AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, $show  ");
 
                 $ac6="active";
           break;
           case 'no_number':
 
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."'  AND op_status !='Deposit') AND ( sec='6') AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."'  AND op_status !='Deposit') AND ( sec='6') AND (web=1 or web is NULL)   ORDER BY id DESC LIMIT $startrow, $show  ");
 
                 $ac13="active";
           break;
 
           case 'all':
 
-                $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."'  AND op_status !='Deposit') AND  (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, 30  ");//all but web and ftd
+                $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."'  AND op_status !='Deposit') AND  (web=1 or web is NULL) and sec!=3  ORDER BY `id` DESC LIMIT $startrow, $show  ");//all but web and ftd
 
                 $ac8="active";
           break;
           case 'view_list':
-          		$r=mysqli_query($con,"SELECT * FROM user WHERE list_name='".$_GET['list_name']."'  AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30  ");
+          		$r=mysqli_query($con,"SELECT * FROM user WHERE list_name='".$_GET['list_name']."'  AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, $show  ");
           		$ac12='active';
           	break;
           case 'view_operator':
-            $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30  ");
+            $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, $show  ");
             break;
             
            case 'filtered':
            	if (isset($_GET['by_operator']) && isset($_GET['by_status']) && strlen($_GET['by_operator'])>0 && strlen($_GET['by_status'])>0 ) {
-           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto ='".$_GET['by_operator']."' and op_status='".$_GET['by_status']."'  AND op_status !='Deposit' ORDER BY id DESC  LIMIT $startrow, 30   ");
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto ='".$_GET['by_operator']."' and op_status='".$_GET['by_status']."'  AND op_status !='Deposit' ORDER BY id DESC  LIMIT $startrow, $show   ");
            	}elseif (isset($_GET['by_operator']) && strlen($_GET['by_operator'])>0) {
-           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['by_operator']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, 30   ");
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['by_operator']."'   AND op_status !='Deposit' AND lang='".$lang."'  ORDER BY id DESC LIMIT $startrow, $show   ");
            	} elseif (isset($_GET['by_status']) && strlen($_GET['by_status'])>0) {
-           		$r=mysqli_query($con,"SELECT * FROM user WHERE op_status='".$_GET['by_status']."'   AND op_status !='Deposit' ORDER BY id DESC  LIMIT $startrow, 30  ");
+           		$r=mysqli_query($con,"SELECT * FROM user WHERE op_status='".$_GET['by_status']."'   AND op_status !='Deposit' AND lang='".$lang."'  ORDER BY id DESC  LIMIT $startrow, $show  ");
            	}
            	 
            	break;
@@ -322,7 +332,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                       $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit'' AND web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
                         break;
                         case 'lifetime':
-                             $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC LIMIT $startrow, 30  ");
+                             $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC LIMIT $startrow, $show  ");
                             $r2=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC  ");
 
                           break;
@@ -338,35 +348,35 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
           case 'potential':
 
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Potential'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Potential'  ORDER BY id DESC LIMIT $startrow, $show  ");
                 
           break;
           case 'follow_up':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Follow Up'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Follow Up'  ORDER BY id DESC LIMIT $startrow, $show  ");
                 
           break;
           case 'interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Interested'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Interested'  ORDER BY id DESC LIMIT $startrow, $show  ");
                 
           break;
           case 'not_interested':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND  (sec='5' OR op_status='Non Interested')  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE (lang='".$lang."' AND op_status !='Deposit') AND  (sec='5' OR op_status='Non Interested')  ORDER BY id DESC LIMIT $startrow, $show  ");
                 
           break;
           case 'no_answer':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Non Answer'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Non Answer'  ORDER BY id DESC LIMIT $startrow, $show  ");
                 
           break;
           case 'call_failed':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Call Failed'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Call Failed'  ORDER BY id DESC LIMIT $startrow, $show  ");
                 
           break;
           case 'secretary':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Secretary'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='Secretary'  ORDER BY id DESC LIMIT $startrow, $show  ");
                 
           break;
           case 'no_status':
-                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='No Status'  ORDER BY id DESC LIMIT $startrow, 30  ");
+                $r=mysqli_query($con,"SELECT * FROM user  WHERE lang='".$lang."' AND op_status !='Deposit' AND op_status='No Status'  ORDER BY id DESC LIMIT $startrow, $show  ");
 
                 
           break;
@@ -472,12 +482,43 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
        ?>
       </span>
 
-      <td >
+      <td >  
+              <select style='float: left; margin-right: 3px;' type="text" class="_show btn btn-default" name="show">
+                <option <?php if ($_GET['show']==30){ echo 'selected=""';}; ?> value="30">30</option>
+                <option <?php if ($_GET['show']==50){ echo 'selected=""';}; ?> value="50">50</option>
+                <option <?php if ($_GET['show']==100){ echo 'selected=""';}; ?> value="100">100</option>
+                <option <?php if ($_GET['show']==500){ echo 'selected=""';}; ?> value="500">500</option>
+              </select>
+        <?php 
+   function unset_uri_var($variable, $uri) {   
+    $parseUri = parse_url($uri);
+    $arrayUri = array();
+    parse_str($parseUri['query'], $arrayUri);
+    unset($arrayUri[$variable]);
+    $newUri = http_build_query($arrayUri);
+    $newUri = $parseUri['path'].'?'.$newUri;
+    return $newUri;
+}
+  if (isset($_GET['show'])) {
+    $url = unset_uri_var('show', basename($_SERVER['REQUEST_URI']));
+  }else{
+    $url=$_SERVER["REQUEST_URI"];
+  }
+         if (strlen($_SERVER["REQUEST_URI"]) ==10){ ?>
+             <script type="text/javascript">
+               $('._show').on('change',function(){
+                  window.location.href='<?php echo $url ?>?show='+$('._show').val();
+               })
+             </script>
+             <?php } else{ ?>
+             <script type="text/javascript">
+               $('._show').on('change',function(){
+                  window.location.href='<?php echo $url ?>&show='+$('._show').val();
+               })
+             </script>
 
 
-            <a style='float: left; margin-right: 3px' href="export.php?exportall" class='btn btn-default btnf'>Download all</a>
-
-            <a style='float: left; margin-right: 3px' href="export.php?exportnew" class='btn btn-default btnf'>Download Newest</a>
+             <?php } ?>
 
              <button style='float: left; margin-right: 3px' type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create Lead</button>
 
@@ -526,8 +567,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
              	</select>
              	<input type="hidden" name="pager" value="filtered">
              	<input type="submit" class="btn btn-default" style="margin-top: 2px;margin-bottom:2px; padding:4px 12px" value="GO">
-             </form>
-
+             </form>      
 
 
             </td>
@@ -640,7 +680,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
             <?php } ?>
 
     <li id="prev1">
-    	<?php $prev = $startrow - 30; if ($prev >= 0) { 
+    	<?php $prev = $startrow - $pagination; if ($prev >= 0) { 
 
     	if (isset($_GET['pager']) && $_GET['pager']=='view_list') {
     		$href='<a  href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&startrow='.$prev.'&pager='.$pager.'"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
@@ -666,17 +706,17 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     <li id="next1"><?php 
     	if (isset($_GET['pager']) && $_GET['pager']=='view_list') {
 
-    	   	$href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&startrow='.($startrow+30).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+    	   	$href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
     	   	echo $href2;
     	   } elseif (isset($_GET['pager']) && $_GET['pager']=='view_operator') {
-          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&startrow='.($startrow+30).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';
+          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';
          echo $href2;  
          }elseif (isset($_GET['pager']) && $_GET['pager']=='filtered') {
-          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&by_status='.$_GET['by_status'].'&startrow='.($startrow+30).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&by_status='.$_GET['by_status'].'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
           echo $href2;  
          }  else{
 
-              $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+30).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
+              $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?interval='.$interval.'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
         	echo $href2;
          }
 
