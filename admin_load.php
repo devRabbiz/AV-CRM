@@ -564,13 +564,50 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     cursor: pointer;
   }
 </style>
+ 
+		<select style="float: left;width: 110px" id="operator" name="operator" class="btn  btn-primary h_buttons sendtobtn">
+		<option selected="" disabled="">Send To..</option>
+	    <?php
+		$results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
+	    while($row=mysqli_fetch_assoc($results)){?>
+	  	<option value="<?php echo $row['username'] ?>"><?php echo $row['full_name'] ?></option>
+		<?php } mysqli_close($con);?>
+		<option value="UnSend">UnSend</option>
+	</select>
+	<select style="float: left;width: 110px"  id="movein" name="movein" class="btn btn-primary h_buttons movetobtn">
+	 	<option selected="" disabled="">Move To..</option>
+	  	<option value="1">Trader </option>
+	  	<option value="0">Finish</option>
+	   	<option value="3">FTD</option>
+	   	<option value="4">Callback</option>
+	   	<option value="5">Not Interested</option>
+		<option value="6">No Number</option>
+	</select>
 
+<script type="text/javascript">
+	$('#operator').on('change',function(){
+		sendto();
+	});
+	$('#movein').on('change',function(){
+		move_sec();
+	});
+</script>
+         <style type="text/css">
+         	body {
+	position: relative;
+}
 
-      <button type="button" class="btn  btn-primary h_buttons sendtobtn" data-toggle="modal" data-target="#send_tooo">Send To</button>
-       <button type="button" class="btn btn-primary h_buttons movetobtn" data-toggle="modal" data-target="#moveto">Move To</button>
+.image-wrapper {
+	position: absolute;
+	transform: translate(-50%, -50%);
+    opacity: 1;
+}
 
-  
-            
+.image-wrapper.fade-out {
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+}
+         </style>
 
     <ul class="pagination pagination-md no-margin pull-right">
 
@@ -923,9 +960,28 @@ $("#select_all").click(function(){
   //check show hide buttons
   function show_buttons() {
   
-  var st_checked = $('.doA:checked').length + $('.doA:checked').length;
+  st_checked = $('.doA:checked').length + $('.doA:checked').length;
+  $('.selected_leads').html(st_checked/2);
   if (st_checked > 0) {
     $('.h_buttons').fadeIn('slow');
+   
+	var fadeDelay = 700;
+	var fadeDuration = 1000;
+    $('.doA').click(function(e){
+		var div = $('<div class="image-wrapper">')
+			.css({
+				"left": e.pageX+19+ 'px',
+				"top": e.pageY+ 'px'
+			})
+			.append($('<img src="" alt="'+st_checked/2+'" />'))
+			.appendTo(document.body);
+				
+		setTimeout(function() {
+			div.addClass('fade-out');			
+			setTimeout(function() { div.remove(); }, fadeDuration);
+		}, fadeDelay);
+    });
+
   }
   else {
     $('.h_buttons').fadeOut('slow');
@@ -995,80 +1051,6 @@ $("#select_all").click(function(){
 </style>
 
 
-
-<div id="send_tooo" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Send to</h4>
-      </div>
-      <div class="modal-body">
-        <center>
-     <select id="operator" name="operator" class="btn btn-default">
-    <?php
-    
-$results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
-
-    while($row=mysqli_fetch_assoc($results)){?>
-
-
-  <option value="<?php echo $row['username'] ?>"><?php echo $row['full_name'] ?></option>
-
-
-
-
-<?php } mysqli_close($con);?>
-<option value="UnSend">UnSend</option>
-</select>
-</center>
-      </div>
-      <div class="modal-footer">
-        <center>
-        <input class="btn  btn-info" type='button' value='Send' onclick='sendto(); return false;'>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </center>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div id="moveto" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Move to</h4>
-      </div>
-      <div class="modal-body">
-        <center>
-     <select id="movein" name="movein" class="btn btn-default">
-
-  <option value="1">Trader </option>
-  <option value="0">Finish</option>
-   <option value="3">FTD</option>
-   <option value="4">Callback</option>
-   <option value="5">Not Interested</option>
-	<option value="6">No Number</option>
-   </center>
-
-</select>
-     </div>
-      <div class="modal-footer">
-        <center>
-        <input class="btn  btn-warning" type='button' value='Move' onclick='move_sec(); return false;'>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </center>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 <div id="showprofile" class="modal fade" role="dialog" >
   <div style="width:90%;" class="modal-dialog">
