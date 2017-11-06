@@ -205,13 +205,19 @@ strong {
       $lang=$lang_check->fetch_assoc();
       $lang=$lang['lang'];
 
-if (!isset($_GET['show']) or !is_numeric($_GET['show'])) {
-  $show=30;
-  $pagination=30;
-}else{
-      $show = (int)$_GET['show'];
-      $pagination = (int)$_GET['show'];
+
+///table_limit
+if (isset($_POST['show']) or is_numeric($_POST['show'])) {
+	$update_table_limit=mysqli_query($con,"UPDATE admins SET table_limit='".$_POST['show']."' WHERE username='".$_SESSION['login_username']."'") or die('error');
+	$show=$_POST['show'];
+	$pagination=$_POST['show'];
+} else {
+	$check_table_sql=mysqli_query($con,"SELECT table_limit from admins where username='".$_SESSION['login_username']."'");
+	$check_table_limit=$check_table_sql->fetch_assoc();
+	$show=$check_table_limit['table_limit'];
+	$pagination=$check_table_limit['table_limit'];
 }
+////////
 
 if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
@@ -482,43 +488,24 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
        ?>
       </span>
 
-      <td >  
-              <select style="margin-top: 2px;margin-bottom:2px; padding:4px 12px;float: left; margin-right: 3px"  type="text" class="_show btn btn-default" name="show">
-                <option <?php if ($_GET['show']==30){ echo 'selected=""';}; ?> value="30">30</option>
-                <option <?php if ($_GET['show']==50){ echo 'selected=""';}; ?> value="50">50</option>
-                <option <?php if ($_GET['show']==100){ echo 'selected=""';}; ?> value="100">100</option>
-                <option <?php if ($_GET['show']==500){ echo 'selected=""';}; ?> value="500">500</option>
+      <td >  <form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>" id="set_table_limit">
+      	         <select style="margin-top: 2px;margin-bottom:2px; padding:4px 12px;float: left; margin-right: 3px"  type="text" class="_show btn btn-default" name="show">
+                <option <?php if ($show==30){ echo 'selected=""';}; ?> value="30">30</option>
+                <option <?php if ($show==50){ echo 'selected=""';}; ?> value="50">50</option>
+                <option <?php if ($show==100){ echo 'selected=""';}; ?> value="100">100</option>
+                <option <?php if ($show==500){ echo 'selected=""';}; ?> value="500">500</option>
               </select>
-        <?php 
-   function unset_uri_var($variable, $uri) {   
-    $parseUri = parse_url($uri);
-    $arrayUri = array();
-    parse_str($parseUri['query'], $arrayUri);
-    unset($arrayUri[$variable]);
-    $newUri = http_build_query($arrayUri);
-    $newUri = $parseUri['path'].'?'.$newUri;
-    return $newUri;
-}
-  if (isset($_GET['show'])) {
-    $url = unset_uri_var('show', basename($_SERVER['REQUEST_URI']));
-  }else{
-    $url=$_SERVER["REQUEST_URI"];
-  }
-         if (strlen($_SERVER["REQUEST_URI"]) ==10){ ?>
+      </form>
+
+
+
              <script type="text/javascript">
                $('._show').on('change',function(){
-                  window.location.href='<?php echo $url ?>?show='+$('._show').val();
-               })
-             </script>
-             <?php } else{ ?>
-             <script type="text/javascript">
-               $('._show').on('change',function(){
-                  window.location.href='<?php echo $url ?>&show='+$('._show').val();
+                 $('#set_table_limit').submit();
                })
              </script>
 
 
-             <?php } ?>
 
              <button style='float: left; margin-right: 3px' type="button" class="btn btn-warning btnf" data-toggle="modal" data-target="#manual-reg">Create Lead</button>
 
