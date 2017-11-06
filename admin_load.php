@@ -291,7 +291,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
           		$ac12='active';
           	break;
           case 'view_operator':
-            $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['op_name']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, $show  ");
+            $r=mysqli_query($con,"SELECT * FROM user WHERE sendto='".$_GET['by_operator']."'   AND op_status !='Deposit' ORDER BY id DESC LIMIT $startrow, $show  ");
             break;
             
            case 'filtered':
@@ -476,13 +476,13 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
        <span class="label label-primary ">
       <?php 
 
-      if ($interval=='lifetime') {
+      if ($interval=='lifetime' && $pager='web') {
         $numa=mysqli_num_rows($r2);
         print_r($numa);
       } else {
 
-         $numa=mysqli_num_rows($r);
-            print_r($numa);
+        $numa=mysqli_num_rows($r);
+        print_r($numa);
       
       }
        ?>
@@ -554,13 +554,22 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
              	</select>
              	<input type="hidden" name="pager" value="filtered">
              	<input type="submit" class="btn btn-default" style="margin-top: 2px;margin-bottom:2px; padding:4px 12px" value="GO">
-             </form>      
+             </form> 
+     
+<style type="text/css">
+  .h_buttons{
+      display: none;
+  }
+  #atitle:hover{
+    cursor: pointer;
+  }
+</style>
 
 
-            </td>
-              <td>&nbsp;</td>     <td>&nbsp;</td>
-            <td >
+      <button type="button" class="btn  btn-primary h_buttons sendtobtn" data-toggle="modal" data-target="#send_tooo">Send To</button>
+       <button type="button" class="btn btn-primary h_buttons movetobtn" data-toggle="modal" data-target="#moveto">Move To</button>
 
+  
             
 
     <ul class="pagination pagination-md no-margin pull-right">
@@ -673,7 +682,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     		$href='<a  href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&startrow='.$prev.'&pager='.$pager.'"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
     		echo $href;
     		}elseif (isset($_GET['pager']) && $_GET['pager']=='view_operator') {
-		        $href='<a  href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&startrow='.$prev.'&pager='.$pager.'"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
+		        $href='<a  href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&startrow='.$prev.'&pager='.$pager.'"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
 		        echo $href;
         }elseif (isset($_GET['pager']) && $_GET['pager']=='filtered') {
         $href='<a  href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&by_status='.$_GET['by_status'].'&startrow='.$prev.'&pager='.$pager.'"><span aria-hidden="true">&larr;&nbsp;</span>Previous </a>';
@@ -696,7 +705,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
     	   	$href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?list_name='.$_GET['list_name'].'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
     	   	echo $href2;
     	   } elseif (isset($_GET['pager']) && $_GET['pager']=='view_operator') {
-          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?op_name='.$_GET['op_name'].'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';
+          $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';
          echo $href2;  
          }elseif (isset($_GET['pager']) && $_GET['pager']=='filtered') {
           $href2='<a class="next btnf" href="'.$_SERVER['PHP_SELF'].'?by_operator='.$_GET['by_operator'].'&by_status='.$_GET['by_status'].'&startrow='.($startrow+$pagination).'&pager='.$pager.'">Next <span aria-hidden="true">&nbsp;&rarr;</span> </a>';  
@@ -851,7 +860,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
             <form  action="unsend.php" method="POST" style="float: right;">
               <font > <?php echo $row['sendto']; ?> </font>
               <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-              <input type="hidden" name="op_name" value="<?php echo $row['sendto'] ?>">
+              <input type="hidden" name="by_operator" value="<?php echo $row['sendto'] ?>">
               <input type="submit" title="Unsend" class=" btn-danger" value="X">
             </form>
 
@@ -873,31 +882,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
        
 </tbody>
 
-<tfoot>
-<style type="text/css">
-  .h_buttons{
-      display: none;
-  }
-  #atitle:hover{
-    cursor: pointer;
-  }
-</style>
 
- <tr class="h_buttons">
-
-
-                  <td  ><center>
-      <button type="button" class="btn  btn-primary " data-toggle="modal" data-target="#send_tooo">Send To</button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moveto">Move To</button>
-       </center>
-       </td>
-
-       </tr>
-
-
-
-
-</tfoot>
 
          </table>
 

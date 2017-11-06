@@ -34,7 +34,7 @@
 
       	<tr>
 
-      		<td><a href="<?php echo $_SERVER['PHP_SELF']?>?pager=view_operator&op_name=<?php echo $row['username'] ?>"><?php echo $row['full_name']; ?></a></td>
+      		<td><a href="<?php echo $_SERVER['PHP_SELF']?>?pager=view_operator&by_operator=<?php echo $row['username'] ?>"><?php echo $row['full_name']; ?></a></td>
               <td> <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$row['username']."' ");
                  $ptotal=mysqli_num_rows($stat);
                  echo $ptotal;?>
