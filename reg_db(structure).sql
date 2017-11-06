@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2017 at 03:58 PM
+-- Generation Time: Nov 06, 2017 at 02:14 PM
 -- Server version: 5.5.46-MariaDB-log
 -- PHP Version: 5.4.20
 
@@ -33,8 +33,10 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `lang` varchar(15) NOT NULL,
-  `full_name` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `full_name` text NOT NULL,
+  `session` text NOT NULL,
+  `table_limit` int(11) NOT NULL DEFAULT '30'
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -77,7 +79,22 @@ CREATE TABLE IF NOT EXISTS `call_count` (
   `admin` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `calls` int(11) NOT NULL DEFAULT '1'
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3434 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19451 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config`
+--
+
+CREATE TABLE IF NOT EXISTS `config` (
+`id` int(11) NOT NULL,
+  `lang` text NOT NULL,
+  `line_prefix` text NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `admin` varchar(20) NOT NULL,
+  `value` text NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -119,8 +136,9 @@ CREATE TABLE IF NOT EXISTS `jobs` (
   `status` text NOT NULL,
   `note` text NOT NULL,
   `last_call` text NOT NULL,
-  `meet` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2372 ;
+  `meet` datetime DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10138 ;
 
 -- --------------------------------------------------------
 
@@ -133,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `last_call` (
   `def` int(11) NOT NULL,
   `lcall` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `admin` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1638 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3375 ;
 
 -- --------------------------------------------------------
 
@@ -143,8 +161,10 @@ CREATE TABLE IF NOT EXISTS `last_call` (
 
 CREATE TABLE IF NOT EXISTS `list_names` (
 `id` int(11) NOT NULL,
-  `name` text NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;
+  `name` text NOT NULL,
+  `lang` text NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
 -- --------------------------------------------------------
 
@@ -158,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `note` (
   `admin` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `note` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4910 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14948 ;
 
 -- --------------------------------------------------------
 
@@ -172,9 +192,9 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `text` text,
   `isRead` int(11) DEFAULT '1',
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `title` varchar(45) DEFAULT NULL,
-  `color` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `title` text,
+  `type` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7585 ;
 
 -- --------------------------------------------------------
 
@@ -188,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `operator` (
   `password` text NOT NULL,
   `full_name` text NOT NULL,
   `lang` varchar(15) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 -- --------------------------------------------------------
 
@@ -217,8 +237,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `lang` varchar(15) NOT NULL,
   `deposit_by` varchar(30) NOT NULL,
   `list_name` text NOT NULL,
-  `web` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2165 ;
+  `web` int(11) DEFAULT NULL,
+  `country` text NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4069 ;
 
 --
 -- Indexes for dumped tables
@@ -247,6 +268,12 @@ ALTER TABLE `akit_reg`
 --
 ALTER TABLE `call_count`
  ADD PRIMARY KEY (`def`);
+
+--
+-- Indexes for table `config`
+--
+ALTER TABLE `config`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `excel`
@@ -310,7 +337,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `admin_jobs`
 --
@@ -325,7 +352,12 @@ MODIFY `idi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `call_count`
 --
 ALTER TABLE `call_count`
-MODIFY `def` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3434;
+MODIFY `def` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19451;
+--
+-- AUTO_INCREMENT for table `config`
+--
+ALTER TABLE `config`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `excel`
 --
@@ -340,37 +372,37 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-MODIFY `def` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2372;
+MODIFY `def` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10138;
 --
 -- AUTO_INCREMENT for table `last_call`
 --
 ALTER TABLE `last_call`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1638;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3375;
 --
 -- AUTO_INCREMENT for table `list_names`
 --
 ALTER TABLE `list_names`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `note`
 --
 ALTER TABLE `note`
-MODIFY `def` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4910;
+MODIFY `def` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14948;
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7585;
 --
 -- AUTO_INCREMENT for table `operator`
 --
 ALTER TABLE `operator`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2165;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4069;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
