@@ -41,7 +41,8 @@ include_once 'functions.php';
   <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+        <script src="dist/js/bootstrapPlusPlus.js"></script>
+        <link rel="stylesheet" href="dist/css/bootstrapPlusPlus.css" />
 <body >
 
     <div class="container-fluid">
@@ -335,7 +336,7 @@ if (isset($row['meet'])){
 <form method="POST" action="meet_admin.php">
 
              <div class='input-group date' id='datetimepicker1'>
-        <input type='text' name="dt" id="dat<?php echo $_GET['user_id']; ?>" class="form-control" placeholder="Cakto" required />
+        <input type='text' name="dt" id="dat<?php echo $_GET['user_id']; ?>" style="font-size: 15px" class="form-control" placeholder="Choose" required />
         <input type="hidden" name="id" value="<?php echo $_GET['user_id']; ?>"/>
         <input type="hidden" name="admin" value="<?php echo $_SESSION['login_username']; ?>"/>
          <input type="hidden" name="name" value="<?php echo $array[1]; ?>"/>
@@ -369,7 +370,7 @@ if (isset($row['meet'])){
 Leave a note:
 <div class="input-group" style="width: 90%">
 <form method="POST" action="addnote.php">
-<input type="text" class="form-control" name="notetoadd" style="text-align: left !important;" required="" autocomplete="off"></input>
+<input type="text" class="form-control" style="font-size: 15px" name="notetoadd" style="text-align: left !important;" required="" autocomplete="off"></input>
 <input type="hidden" name="user_id" value="<?php echo $_GET['user_id'] ?>"></input>
 <input type="hidden" name="admin" value="<?php echo $_SESSION['login_username'] ?>"></input>
  <span class="input-group-btn">

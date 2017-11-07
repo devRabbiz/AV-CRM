@@ -15,6 +15,6 @@ $delete_from_op=mysqli_query($con,$sql);
 		
 	
 
-mysqli_close($con);
+
 header("Location: " . $_SERVER["HTTP_REFERER"]);
 ?>

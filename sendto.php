@@ -6,12 +6,13 @@
 
 	foreach ($snd as $key => $value) {
 			//set sendto
-		if ($_POST['operator']=='UnSend') {
+		if ($operator=='UnSend') {
 
-			$sql="DELETE  FROM jobs WHERE id='".(int)$value."'  ";
+			$del_from_jobs=mysqli_query($con,"DELETE  FROM jobs WHERE id='".(int)$value."'");
 			$set_null_admin=mysqli_query($con,"UPDATE user SET sendto=NULL WHERE id='".(int)$value."'");
 			$set_op_status=mysqli_query($con,"UPDATE user SET op_status='No Status'  WHERE id='".(int)$value."'");
 			//$del_call_log=mysqli_query($con,"DELETE FROM last_call WHERE def='".(int)$value."' AND admin='".$op_name."' ");
+			echo '<script>console.log("unsend")</script>';
 		} else {
 		$query = "UPDATE user SET sendto='".$_POST['operator']." '  WHERE id='".(int)$value."'";
 

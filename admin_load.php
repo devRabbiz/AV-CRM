@@ -855,31 +855,11 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
            </td>
 
 
-           <td style="text-align: justify;"><center>
+           <td style="text-align: justify;">
 
-<?php
-
-    if($result123 = admin_jobs($con,$row['id'],$_SESSION['login_username'])){
-       
-            while($row123 = mysqli_fetch_array($result123)){
-
-                    $date_arr= explode(" ", $row123['meet']);
-                    $date= $date_arr[0];
-                    $time= $date_arr[1];
-                    $tomorrow = date('Y-m-d', strtotime('tomorrow')); 
-            ?>
-            <?php  if (date('Y-m-d') == date('Y-m-d', strtotime($row123['meet']))) { ?>
-             <span  style="font-size: 16px" class="label label-danger"><?php echo  substr($time, 0, -3); ?></span>
-             <?php } else if ($tomorrow == date('Y-m-d', strtotime($row123['meet']))) { ?>
-            <span style="font-size: 14px"  class="label label-warning"><?php echo  substr($time, 0, -3); ?></span>
-              <?php } else { ?>
-          <span style="font-size: 12px"  class="label label-success"><?php echo  substr($time, 0, -3); ?></span>
-          <?php } ?>
-            <span class="label label-primary"><?php echo $date ?></span>
-            <?php } ?>
-          </center>
+            <?php ///work to do ?>
           </td>
-          <?php }  ?>
+
 
            <td><center>
             <form method = "post" action="admin_user_edit.php?user_id=<?php echo $row['id'];?>"><input type="submit" value="Edit" style="background: #a4acb6 !important;border-color: #ecf0f5 !important;" class="btn btn-warning">
@@ -896,8 +876,8 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
             <form  action="unsend.php" method="POST" style="float: right;">
               <font > <?php echo $row['sendto']; ?> </font>
-              <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-              <input type="hidden" name="by_operator" value="<?php echo $row['sendto'] ?>">
+              <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+              <input type="hidden" name="op_name" value="<?php echo trim($row['sendto']);?>">
               <input type="submit" title="Unsend" class=" btn-danger" value="X">
             </form>
 
