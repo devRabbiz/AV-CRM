@@ -52,6 +52,7 @@ include_once 'functions.php';
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="dist/js/jquery.slimscroll.min.js"></script>
 
+        <link rel="stylesheet" href="dist/css/bootstrapPlusPlus.css" />
 <!-- 
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 

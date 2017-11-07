@@ -565,7 +565,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   }
 </style>
  
-		<select style="float: left;width: 110px" id="operator" name="operator" class="btn  btn-primary h_buttons sendtobtn">
+		<select style="float: left;width: 110px" id="operator" name="operator" class="btn  btn-info h_buttons sendtobtn">
 		<option selected="" disabled="">Send To..</option>
 	    <?php
 		$results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."'");
@@ -574,7 +574,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 		<?php } mysqli_close($con);?>
 		<option value="UnSend">UnSend</option>
 	</select>
-	<select style="float: left;width: 110px"  id="movein" name="movein" class="btn btn-primary h_buttons movetobtn">
+	<select style="float: left;width: 110px"  id="movein" name="movein" class="btn btn-info h_buttons movetobtn">
 	 	<option selected="" disabled="">Move To..</option>
 	  	<option value="1">Trader </option>
 	  	<option value="0">Finish</option>

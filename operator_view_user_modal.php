@@ -48,7 +48,7 @@ include_once 'functions.php';
   <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
   <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  <link rel="stylesheet" href="dist/css/bootstrapPlusPlus.css" />
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -288,7 +288,7 @@ $(function () {
 Leave a note:
 <div class="input-group" style="width: 90%"> 
 <form method="POST" action="addnote.php">
-<input type="text" class="form-control" name="notetoadd" required="" autocomplete="off"></input>
+<input type="text" class="form-control" name="notetoadd" style="font-size: 15px" required="" autocomplete="off"></input>
 <input type="hidden" name="user_id" value="<?php echo $_GET['user_id'] ?>"></input>
 <input type="hidden" name="admin" value="<?php echo $_SESSION['operator_username'] ?>"></input>
  <span class="input-group-btn">

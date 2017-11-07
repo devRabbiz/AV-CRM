@@ -42,18 +42,9 @@ include_once 'functions.php'
   <script type="text/javascript" src="dist/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="dist/js/bootstrapPlusPlus.js"></script>
+        <link rel="stylesheet" href="dist/css/bootstrapPlusPlus.css" />
 
-
-<!-- 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-  <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="../../dikst/css/stsdyle.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="dist/css/bootstrap-datetimepicker.min.css" />
--->
- 
- 
 
   <link rel="shortcut icon" type="image/png" href="/images/hlogo.png"/>
 <?php
@@ -66,7 +57,7 @@ if (isset($_SESSION['login_username'])) {
 
 
 
-    <div class="container jumbotron" id="form-container">
+    <div class="container " id="form-container">
 
       <div class="alerts"></div>
     <form role="form">

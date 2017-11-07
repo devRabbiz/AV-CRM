@@ -42,16 +42,10 @@ include_once 'functions.php'
     <script type="text/javascript" src="dist/js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-<!-- 
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-  <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="../../dikst/css/stsdyle.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="dist/css/bootstrap-datetimepicker.min.css" />
--->
- 
+        <script src="dist/js/bootstrapPlusPlus.js"></script>
+        <link rel="stylesheet" href="dist/css/bootstrapPlusPlus.css" />
+        <script src="dist/js/bootstrapPlusPlus.js"></script>
+        <link rel="stylesheet" href="dist/css/bootstrapPlusPlus.css" />
  
 
   <link rel="shortcut icon" type="image/png" href="/images/hlogo.png"/>
@@ -67,7 +61,7 @@ if (isset($_SESSION['operator_username'])) {
 
 
 
-    <div class="form-container well">
+    <div class="form-container ">
 
       <div class="alerts"></div>
     <form role="form">
