@@ -1272,7 +1272,7 @@ $("#select_all").click(function(){
 function main_chart(){
 
       //charts functions
-        var linku1="trade/main_chart.html";
+        var linku1="forex";
       $("#trading_chart_frame").attr("src",linku1);
 
         $('#trading_chart').modal('toggle');

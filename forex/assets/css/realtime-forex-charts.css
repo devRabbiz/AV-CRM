@@ -1,0 +1,71 @@
+#realtime-fx-chart {
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+  position: relative; }
+  #realtime-fx-chart #rfc-loader {
+    width: 99%;
+    height: 100%;
+    position: absolute;
+    color: #000;
+    font-size: 1.5rem; }
+    #realtime-fx-chart #rfc-loader span {
+      display: block;
+      position: absolute;
+      top: 49%;
+      width: 100%;
+      text-align: center; }
+  #realtime-fx-chart #rfc-controls {
+    position: absolute;
+    top: 0.1rem;
+    left: 0.1rem;
+    z-index: 1; }
+    #realtime-fx-chart #rfc-controls select {
+      font-size: 1rem;
+      border: 1px solid #000000;
+      margin: 0;
+      margin-right: 0.4rem;
+      padding: 0;
+      background: #fff; }
+    #realtime-fx-chart #rfc-controls #rfc-message {
+      font-size: 1rem;
+      color: red;
+      font-weight: bold; }
+  #realtime-fx-chart #rfc-container {
+    width: 100%;
+    height: 500px; }
+    #realtime-fx-chart #rfc-container .rfc-price-up {
+      color: #008f41; }
+    #realtime-fx-chart #rfc-container .rfc-price-down {
+      color: #ff0014; }
+  #realtime-fx-chart .rfc-last-up {
+    background: green; }
+  #realtime-fx-chart .rfc-last-down {
+    background: red; }
+  #realtime-fx-chart .amChartsButton, #realtime-fx-chart .amChartsButtonSelected {
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid #000000;
+    background: #fff;
+    color: #000;
+    padding: 0.125rem;
+    margin-right: 2px;
+    font-weight: normal; }
+  #realtime-fx-chart .amChartsButtonSelected {
+    font-weight: bold; }
+  #realtime-fx-chart .amChartsPeriodSelector {
+    padding-top: 0.1rem; }
+  #realtime-fx-chart .amcharts-export-menu-top-right {
+    top: 15px !important; }
+  #realtime-fx-chart table.candlestick-balloon td {
+    text-align: left; }
+
+@media screen and (max-width: 991px) {
+  #realtime-fx-chart #rfc-controls {
+    position: relative; }
+    #realtime-fx-chart #rfc-controls #rfc-message {
+      display: block;
+      margin: 0.5rem 0; }
+  .amChartsPeriodSelector > div {
+    float: none !important;
+    display: block !important; } }
