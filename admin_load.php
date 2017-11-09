@@ -472,8 +472,9 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
   <table  style="  margin-bottom: 0px !important; " id="etab3" class="table  table-condensed " cellspacing="0" width="100%">
        <tr >
 
-        <th >
-       <span class="label label-primary ">
+
+      <td >
+       <span style="float: left;vertical-align: bottom;" class="label label-primary ">
       <?php 
 
       if ($interval=='lifetime' && $pager='web') {
@@ -487,8 +488,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
       }
        ?>
       </span>
-
-      <td >  <form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>" id="set_table_limit">
+        <form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>" id="set_table_limit">
       	         <select style="margin-top: 2px;margin-bottom:2px; padding:4px 12px;float: left; margin-right: 3px"  type="text" class="_show btn btn-default" name="show">
                 <option <?php if ($show==30){ echo 'selected=""';}; ?> value="30">30</option>
                 <option <?php if ($show==50){ echo 'selected=""';}; ?> value="50">50</option>
@@ -878,7 +878,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
               <font > <?php echo $row['sendto']; ?> </font>
               <input type="hidden" name="id" value="<?php echo $row['id'];?>">
               <input type="hidden" name="op_name" value="<?php echo trim($row['sendto']);?>">
-              <input type="submit" title="Unsend" class=" btn-danger" value="X">
+              <input type="submit" title="Unsend" style="background: #d9534f" class="" value="X">
             </form>
 
           <?php }  ?>
