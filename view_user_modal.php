@@ -67,7 +67,7 @@ include_once 'functions.php';
 
 <div class="row">
 
-<div  class="col-md-4" style="width: 600px;">
+<div  class="col-md-8" >
 
     
 

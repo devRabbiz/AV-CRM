@@ -344,7 +344,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                           break;
                   //ktu
                   default:
-                    # code...
+                     $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit'' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
                     break;
                 }
 
@@ -782,7 +782,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 
       
   $num=mysqli_num_rows($r);
-      if (mysqli_num_rows($r)==0){
+      if ($num==0){
 
         echo "<div class='well col-md-12'><p class='text-center'>No more records</p><ul class='pager'><li>";
         echo '<a href="'.$_SERVER['PHP_SELF'].'?pager='.$pager.'&startrow=0">Go to start</a></li></ul></div>';
