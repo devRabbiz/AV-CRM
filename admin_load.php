@@ -315,8 +315,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                 switch ($interval) {
                   case 'today':
 
-                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit'' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
-
+                   $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."' AND op_status !='Deposit') AND  (web=0 AND DATE(`date`) = CURDATE() ) ORDER BY id DESC  ");
                     break;
                   case 'yesterday':
                    $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND op_status !='Deposit' AND  web=0 AND  `date` >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND `date` < CURDATE() ORDER BY id DESC ");
@@ -335,7 +334,7 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                       $dateF = date("Y-m-d", strtotime($date_range[0]));
                       $dateT = date("Y-m-d", strtotime($date_range[1]));
 
-                      $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit'' AND web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
+                      $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit' AND web=0 AND DATE(`date`) >= '".$dateF."' AND DATE(`date`) <= '".$dateT."' ORDER BY id DESC  ");
                         break;
                         case 'lifetime':
                              $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang."' AND op_status !='Deposit' AND web=0  ORDER BY id DESC LIMIT $startrow, $show  ");
@@ -344,7 +343,8 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
                           break;
                   //ktu
                   default:
-                     $r=mysqli_query($con,"SELECT * FROM user where lang='".$lang." AND op_status !='Deposit'' AND  web=0 AND DATE(`date`) = CURDATE() ORDER BY id DESC  ");
+                     $r=mysqli_query($con,"SELECT * FROM user where (lang='".$lang."' AND op_status !='Deposit') AND  (web=0 AND DATE(`date`) = CURDATE() ) ORDER BY id DESC  ");
+
                     break;
                 }
 
@@ -478,12 +478,17 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
       <?php 
 
       if ($interval=='lifetime' && $pager='web') {
-        $numa=mysqli_num_rows($r2);
-        print_r($numa);
+        if ($numa=mysqli_num_rows($r2)) {
+                  
+          print_r($numa);
+        };
+
       } else {
 
-        $numa=mysqli_num_rows($r);
-        print_r($numa);
+        if ($numa=mysqli_num_rows($r)) {
+           print_r($numa);
+        };
+
       
       }
        ?>

@@ -4,6 +4,11 @@
 include_once '../db_connect.php';
 require_once '../session.php';
 $list_name=$_POST['list_name'];
+if ($list_name=='web') {
+    $web=0;
+} else{
+    $web=1;
+}
 
 if (!empty($_FILES[csv][tmp_name])) {
  $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
@@ -39,7 +44,7 @@ if ($_FILES[csv][size] > 0) {
          
             
         
-            mysqli_query($con,"REPLACE INTO user (name, email, phone_no, alt_phone,reg_by, lang, list_name,country) VALUES 
+            mysqli_query($con,"REPLACE INTO user (name, email, phone_no, alt_phone,reg_by, lang, list_name,country,web) VALUES 
                 ( 
                     '".addslashes($data[0])."', 
                     '".addslashes($data[1])."', 
@@ -48,7 +53,8 @@ if ($_FILES[csv][size] > 0) {
                     'list',
                     '".$lang."',
                     '".$list_name."',
-                    '".addslashes($data[4])."'
+                    '".addslashes($data[4])."',
+                    '".$web."'
                 )
             ");
          }
