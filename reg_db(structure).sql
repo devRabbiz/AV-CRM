@@ -38,6 +38,9 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `table_limit` int(11) NOT NULL DEFAULT '30'
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
+
+INSERT INTO `admins` (`username`, `password`, `lang`, `full_name`, `session`, `table_limit`) VALUES ('admin', 'admin123', 'it', 'Administrator', '', 30);
+
 -- --------------------------------------------------------
 
 --

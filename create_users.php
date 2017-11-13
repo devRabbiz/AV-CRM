@@ -11,11 +11,12 @@ include_once 'functions.php'
         $username=mysqli_escape_string($con,$_POST['username']);
         $password=mysqli_escape_string($con,$_POST['password']);
         $name=mysqli_escape_string($con,$_POST['name']);
+        $lang=mysqli_escape_string($con,$_POST['lang']);
           if ($_POST['type']=='admin') {//if admin type
             $checkIfExist=mysqli_query($con,"SELECT * FROM admins WHERE username='".$username."'");
             $array=mysqli_fetch_array($checkIfExist);
             if (!$array) {//if not exist
-              $createUser=mysqli_query($con,"INSERT INTO admins (username,password,full_name,lang) VALUES('".$username."','".$password."','".$name."','it')");
+              $createUser=mysqli_query($con,"INSERT INTO admins (username,password,full_name,lang) VALUES('".$username."','".$password."','".$name."','".$lang."')");
               $sucess='display:block';
             } else $error='display:block';//if exist
           }//admin type end
@@ -23,7 +24,7 @@ include_once 'functions.php'
             $checkIfExist=mysqli_query($con,"SELECT * FROM operator WHERE username='".$username."'");
             $array=mysqli_fetch_array($checkIfExist);
             if (!$array) {//if not exist
-              $createUser=mysqli_query($con,"INSERT INTO operator (username,password,full_name,lang) VALUES('".$username."','".$password."','".$name."','it')");
+              $createUser=mysqli_query($con,"INSERT INTO operator (username,password,full_name,lang) VALUES('".$username."','".$password."','".$name."','".$lang."')");
               $success='display:block';
             } else $error='display:block';//if exist
           }//operator type end
@@ -89,6 +90,11 @@ include_once 'functions.php'
   <input type="text" required="" name="name" placeholder="Full Name" class="form-control">
   <input type="text" required="" name="password" placeholder="Password" class="form-control">
   <input type="text"  required="" name="username" placeholder="Username" class="form-control">
+  <select required="" name="lang" class=" form-control">
+    <option selected="" disabled="" value="">Language</option>
+    <option value="it">IT</option>
+    <option value="en">EN</option>
+  </select>
   <button type="submit" class="form-control btn btn btn-info">Create User</button>
 
 </form>
