@@ -8,12 +8,12 @@
 
 <?php
 
-//if (file_exists('install.php')) {
+if (!file_exists('db_connect.php')) {
 	
-//	header('Location: install.php');
-	//}
+	header('Location: install.php');
+	}
 	
-//will removed soon
+
 ?>
 
 <a href="admin.php">Admin</a>
