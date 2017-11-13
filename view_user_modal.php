@@ -11,7 +11,7 @@ include_once 'functions.php';
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin| L`Avenir</title>
 
-  <script type="text/javascript" src="/dist/js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="dist/js/jquery-3.1.1.min.js"></script>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
