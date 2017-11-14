@@ -136,7 +136,7 @@ if (!isset($sendNotification)) {
             </div>
 
             <div class="timeline-footer">
-                <a href="admin.php?pager=view_operator&by_operator=<?php echo $row['admin'] ?>" target='top' class="btn btn-primary btn-xs"><?php echo $row['admin'] ?></a>
+                <a  href="admin.php?pager=view_operator&by_operator=<?php echo $row['admin'] ?>" target='top' class="btn btn-primary btn-xs"><?php echo $row['admin'] ?></a>
             </div>
         </div>
     </li>

@@ -7,7 +7,7 @@
       
     $result=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."' ");
 ?>
- 
+
 
 <table id="tabb" class="table table-striped table-hover" style="width: 100%;margin-bottom: 0px" data-sort="table">
       <thead> 
@@ -18,7 +18,6 @@
           <th>Follow Up</th>
           <th>Interested</th>
           <th>Non Interested</th>
-
           <th>Non Answer</th>
           <th>Call Failed</th>
           <th>Secretary</th>
@@ -34,7 +33,7 @@
 
       	<tr>
 
-      		<td><a href="<?php echo $_SERVER['PHP_SELF']?>?pager=view_operator&by_operator=<?php echo $row['username'] ?>"><?php echo $row['full_name']; ?></a></td>
+      		<td><a style="cursor: pointer;"  onclick="show_operator('<?php echo $row['username'] ?>')"><?php echo $row['full_name']; ?></a></td>
               <td> <?php $stat=mysqli_query($con,"SELECT * FROM jobs WHERE operator='".$row['username']."' ");
                  $ptotal=mysqli_num_rows($stat);
                  echo $ptotal;?>
@@ -126,7 +125,35 @@ function initTableSorter() {
 </style>
 
 
+  <div id="view_operator_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Operator</h4>
+            </div>
+            <div class="modal-body">
+               <iframe src=""  frameborder="0" id="op_iframe" width="100%" height="400px"></iframe> 
+            </div>
+            <div class="modal-footer">
+          
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    <script type="text/javascript">
+      function show_operator(operator){
+        var src="view_operator_data.php?operator="+operator;
+        $('#op_iframe').attr('src',src);
+        $('#view_operator_modal').modal();
+
+      }
+    </script>
 
 
 
