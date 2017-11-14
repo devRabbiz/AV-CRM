@@ -13,7 +13,7 @@ if (!isset($sendNotification)) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin| L`Avenir</title>
 
-  <script type="text/javascript" src="/dist/js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="dist/js/jquery-3.1.1.min.js"></script>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -67,8 +67,10 @@ if (!isset($sendNotification)) {
                   <select id="operator" class="form-control">
                   <option value="*" >All</option>
                   <?php
-
-    			$results=mysqli_query($con,"SELECT * FROM operator WHERE lang='it'");
+				      $lang_check=mysqli_query($con,"SELECT lang FROM admins WHERE username='".$_SESSION['login_username']."'");
+				      $lang=$lang_check->fetch_assoc();
+				      $lang=$lang['lang'];
+    			$results=mysqli_query($con,"SELECT * FROM operator WHERE lang='".$lang."' ");
 
    			     while($row=mysqli_fetch_assoc($results)){ ?>
 
@@ -89,7 +91,7 @@ if (!isset($sendNotification)) {
 
 <?php 
 
-    			$results=mysqli_query($con,"SELECT * FROM notifications ORDER BY `date` DESC");
+    			$results=mysqli_query($con,"SELECT * FROM notifications ORDER BY `date` DESC LIMIT 50");
 
    			     while($row=mysqli_fetch_assoc($results)){
 
@@ -134,7 +136,7 @@ if (!isset($sendNotification)) {
             </div>
 
             <div class="timeline-footer">
-                <a href="view_operator.php?op_name=<?php echo $row['admin'] ?>" target='top' class="btn btn-primary btn-xs"><?php echo $row['admin'] ?></a>
+                <a href="admin.php?pager=view_operator&by_operator=<?php echo $row['admin'] ?>" target='top' class="btn btn-primary btn-xs"><?php echo $row['admin'] ?></a>
             </div>
         </div>
     </li>

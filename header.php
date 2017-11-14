@@ -202,7 +202,7 @@ include_once 'functions.php';
               <h4 class="modal-title">Notifications</h4>
             </div>
             <div class="modal-body">
-              <!-- <iframe src="admin_send_notification.php" width="880px" height="500px"></iframe> -->
+               <iframe src="admin_send_notification.php" width="880px" height="500px"></iframe> 
             </div>
             <div class="modal-footer">
           
