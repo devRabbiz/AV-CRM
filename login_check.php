@@ -3,7 +3,7 @@ include 'db_connect.php';
 session_start();
 
 if (isset($_POST['admin-username'])) {
-      $query="SELECT * FROM admins WHERE username='".$_POST['admin-username']."' and password='".$_POST['admin-pass']."'";
+      $query="SELECT * FROM admins WHERE username='".mysqli_escape_string($con,$_POST['admin-username'])."' and password='".mysqli_escape_string($con,$_POST['admin-pass'])."'";
       $result = mysqli_query($con,$query);
       if (!$result){
         die('Error: ' . mysqli_error());

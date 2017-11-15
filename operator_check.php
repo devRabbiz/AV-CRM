@@ -2,7 +2,7 @@
 include 'db_connect.php';
 session_start();
 
-      $query="SELECT * FROM operator WHERE username='".$_POST['operator-username']."' and password='".$_POST['operator-pass']."'";
+      $query="SELECT * FROM operator WHERE username='".mysqli_escape_string($con,$_POST['operator-username'])."' and password='".mysqli_escape_string($con,$_POST['operator-pass'])."'";
       $result = mysqli_query($con,$query);
       if (!$result){
         die('Error: ' . mysqli_error());
