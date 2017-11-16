@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
 
-INSERT INTO `admins` (`username`, `password`, `lang`, `full_name`, `session`, `table_limit`) VALUES ('admin', 'admin123', 'it', 'Administrator', '', 30);
+
 
 -- --------------------------------------------------------
 
