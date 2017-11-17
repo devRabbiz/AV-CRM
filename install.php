@@ -27,7 +27,7 @@
             PHP Version
         </td>
         <td>
-           <?php if (phpversion() > '5.4.20') {
+           <?php if (phpversion() >= '5.4.20') {
                 echo phpversion()." OK";
              } else{
               echo "Please update PHP to 5.4.20 or greater";
