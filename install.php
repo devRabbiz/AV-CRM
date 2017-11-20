@@ -118,7 +118,7 @@ if (isset($_POST['submit'])) {
 
       }
 
-            $file_db = fopen("db_connect.php", "w") or die("Unable to db file!<br><a href='install.php' class='btn btn-info'>Try Again</a>");
+            $file_db = fopen("db_connect.php", "w") or die("Unable to write db file!<br><a href='install.php' class='btn btn-info'>Try Again</a>");
             if (fwrite($file_db, $txt)) {
               $done+=1;//  1
               echo "Config file updated<br>";
