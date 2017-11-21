@@ -392,6 +392,105 @@ if (!isset($_GET['startrow']) or !is_numeric($_GET['startrow'])) {
 } ?> 
 
 
+  <div id="admin_settings_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="height: 500px">
+          <!-- Modal content-->
+          <div class="modal-content" style="height: 500px">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Settings</h4>
+            </div>
+            <div class="modal-body" style="height: 500px">
+              <div>
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                          <li role="presentation"><a href="#admins" aria-controls="admins" role="tab" data-toggle="tab">Administrators</a></li>
+                          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                          <div role="tabpanel" class="tab-pane active" id="home">..retert.</div>
+                          <div role="tabpanel" class="tab-pane" id="profile">
+                            <?php 
+
+                            $this_admin=trim($_SESSION['login_username']);
+                            $result_admin=mysqli_query($con,"SELECT * FROM admins WHERE username='".$this_admin."'");
+   
+                                      ?>
+
+                                      <form action="<?php echo $_SERVER['PHP_SELF']."?admin=".$operator; ?>" method="POST" >
+                                        
+
+                                      <?php 
+                                          while($row_admin = $result_admin->fetch_assoc()){ 
+
+
+                                          echo '<div class="form-group">
+                                                  <label for="alt_phone">Full Name</label>
+                                                  <input type="alt_phone" required="" name="full_name" class="form-control" placeholder="Enter Full Name " value="'.$row_admin['full_name'].'" >
+                                                </div>';
+                                          echo '<div class="form-group">
+                                                  <label for="alt_phone">Username</label>
+                                                  <input type="alt_phone" required="" autocomlete="off" name="username"  class="form-control"  placeholder="Enter Username " value="'.$row_admin['username'].'" >
+                                                </div>';
+                                          echo '<div class="form-group">
+                                                  <label for="alt_phone">Password</label>
+                                                  <input type="password" required="" name="password" class="form-control"  placeholder="Enter Password " value="'.$row_admin['password'].'" >
+                                                </div>';
+                                          echo '<div class="form-group">
+                                                  <label for="alt_phone">Language</label>
+                                                  <input type="alt_phone" required=""  name="lang"  class="form-control"  placeholder="Enter Username " value="'.$row_admin['lang'].'" >
+                                                </div>';
+
+                                               }
+                                      ?>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="admins">
+                              <?php 
+                                  $all_admins=mysqli_query($con,"SELECT * FROM admins");
+                               ?>
+                               <form>
+                                <table class="table-striped table">
+                                 <?php 
+
+                                    while ($adm=$all_admins->fetch_assoc()) {
+                                      echo "<tr>";
+                                      echo "<td>".$adm['full_name']."</td>";
+                                      echo "<td>".$adm['username']."</td>";
+                                      echo "<td>".$adm['password']."</td>";
+                                      echo "</td>";
+
+                                    }
+
+                                  ?>
+                                </table>
+                               </form>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="settings">..terterterter.</div>
+                        </div>
+
+                      </div>
+
+                      <script type="text/javascript">
+                          $('#myTabs a').click(function (e) {
+                            e.preventDefault()
+                            $(this).tab('show')
+                          })
+                      </script>
+            </div>
+            <div class="modal-footer">
+          
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
 
 <style type="text/css">
   
@@ -1247,7 +1346,6 @@ $("#select_all").click(function(){
 
   </div>
 </div>
-
 
 
 <script type="text/javascript">

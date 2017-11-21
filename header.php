@@ -175,6 +175,7 @@ include_once 'functions.php';
        <div style="color:white;text-align: center;">
        <?php if (isset($_SESSION['login_username'])): ?>
        <a class="btn btn-primary" data-toggle="modal" data-target="#sendNotification">Send Notification</a>
+       <a class=" btn btn-info"  data-toggle="modal" data-target="#admin_settings_modal">Settings</a>
        <?php endif ?>
        <a class="btn btn-default"  href="logout.php">Logout</a>
 
