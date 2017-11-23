@@ -28,10 +28,16 @@
   <div class="chat_head"> Chat Box<label id="chat_count" style="float: right;" class=" label label-primary"></label></div>
   <div class="chat_body" style="    overflow: auto;"> 
 <div class="user1" onclick="openChat('*')">ALL<label class="label_user" id="*"></label></div>
-<?php
+<?php if (isset($_SESSION['login_username'])){
+  $session=$_SESSION['login_username'];
+} elseif (isset($_SESSION['operator_username'])) {
+  $session=$_SESSION['operator_username'];
+}
+
  $conm=mysqli_connect("127.0.0.1","root","","reg_db") or die('asd');
- $results11=mysqli_query($conm,"SELECT * FROM operator ORDER BY full_name");
- $results111=mysqli_query($conm,"SELECT * FROM admins ORDER BY full_name");
+
+ $results111=mysqli_query($conm,"SELECT * FROM admins WHERE username!='".$session."' ORDER BY full_name");
+ $results11=mysqli_query($conm,"SELECT * FROM operator WHERE username!='".$session."' ORDER BY full_name");
 
 while($row=mysqli_fetch_assoc($results111)){?>
 <div class="user1" onclick="openChat('<?php echo $row["username"] ?>')"><?php echo $row['full_name'] ?><label class="label_user" id="<?php echo $row['username']; ?>"></label></div>
@@ -57,11 +63,7 @@ while($row=mysqli_fetch_assoc($results11)){?>
 
 </div>
 </div>
-<?php if (isset($_SESSION['login_username'])){
-  $chat='chat/chat.php';
-} elseif (isset($_SESSION['operator_username'])) {
-  $chat='chat/chat_op.php';
-}?>
+
 
     <script >
 
