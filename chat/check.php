@@ -26,11 +26,13 @@ if (isset($_SESSION['login_username'])){
     		case 'beep':
         		$beep=mysqli_query($conm,"UPDATE  messages SET beep=0 WHERE id='".$_POST['id']."' ");
         		$data = array('beep' => $_POST['id']);
+        		header('Content-type: application/json');
     			echo json_encode($data);
     			break;
     		case 'read':
     			$read=mysqli_query($conm,"UPDATE messages SET `read`=0 WHERE username='".$_POST['username']."' AND (to_username='".$session."' OR to_username='*')  ");
 				$data = array('success' => $_POST['username']);
+				header('Content-type: application/json');
     			echo json_encode($data);
     			break;
     	default:
