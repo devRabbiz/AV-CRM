@@ -64,9 +64,14 @@ while($row=mysqli_fetch_assoc($results11)){?>
 </div>
 </div>
 
+<?php if (isset($_SESSION['login_username'])){
+  $chat='chat/chat.php';
+} elseif (isset($_SESSION['operator_username'])) {
+  $chat='chat/chat_op.php';
+} ?>
 
     <script >
-
+ 	var titleBefore=window.document.title;
   function openChat(username){
     //$('.msg_box').slideDown('slow');
     $('.chat_iframe').attr('src','<?php echo $chat; ?>?to='+username);
@@ -97,29 +102,53 @@ function chat(){
     data: {action: 'check'},
   })
   .done(function(data) {
+  		if(typeof data  !== "undefined"){
+  			window.document.title=titleBefore;
+  		}
         for (var i = data.length - 1; i >= 0; i--) {
-          console.log(data.length);
-          if (data.length>=1) {
+        
+          if (data.length>=1 ) {
+
+          	window.document.title="New Message!";
+          	console.log('length= '+data.length);
             $('#'+data[i]['username']).html('<label style="float:right"  class="label label-danger">New</label>');
             $('#chat_count').html(data.length);
-          } 
+            if ( $('.msg_box').css('display') == 'none' ){
+			    // element is hidden
+			    openChat(data[i]['username']);
+			       	$('.msg_wrap').show();
+   					$('.msg_box').show();
+
+			} else{
+				if ( $('.chat_iframe').attr('src')=='<?php echo $chat; ?>?to='+data[i]["username"]  ) {
+					    $.ajax({
+					      url: 'chat/check.php',
+					      type: 'POST',
+					      dataType: 'json',
+					      data: {action: 'read',username:data[i]['username']},
+					    })
+					        .done(function(data) {
+						      $('.label_user').html('');
+						      $('#chat_count').html('');
+						    })
+				}
+			}
+		  } 
           if (data[i]['beep']==1) {
-          var audio = new Audio('beep.ogg');
-            audio.play();   
-          //console.log(data[i]);
-        $.ajax({
-          url: 'chat/check.php',
-          type: 'POST',
-          dataType: 'json',
-          data: {action: 'beep',id:data[i]['id']},
-        })
-        .done(function(data1) {
-          console.log(data1);
-        })
-        .fail(function() {
-          console.log("error");
-        });
-      }
+      
+	          var audio = new Audio('chat/beep.ogg');
+	            audio.play();   
+	          //console.log(data[i]);
+	        $.ajax({
+	          url: 'chat/check.php',
+	          type: 'POST',
+	          dataType: 'json',
+	          data: {action: 'beep',id:data[i]['id']},
+	        })
+	        .fail(function() {
+	          console.log("error");
+	        });
+        }
 
 
      }

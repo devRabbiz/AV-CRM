@@ -24,8 +24,8 @@ if (isset($_SESSION['login_username'])){
 				       echo json_encode($output); //echo data json 
     		break;
     		case 'beep':
-    		$beep=mysqli_query($conm,"UPDATE  messages SET beep=0 WHERE id='".$_POST['id']."' ");
-    		$data = array('beep' => $_POST['id']);
+        		$beep=mysqli_query($conm,"UPDATE  messages SET beep=0 WHERE id='".$_POST['id']."' ");
+        		$data = array('beep' => $_POST['id']);
     			echo json_encode($data);
     			break;
     		case 'read':

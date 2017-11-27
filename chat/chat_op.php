@@ -207,8 +207,12 @@ class Model extends SPA_Common\Model
 
     public function getMessages($to_username,$limit = CHAT_HISTORY, $reverse = true)
     {   
-        $response = $this->db->query("(SELECT * FROM messages WHERE (username='{$_SESSION['operator_username']}' AND to_username='{$to_username}') OR (username='{$to_username}'AND to_username='{$_SESSION['operator_username']}') OR to_username='*'
+        if ($to_username=='*') {
+            $response = $this->db->query("(SELECT * FROM messages WHERE to_username='".$to_username."' ORDER BY `date` DESC LIMIT {$limit}) ORDER BY `date` ASC");
+        } else {
+        $response = $this->db->query("(SELECT * FROM messages WHERE (username='{$_SESSION['operator_username']}' AND to_username='{$to_username}') OR (username='{$to_username}'AND to_username='{$_SESSION['operator_username']}')
             ORDER BY `date` DESC LIMIT {$limit}) ORDER BY `date` ASC");
+        }
 
         $result = array();
         while($row = $response->fetch_object()) {
@@ -425,28 +429,7 @@ $chatApp = new Controller(); ?><!doctype html>
             message: null
         };
 
-        $scope.pageTitleNotificator = {
-            vars: {
-                originalTitle: window.document.title,
-                interval: null,
-                status: 0
-            },    
-            on: function(title, intervalSpeed) {
-                var self = this;
-                if (! self.vars.status) {
-                    self.vars.interval = window.setInterval(function() {
-                        window.document.title = (self.vars.originalTitle == window.document.title) ? 
-                        title : self.vars.originalTitle;
-                    },  intervalSpeed || 500);
-                    self.vars.status = 1;
-                }
-            },
-            off: function() {
-                window.clearInterval(this.vars.interval);
-                window.document.title = this.vars.originalTitle;   
-                this.vars.status = 0;
-            }
-        };
+       
 
         $scope.saveMessage = function(form, callback) {
             var data = $.param($scope.me);
@@ -485,7 +468,7 @@ $chatApp = new Controller(); ?><!doctype html>
                         window.focus();
                     };
                     notify.onclose = function() {
-                        $scope.pageTitleNotificator.off();
+                        
                     };
                     var timmer = setInterval(function() {
                         notify && notify.close();
@@ -521,13 +504,13 @@ $chatApp = new Controller(); ?><!doctype html>
         $scope.onNewMessage = function(wasListingForMySubmission) {
             if ($scope.lastMessageId && !wasListingForMySubmission) {
                 $scope.playAudio();
-                $scope.pageTitleNotificator.on('New message');
+           
                 $scope.notifyLastMessage();
             }
 
             $scope.scrollDown();
             window.addEventListener('focus', function() {
-                $scope.pageTitleNotificator.off();
+               
             });
         };
 
@@ -681,9 +664,9 @@ input,button,.alert,.modal-content {
         <div class="box box-warning direct-chat direct-chat-warning">
             <div class="box-body">
                 <div class="direct-chat-messages">
-                    <div class="direct-chat-msg" ng-repeat="message in messages" ng-if="historyFromId < message.id" ng-class="{'right':!message.me}">
+                    <div class="direct-chat-msg" ng-repeat="message in messages" ng-if="historyFromId < message.id" ng-class="{'right':message.me}">
                         <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name" ng-class="{'pull-left':message.me, 'pull-right':!message.me}">{{ message.username }}</span>
+                            <!-- <span class="direct-chat-name" ng-class="{'pull-left':message.me, 'pull-right':!message.me}">{{ message.username }}</span>-->
                             <span class="direct-chat-timestamp " ng-class="{'pull-left':!message.me, 'pull-right':message.me}">{{ message.date }}</span>
                         </div>
                         <img class="direct-chat-img" src="http://upload.wikimedia.org/wikipedia/en/e/ee/Unknown-person.gif" alt="">
