@@ -5,13 +5,15 @@
 
 # You need to put lines similar to those below in your extensions.conf file:
 
-#;av-crm
-#exten => _-123.,1,Answer();
-#exten => _-123.,2,AGI(av-crm.agi,${EXTEN:4})
-#exten => _-123.,3,GotoIf($["${check}" = "line3"]?line3:line1)
-#exten => _-123.,n(line3),Dial(${abisnettrunk3}/${ext:2},,tToR)
-#exten => _-123.,n(line1),Dial(${abisnettrunk}/${ext},,tToR)
-#exten => _-123.,n,hangup
+# ;av-crm
+# exten => _-123.,1,Answer();
+# exten => _-123.,2,AGI(av-crm.agi,${EXTEN:4})
+# exten => _-123.,3,Set(CALLFILENAME=${CALLERID(all)}-${ext}-${STRFTIME(${EPOCH},,%Y%m%d-%H%M%S)})
+# exten => _-123.,4,Monitor(wav,${CALLFILENAME},m)
+# exten => _-123.,5,GotoIf($["${check}" = "line3"]?line3:line1)
+# exten => _-123.,n(line3),Dial(${abisnettrunk3}/${ext:2},,tToR)
+# exten => _-123.,n(line1),Dial(${abisnettrunk}/${ext},,tToR)
+# exten => _-123.,n,hangup
 
 $V = 1;		# set to 1 for verbose mode
 $CLIOUT = 1;	# set to 1 for printing 1 line to STDERR
