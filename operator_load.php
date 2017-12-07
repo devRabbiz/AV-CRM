@@ -891,7 +891,7 @@ function main_chart(){
 
 </div>
 
-<div id="showprofile" class="modal fade" role="dialog" >
+<div id="showprofile" class="modal fade" role="dialog"  style="z-index: 99999999;">
   <div style="width:90%;" class="modal-dialog">
 
     <!-- Modal content-->
