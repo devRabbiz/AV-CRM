@@ -205,10 +205,7 @@ function sendto () {
                         <td>Email:</td>
                         <td><?php echo $array[3]?></td>
                       </tr>
-                      <tr>
-                        <td>Country:</td>
-                        <td><?php echo $array[21]?></td>
-                      </tr>
+
                       <tr>
                         <td>Registered:</td>
                         <td><?php echo $array[6]?></td>
@@ -223,6 +220,8 @@ function sendto () {
                         </a>
                         </td>
                       </tr>
+
+                      <?php if ($array[12]!=''): ?>
                       <tr>
 
                         <td>Second Number:</td>
@@ -233,12 +232,29 @@ function sendto () {
                         </td>
 
                       </tr>
-                      <tr>
+                      <?php endif ?>
+                      <?php if ($array['company']!=''): ?>
+	                      <tr>
+	                        <td>Company:</td>
+	                        <td><?php echo $array['company']?></td>
+	                      </tr>	
+                      <?php endif ?>
 
-                        <td>Job:</td>
-                        <td><?php echo $array[13]?></td>
+                        <?php if ($array[13]!=''): ?>
+	                      <tr>
+	                        <td>Job:</td>
+	                        <td><?php echo $array[13]?></td>
+	                      </tr>	
+                      <?php endif ?>
 
-                      </tr>
+                      <?php if ($array[21]!=''): ?>
+	                      <tr>
+	                        <td>Country:</td>
+	                        <td><?php echo $array[21]?></td>
+	                      </tr>	
+                      <?php endif ?>
+ 
+
                       <tr><td>
                         <td></td>
                       </td></tr>
